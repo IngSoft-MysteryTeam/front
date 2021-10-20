@@ -1,26 +1,40 @@
-import React from "react";
+import React from 'react';
 
-function Formulario () {
-    return (
-        <form className = "row">
-            <h1>Creando Nueva Paritda</h1>
-            <div className = "col-md-3">      
-                <input 
-                type="text" 
-                placeholder = "Escribe un Nombre"
-                /* nombre = "nombre"
-                onChange = {Partida(nombre)} *//>
-                 <br/>
-                 <br/>
-                <button 
-                className = "btn btn-dark" 
-                type = "submit">
-                Crear
-                </button>
-                <br/>
-            </div>
-        </form>
-    );
+class Formulario extends React.Component{
+
+    handleSubmit = (e) => {
+        
+        e.preventDefault()
+        const partida = this.inputName.value
+        console.log({partida})
+    }
+
+    render(){
+        return(
+            <div className = "col-md-3">
+                <h1>Nueva Partida</h1>
+                <form className = "row"
+                    onSubmit={this.handleSubmit}>
+                    <p>
+                        <label htmlFor='partida'>Introducir nombre:</label>   
+                        <input 
+                            id='partida'
+                            name='nombrePartida'
+                            type='text' 
+                            placeholder = 'Escribe un Nombre'
+                            ref={inputElement => this.inputName = inputElement}
+                            required  />
+                    </p>        
+                        <button
+                        className = "btn btn-dark" 
+                        type = "submit">    
+                        Crear
+                        </button>
+                        <br/>
+                </form>
+            </div>    
+        )
+    }
 }
 
 export default Formulario;
