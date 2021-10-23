@@ -36,9 +36,11 @@ export default function ListaPartidas() {
       <h1>Unirse a una partida</h1>
       <table className='tablaPartidas'>
         <thead>
-          <th width='50%'>Partida</th>
-          <th>Anfitrión</th>
-          <th width='130px'>Cant. Jugadores</th>
+          <tr>
+            <th width='50%'>Partida</th>
+            <th>Anfitrión</th>
+            <th width='130px'>Cant. Jugadores</th>
+          </tr>
         </thead>
         <tbody>
           {partidas.map((e, key) => (
