@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import BotonCrear from './BotonCrear';
 import BotonUnirse from './BotonUnirse';
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
 export default function ListaPartidas() {
   const test = [
@@ -36,12 +37,12 @@ export default function ListaPartidas() {
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
       <h1>Unirse a una partida</h1>
-      <table className='tablaPartidas'>
+      <table className='tablaPartidas' style={{marginBottom: '10px'}}>
         <thead>
           <tr>
-          <th width='50%'>Partida</th>
-          <th>Anfitrión</th>
-          <th width='130px'>Cant. Jugadores</th>
+            <th width='50%'>Partida</th>
+            <th>Anfitrión</th>
+            <th width='140px'>Cant. Jugadores</th>
           </tr>
         </thead>
         <tbody>
@@ -49,7 +50,7 @@ export default function ListaPartidas() {
             <tr key={key}>
               <td>{e.nombre_partida}</td>
               <td>{e.anfitrion}</td>
-              <td><i className="bi-people-fill"></i> {e.cant_jugadores}/6</td>
+              <td><FontAwesomeIcon icon={faUserFriends} /> {e.cant_jugadores}/6</td>
               <td><BotonUnirse/></td>
             </tr>
           ))}
