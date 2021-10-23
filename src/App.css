@@ -18,7 +18,6 @@
   text-overflow: ellipsis;
 }
 
-.tablaPartidas tr:hover td {
+.tablaPartidas tbody tr:hover {
   background-color: rgb(250, 250, 250);
-  cursor: pointer;
 }
