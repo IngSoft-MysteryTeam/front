@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import BotonCrear from './BotonCrear';
+import BotonUnirse from './BotonUnirse';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default function ListaPartidas() {
   const test = [
     {
       id_partida: 0,
-      nombre_partida: "Prueba 1asdajskdajsdakdlasdjskadalsdjaksldajdajsldasdakldljsadajslaklaskld",
-      anfitrion: "Carlitosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      nombre_partida: "Prueba 1",
+      anfitrion: "Carlitos",
       cant_jugadores: 3
     },
     {
@@ -36,16 +38,19 @@ export default function ListaPartidas() {
       <h1>Unirse a una partida</h1>
       <table className='tablaPartidas'>
         <thead>
+          <tr>
           <th width='50%'>Partida</th>
           <th>Anfitrión</th>
           <th width='130px'>Cant. Jugadores</th>
+          </tr>
         </thead>
         <tbody>
           {partidas.map((e, key) => (
             <tr key={key}>
               <td>{e.nombre_partida}</td>
               <td>{e.anfitrion}</td>
-              <td><i class="bi-people-fill"></i> {e.cant_jugadores}/6</td>
+              <td><i className="bi-people-fill"></i> {e.cant_jugadores}/6</td>
+              <td><BotonUnirse/></td>
             </tr>
           ))}
           {
@@ -56,6 +61,7 @@ export default function ListaPartidas() {
           : null}
         </tbody>
       </table>
+      <BotonCrear />
     </div>
   )
 }
