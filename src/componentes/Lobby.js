@@ -26,14 +26,14 @@ export default function Lobby() {
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
       <h1>Nombre de la partida</h1>
-      <div style={{display: 'flex'}}>
-        <div style={{width: '300px', marginRight: '5px'}}>
+      <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap-reverse'}}>
+        <div style={{flexGrow: 1, flexBasis: '300px'}}>
           <ListaJugadores jugadores={jugadores} />
-          <div style={{display: 'flex', marginTop: '10px'}}>
-            <button className='btn btn-dark' style={{flexGrow: 1, marginRight: '5px'}} disabled={jugadores.length < 2 ? 'true' : ''}>
+          <div style={{display: 'flex', marginTop: '10px', columnGap: '10px'}}>
+            <button className='btn btn-dark' style={{flexGrow: 1}} disabled={jugadores.length < 2 ? 'true' : ''}>
               Iniciar partida
             </button>
-            <button className='btn btn-dark' style={{flexGrow: 1, marginLeft: '5px'}}>
+            <button className='btn btn-dark' style={{flexGrow: 1}}>
               Abandonar partida
             </button>
           </div>
