@@ -1,32 +1,31 @@
-import react from 'react';
+import react, { useState } from 'react';
 import './LanzarDado.css';
 
 
 export default function LarzarDado () {
-    let min = 1;
-    let max = 6;
-    let result = Math.floor(Math.random() * (max - min + 1)) + min
+    const [dado, setDado] = useState(-1);
+
+    function numeroAletorio() {
+        var myMin = 1;
+        var myMax = 6;
+        var result
+        
+        result = Math.floor(Math.random() * (myMax - myMin + 1)) + myMin
+    
+        setDado(result);
+    }
 
     return (
         <div style={{maxWidth: '500px', margin: 'auto'}}>
-            <button className = "btnDado" onClick={numeroAletorio()}>
+            <button className = "btnDado" onClick={e => numeroAletorio(1,6)}>
             Lanzar dado
             </button>
+
+            {dado !== -1 ? 
             <h3 className="resultadoDado">
-               {numeroAletorio(1,6)}
-               
-            </h3>
+               {dado}  
+            </h3> : null}
 
         </div>
     );
-}
-
-function numeroAletorio() {
-    var myMin = 1;
-    var myMax = 6;
-    var result
-    
-    result = Math.floor(Math.random() * (myMax - myMin + 1)) + myMin
-    
-    return result;
 }
