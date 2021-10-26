@@ -36,11 +36,6 @@ export default function ListaPartidas() {
 
   const [partidas, setPartidas] = useState(test);
 
-  async function TraerPartidas() {
-    const resp = await axios.get('http://localhost:8000/partidas/');
-    console.log(resp)
-  }
-
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
       <h1 style={{color:"white"}}>Unirse a una partida</h1>
@@ -70,7 +65,6 @@ export default function ListaPartidas() {
         </tbody>
       </table>
       <BotonCrear />
-      <button onClick={TraerPartidas()}>Traer</button>
       <LarzarDado />
     </div>
   )
