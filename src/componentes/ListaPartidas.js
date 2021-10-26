@@ -3,6 +3,7 @@ import BotonCrear from './BotonCrear';
 import BotonUnirse from './BotonUnirse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'
 
 export default function ListaPartidas() {
   const test = [
@@ -34,9 +35,14 @@ export default function ListaPartidas() {
 
   const [partidas, setPartidas] = useState(test);
 
+  async function TraerPartidas() {
+    const resp = await axios.get('http://localhost:8000/partidas/');
+    console.log(resp)
+  }
+
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
-      <h1>Unirse a una partida</h1>
+      <h1 style={{color:"white"}}>Unirse a una partida</h1>
       <table className='tablaPartidas' style={{marginBottom: '10px'}}>
         <thead>
           <tr>
@@ -63,6 +69,7 @@ export default function ListaPartidas() {
         </tbody>
       </table>
       <BotonCrear />
+      <button onClick={TraerPartidas()}>Traer</button>
     </div>
   )
 }
