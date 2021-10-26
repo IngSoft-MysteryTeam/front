@@ -4,6 +4,7 @@ import BotonUnirse from './BotonUnirse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
+import LarzarDado from './LanzarDado';
 
 export default function ListaPartidas() {
   const test = [
@@ -70,6 +71,7 @@ export default function ListaPartidas() {
       </table>
       <BotonCrear />
       <button onClick={TraerPartidas()}>Traer</button>
+      <LarzarDado />
     </div>
   )
 }
