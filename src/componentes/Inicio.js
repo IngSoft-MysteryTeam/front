@@ -21,7 +21,7 @@ export default function Inicio () {
         axios.post('http://localhost:8000/', {nombre: newjugador.nombre}).then((res) => {
             if (res.status === 200) {
                 history.push('/inicio')
-                localStorage.setItem("NombreJugador",newjugador.nombre)
+                sessionStorage.setItem("NombreJugador",newjugador.nombre)
             } else {
                 alert("Error desconocido. Revise la consola.")
                 console.log(res)

@@ -21,6 +21,13 @@ export default function ListaPartidas() {
         console.log(err)
       })
     }
+
+    function Unirsepartida(e){
+      axios.post(`http://localhost:8000/unirse/${e}`,(partidas.id_partida))
+      .then(res =>{
+        console.log(res)
+      })
+    }
     
     useEffect(()=>{
      TraerPartidas(); 
@@ -41,9 +48,9 @@ export default function ListaPartidas() {
           {partidas.map((e, key) => (
             <tr key={key}>
               <td>{e.nombre}</td>
-              <td>{e.id_partida}</td>
-              <td><FontAwesomeIcon icon={faUserFriends} /> 1/6</td>
-              <td><BotonUnirse/></td>
+              <td>{e.anfitrion}</td>
+              <td><FontAwesomeIcon icon={faUserFriends} /> {e.cantidad_jugadores}/6</td>
+              <td><BotonUnirse id_partida= {e.id_partida} unirse ={Unirsepartida}/></td>
             </tr>
           ))}
           {
