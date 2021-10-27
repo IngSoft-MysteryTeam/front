@@ -1,44 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BotonCrear from './BotonCrear';
 import BotonUnirse from './BotonUnirse';
+import BotonAct from './BotonAct';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
 
 export default function ListaPartidas() {
-  const test = [
-    {
-      id_partida: 0,
-      nombre_partida: "Prueba 1",
-      anfitrion: "Carlitos",
-      cant_jugadores: 3
-    },
-    {
-      id_partida: 1,
-      nombre_partida: "Prueba 2",
-      anfitrion: "Pepito",
-      cant_jugadores: 2
-    },
-    {
-      id_partida: 2,
-      nombre_partida: "Prueba 3",
-      anfitrion: "Juancito",
-      cant_jugadores: 5
-    },
-    {
-      id_partida: 2,
-      nombre_partida: "Prueba 3",
-      anfitrion: "Pedrito",
-      cant_jugadores: 6
+  
+  const [partidas, setPartidas] = useState([]);
+
+  
+  function TraerPartidas() {
+    axios.get('http://localhost:8000/partidas/')
+    .then(res =>{
+        console.log(res)
+        setPartidas(res.data)
+      }).catch((err)=>{
+        alert("No hay partidas. ¡Crea una nueva!")
+        console.log(err)
+      })
     }
-  ];
-
-  const [partidas, setPartidas] = useState(test);
-
-  async function TraerPartidas() {
-    const resp = await axios.get('http://localhost:8000/partidas/');
-    console.log(resp)
-  }
+    
+    useEffect(()=>{
+     TraerPartidas(); 
+    },[])
 
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
@@ -54,9 +40,9 @@ export default function ListaPartidas() {
         <tbody>
           {partidas.map((e, key) => (
             <tr key={key}>
-              <td>{e.nombre_partida}</td>
-              <td>{e.anfitrion}</td>
-              <td><FontAwesomeIcon icon={faUserFriends} /> {e.cant_jugadores}/6</td>
+              <td>{e.nombre}</td>
+              <td>{e.id_partida}</td>
+              <td><FontAwesomeIcon icon={faUserFriends} /> 1/6</td>
               <td><BotonUnirse/></td>
             </tr>
           ))}
@@ -68,8 +54,9 @@ export default function ListaPartidas() {
           : null}
         </tbody>
       </table>
+      <BotonAct actpartidas = {TraerPartidas}/>
+      <br/>
       <BotonCrear />
-      <button onClick={TraerPartidas()}>Traer</button>
     </div>
   )
 }
