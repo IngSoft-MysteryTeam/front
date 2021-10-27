@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
@@ -21,6 +21,7 @@ export default function Inicio () {
         axios.post('http://localhost:8000/', {nombre: newjugador.nombre}).then((res) => {
             if (res.status === 200) {
                 history.push('/inicio')
+                localStorage.setItem("NombreJugador",newjugador.nombre)
             } else {
                 alert("Error desconocido. Revise la consola.")
                 console.log(res)
@@ -34,6 +35,12 @@ export default function Inicio () {
             }
         })
     }
+
+    useEffect(()=>{
+        if(localStorage.getItem("NombreJugador")){
+            history.push('/inicio')
+        }
+    })
 
     return (
         <Fragment>

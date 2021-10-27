@@ -18,7 +18,7 @@ export default function CreaPartida() {
     const enviarPartida = async (evento) => {
         evento.preventDefault();
         const resp = await axios.post('http://localhost:8000/nueva-partida/', 
-        {nombre: newpartida.nombre})
+        {nombre: newpartida.nombre, anfitrion: localStorage.getItem("NombreJugador")})
         console.log(resp)   
     }
   
