@@ -30,7 +30,7 @@ export default function ListaPartidas() {
       })
       .then(res =>{
         if (res.status === 200) {
-          history.push(`/partidas/${res.data.id_partida}`);
+          history.push({pathname: `/partidas/${res.data.id_partida}`, state: res.data});
         }
       }).catch(err => {
         alert("Ocurrió un error. Revise la consola.")

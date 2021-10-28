@@ -1,27 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router';
 import Chat from './Chat';
 import ListaJugadores from './ListaJugadores';
 
 export default function Lobby() {
-  const test = [
-    {
-      id: 0,
-      nombre: "Carlos",
-      color: "#4285F4"
-    },
-    {
-      id: 1,
-      nombre: "Pedro",
-      color: "#DB4437"
-    },
-    {
-      id: 2,
-      nombre: "Jose",
-      color: "#F4B400"
-    },
-  ];
+  const params = useParams();
+  const location = useLocation();
+  const [jugadores, setJugadores] = useState([]);
 
-  const [jugadores, setJugadores] = useState(test);
+  useEffect(() => {
+    setJugadores(location.state.jugadores);
+    const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
+    socket.addEventListener('open', e => console.log("Conexion establecida"));
+    socket.addEventListener('message', msg => console.log(`Mensaje: ${msg.data}`));
+    socket.addEventListener('close', e => console.log("Se cayo la conexion"));
+  }, [])
+
 
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
