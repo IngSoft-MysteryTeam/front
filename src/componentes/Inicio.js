@@ -45,10 +45,10 @@ export default function Inicio () {
     return (
         <Fragment>
             <header id="header">
-            <h1 style={{marginTop: '10px', textAlign:"center"}}>MISTERIO </h1>           
+            <h1 style={{marginTop: '10px', textAlign:"center", color:"yellow"}}>MISTERIO </h1>           
             </header>  
 
-            <div className = "card card-body" style = {{maxWidth: "700px", margin: "auto"}}>
+            <div className="card text-white bg-dark mb-3" style = {{maxWidth: "500px", margin: "auto"}}>
                 <h2 style={{textAlign:"center", color:"red"}}> Ingresar </h2>
                 <br/>
                 <input 
@@ -57,6 +57,7 @@ export default function Inicio () {
                 type="text"
                 name = "nombre"
                 onChange = {controlEvents}
+                maxLength ="20"
                 required
                 />
                 <div>

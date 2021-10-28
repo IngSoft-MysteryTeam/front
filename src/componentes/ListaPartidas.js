@@ -23,8 +23,12 @@ export default function ListaPartidas() {
     }
 
     function Unirsepartida(e){
-      axios.post(`http://localhost:8000/unirse/${e}`,(partidas.id_partida))
+      axios.post(`http://localhost:8000/partida/${e}/unirse`,{
+        nombre: sessionStorage.getItem("NombreJugador")
+      })
       .then(res =>{
+        console.log(res)
+      }).catch(res=>{
         console.log(res)
       })
     }
