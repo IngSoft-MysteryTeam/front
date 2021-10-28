@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import BotonCrear from './BotonCrear';
 import BotonUnirse from './BotonUnirse';
 import BotonAct from './BotonAct';
@@ -8,6 +9,7 @@ import axios from 'axios'
 
 export default function ListaPartidas() {
   
+  const history = useHistory();
   const [partidas, setPartidas] = useState([]);
 
   
@@ -27,9 +29,12 @@ export default function ListaPartidas() {
         nombre: sessionStorage.getItem("NombreJugador")
       })
       .then(res =>{
-        console.log(res)
-      }).catch(res=>{
-        console.log(res)
+        if (res.status === 200) {
+          history.push(`/partidas/${res.data.id_partida}`);
+        }
+      }).catch(err => {
+        alert("Ocurrió un error. Revise la consola.")
+        console.error(err)
       })
     }
     
