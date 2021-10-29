@@ -21,7 +21,7 @@ export default function Lobby() {
 
   return (
     <div style={{maxWidth: '750px', margin: 'auto'}}>
-      <h1>Nombre de la partida</h1>
+      <h1>{location.state.nombre}</h1>
       <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap-reverse'}}>
         <div style={{flexGrow: 1, flexBasis: '300px'}}>
           <ListaJugadores jugadores={jugadores} />
