@@ -18,6 +18,8 @@ export default function Lobby() {
         if (location.state.jugadores.findIndex(e => e.nombre === json.jugador.nombre) === -1) {
           setJugadores(oldJugadores => [...oldJugadores, json.jugador])
         }
+      } else if (json.evento === "Jugador desconectado") {
+        setJugadores(oldJugadores => oldJugadores.filter(e => e.nombre !== json.jugador.nombre))
       }
     });
     socket.addEventListener('close', e => console.log("Se cayo la conexion"));
