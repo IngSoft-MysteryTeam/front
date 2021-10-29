@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { unirJugador, traerPartidas } from '../services';
 import BotonCrear from './BotonCrear';
 import BotonUnirse from './BotonUnirse';
 import BotonAct from './BotonAct';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'
+
 
 export default function ListaPartidas() {
   
@@ -13,9 +14,9 @@ export default function ListaPartidas() {
   const [partidas, setPartidas] = useState([]);
 
   
-  function TraerPartidas() {
-    axios.get('http://localhost:8000/partidas/')
-    .then(res =>{
+  function obtPartidas() {
+     traerPartidas()
+      .then(res =>{
         console.log(res)
         setPartidas(res.data)
       }).catch((err)=>{
@@ -25,21 +26,22 @@ export default function ListaPartidas() {
     }
 
     function Unirsepartida(e){
-      axios.post(`http://localhost:8000/partida/${e.id_partida}/unirse`,{
+      unirJugador({
+        id_partida: e.id_partida,
         nombre: sessionStorage.getItem("NombreJugador")
-      })
-      .then(res =>{
-        if (res.status === 200) {
-          history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: e.nombre}});
-        }
-      }).catch(err => {
-        alert("Ocurrió un error. Revise la consola.")
-        console.error(err)
-      })
-    }
+        })
+        .then(res =>{
+          if (res.status === 200) {
+            history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: e.nombre}});
+          }
+        }).catch(err => {
+          alert("Ocurrió un error. Revise la consola.")
+          console.error(err)
+        })
+    }  
     
     useEffect(()=>{
-     TraerPartidas(); 
+     obtPartidas(); 
     },[])
 
   return (
@@ -70,9 +72,9 @@ export default function ListaPartidas() {
           : null}
         </tbody>
       </table>
-      <BotonAct actpartidas = {TraerPartidas}/>
+      <BotonAct actpartidas = {obtPartidas}/>
       <br/>
-      <BotonCrear />
+      <BotonCrear/>
     </div>
   )
 }

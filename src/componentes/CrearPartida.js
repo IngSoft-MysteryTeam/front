@@ -1,12 +1,11 @@
 import React, {Fragment, useState} from "react";
 import { useHistory } from 'react-router';
-import axios from 'axios';
-
+import { nuevaPartida} from "../services";
 
 export default function CreaPartida() {
 
     const history = useHistory();
-
+    const jugador = sessionStorage.getItem("NombreJugador");
     const [newpartida, setNombre] = useState({
         nombre: ''
     })
@@ -18,13 +17,19 @@ export default function CreaPartida() {
             [evento.target.name]: evento.target.value
         })
     }
+
     const enviarPartida = (evento) => {
         evento.preventDefault();
-        axios.post('http://localhost:8000/nueva-partida/', 
-        {nombre: newpartida.nombre, anfitrion: sessionStorage.getItem("NombreJugador")})
+        nuevaPartida({
+            nombre: newpartida.nombre, 
+            anfitrion: jugador
+        })
         .then(res =>{
             if (res.status === 200) {
-                history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: newpartida.nombre}});
+                history.push({
+                    pathname: `/partidas/${res.data.id_partida}`, 
+                    state: {...res.data, nombre: newpartida.nombre}
+                });
             }
           }).catch(err => {
             alert("Ocurrió un error. Revise la consola.")
