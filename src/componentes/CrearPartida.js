@@ -1,8 +1,11 @@
 import React, {Fragment, useState} from "react";
+import { useHistory } from 'react-router';
 import axios from 'axios';
 
 
 export default function CreaPartida() {
+
+    const history = useHistory();
 
     const [newpartida, setNombre] = useState({
         nombre: ''
@@ -15,12 +18,26 @@ export default function CreaPartida() {
             [evento.target.name]: evento.target.value
         })
     }
-    const enviarPartida = async (evento) => {
+    const enviarPartida = (evento) => {
         evento.preventDefault();
-        const resp = await axios.post('http://localhost:8000/nueva-partida/', 
+        axios.post('http://localhost:8000/nueva-partida/', 
         {nombre: newpartida.nombre, anfitrion: sessionStorage.getItem("NombreJugador")})
-        console.log(resp)   
-    }
+        .then(res =>{
+            if (res.status === 200) {
+                axios.post(`http://localhost:8000/partida/${res.data.id_partida}/unirse`,{
+                nombre: sessionStorage.getItem("NombreJugador")})
+                .then(res=>{
+                    history.push({pathname: `/partidas/${res.data.id_partida}`, state: res.data});
+                }).catch(err=>{
+                    alert("Ocurrió un error. Revise la consola.")
+                    console.error(err)
+                })
+            }
+          }).catch(err => {
+            alert("Ocurrió un error. Revise la consola.")
+            console.error(err)
+          })
+        }
   
     return (
         <Fragment>   

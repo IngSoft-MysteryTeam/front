@@ -10,11 +10,13 @@ export default function Lobby() {
 
   useEffect(() => {
     setJugadores(location.state.jugadores);
-    const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
+    console.log(location.state.jugadores)
+    /* const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
     socket.addEventListener('open', e => console.log("Conexion establecida"));
     socket.addEventListener('message', msg => console.log(`Mensaje: ${msg.data}`));
-    socket.addEventListener('close', e => console.log("Se cayo la conexion"));
-  }, [])
+    socket.addEventListener('close', e => console.log("Se cayo la conexion")); */
+
+  }, [location.state.jugadores, params.id])
 
 
   return (
@@ -24,7 +26,7 @@ export default function Lobby() {
         <div style={{flexGrow: 1, flexBasis: '300px'}}>
           <ListaJugadores jugadores={jugadores} />
           <div style={{display: 'flex', marginTop: '10px', columnGap: '10px'}}>
-            <button className='btn btn-dark' style={{flexGrow: 1}} disabled={jugadores.length < 2 ? 'true' : ''}>
+            <button className='btn btn-dark' disabled={jugadores.length < 2}>
               Iniciar partida
             </button>
             <button className='btn btn-dark' style={{flexGrow: 1}}>
