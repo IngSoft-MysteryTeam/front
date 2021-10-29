@@ -10,7 +10,7 @@ export default function Lobby() {
 
   useEffect(() => {
     setJugadores(location.state.jugadores);
-    const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
+    const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`);
     socket.addEventListener('open', e => console.log("Conexion establecida"));
     socket.addEventListener('message', msg => {
       let json = JSON.parse(msg.data)
