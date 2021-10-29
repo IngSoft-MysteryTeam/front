@@ -10,13 +10,18 @@ export default function Lobby() {
 
   useEffect(() => {
     setJugadores(location.state.jugadores);
-    console.log(location.state.jugadores)
-    /* const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
+    const socket = new WebSocket(`ws://localhost:8000/partida/${params.id}`);
     socket.addEventListener('open', e => console.log("Conexion establecida"));
-    socket.addEventListener('message', msg => console.log(`Mensaje: ${msg.data}`));
-    socket.addEventListener('close', e => console.log("Se cayo la conexion")); */
-
-  }, [location.state.jugadores, params.id])
+    socket.addEventListener('message', msg => {
+      let json = JSON.parse(msg.data)
+      if (json.evento === "Nuevo Jugador") {
+        if (location.state.jugadores.findIndex(e => e.nombre === json.jugador.nombre) === -1) {
+          setJugadores(oldJugadores => [...oldJugadores, json.jugador])
+        }
+      }
+    });
+    socket.addEventListener('close', e => console.log("Se cayo la conexion"));
+  }, [])
 
 
   return (
