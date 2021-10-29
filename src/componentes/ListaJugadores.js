@@ -7,14 +7,14 @@ export default function ListaJugadores(props) {
     <table className='tablaJugadores'>
       <tbody>
         {
-          props.jugadores.map((e, key) => 
-            <tr key={key}>
+          props.jugadores.map((e, index) => 
+            <tr key={index}>
               <td>
                 <span style={{color: e.color}}>●</span>
                 {" "}
                 {e.nombre}
                 {" "}
-                {e.id === 0 ? <FontAwesomeIcon icon={faCrown}/> : null}
+                {index === 0 ? <FontAwesomeIcon icon={faCrown}/> : null}
               </td>
             </tr>
           )
