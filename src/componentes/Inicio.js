@@ -17,11 +17,12 @@ export default function Inicio () {
         })
     }
 
-    const enviarJugador = () => {
+    const enviarJugador = (e) => {
+        e.preventDefault();
         axios.post('http://localhost:8000/', {nombre: newjugador.nombre}).then((res) => {
             if (res.status === 200) {
                 history.push('/inicio')
-                sessionStorage.setItem("NombreJugador",newjugador.nombre)
+                sessionStorage.setItem("NombreJugador", newjugador.nombre)
             } else {
                 alert("Error desconocido. Revise la consola.")
                 console.log(res)
@@ -50,19 +51,20 @@ export default function Inicio () {
 
             <div className="card text-white bg-dark mb-3" style = {{maxWidth: "500px", margin: "auto"}}>
                 <h2 style={{textAlign:"center", color:"red"}}> Ingresar </h2>
-                <br/>
-                <input 
-                placeholder = "Introduce nombre de jugador"
-                className = "form-control"
-                type="text"
-                name = "nombre"
-                onChange = {controlEvents}
-                maxLength ="20"
-                required
-                />
-                <div>
-                <button className = "btn btn-dark" onClick={e => enviarJugador(newjugador)}>Ingresar</button>
-                </div>
+                <form onSubmit = {enviarJugador}>
+                    <input 
+                    placeholder = "Introduce nombre de jugador"
+                    className = "form-control"
+                    type="text"
+                    name = "nombre"
+                    onChange = {controlEvents}
+                    maxLength ="20"
+                    required
+                    />
+                    <div>
+                    <button className = "btn btn-dark" type="submit">Ingresar</button>
+                    </div>
+                </form>
             </div>
         </Fragment>
     );
