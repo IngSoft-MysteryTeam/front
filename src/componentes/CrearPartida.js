@@ -24,14 +24,7 @@ export default function CreaPartida() {
         {nombre: newpartida.nombre, anfitrion: sessionStorage.getItem("NombreJugador")})
         .then(res =>{
             if (res.status === 200) {
-                axios.post(`http://localhost:8000/partida/${res.data.id_partida}/unirse`,{
-                nombre: sessionStorage.getItem("NombreJugador")})
-                .then(res=>{
-                    history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: newpartida.nombre}});
-                }).catch(err=>{
-                    alert("Ocurrió un error. Revise la consola.")
-                    console.error(err)
-                })
+                history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: newpartida.nombre}});
             }
           }).catch(err => {
             alert("Ocurrió un error. Revise la consola.")
