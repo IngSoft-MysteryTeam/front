@@ -27,7 +27,7 @@ export default function CreaPartida() {
                 axios.post(`http://localhost:8000/partida/${res.data.id_partida}/unirse`,{
                 nombre: sessionStorage.getItem("NombreJugador")})
                 .then(res=>{
-                    history.push({pathname: `/partidas/${res.data.id_partida}`, state: res.data});
+                    history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: newpartida.nombre}});
                 }).catch(err=>{
                     alert("Ocurrió un error. Revise la consola.")
                     console.error(err)
@@ -42,7 +42,7 @@ export default function CreaPartida() {
     return (
         <Fragment>   
             <div className = "card card-body" style = {{maxWidth: "700px", margin: "auto"}}>
-                    <h2 style={{textAlign:"center"}}> PARTIDA </h2>
+                    <h2 style={{textAlign:"center", color: 'black'}}>CREAR PARTIDA</h2>
                     <br/>
                     <form className = "row" onSubmit = {enviarPartida}>
                         <input 
