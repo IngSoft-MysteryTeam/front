@@ -25,12 +25,12 @@ export default function ListaPartidas() {
     }
 
     function Unirsepartida(e){
-      axios.post(`http://localhost:8000/partida/${e}/unirse`,{
+      axios.post(`http://localhost:8000/partida/${e.id_partida}/unirse`,{
         nombre: sessionStorage.getItem("NombreJugador")
       })
       .then(res =>{
         if (res.status === 200) {
-          history.push({pathname: `/partidas/${res.data.id_partida}`, state: res.data});
+          history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: e.nombre}});
         }
       }).catch(err => {
         alert("Ocurrió un error. Revise la consola.")
@@ -59,7 +59,7 @@ export default function ListaPartidas() {
               <td>{e.nombre}</td>
               <td>{e.anfitrion}</td>
               <td><FontAwesomeIcon icon={faUserFriends} /> {e.cantidad_jugadores}/6</td>
-              <td><BotonUnirse id_partida= {e.id_partida} unirse ={Unirsepartida}/></td>
+              <td><BotonUnirse partida={e} unirse={Unirsepartida}/></td>
             </tr>
           ))}
           {
