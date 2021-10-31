@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
-import { iniciarPartida } from "../services";
 import Iniciar from "./BotonIniciar";
 import Chat from "./Chat";
 import LarzarDado from "./LanzarDado";
@@ -12,6 +11,7 @@ export default function Lobby() {
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     const [iniciada, setIniciada] = useState(false)
     const [turno, setTurno] = useState(null);
+    const [dado, setDado] = useState(-1);
         /* params.id viene de la url de donde estas parado */
     useEffect(() => {
         setJugadores(location.state.jugadores);
@@ -58,6 +58,7 @@ export default function Lobby() {
                     display: "flex",
                     gap: "10px",
                     flexWrap: "wrap-reverse",
+                    alignItems: "flex-end"
                 }}
             >
                 <div style={{ flexGrow: 1, flexBasis: "300px" }}>
@@ -79,10 +80,14 @@ export default function Lobby() {
                         >
                             Abandonar partida
                         </button>
+                        {iniciada ? <LarzarDado setDado={setDado}/> : null}
                     </div>
+                    {dado !== -1 ? 
+                    <h3 className="resultadoDado" style={{marginTop: '10px'}}>
+                    {dado}  
+                    </h3> : null}
                 </div>
                 <Chat />
-                <LarzarDado />
             </div>
         </div>
     );
