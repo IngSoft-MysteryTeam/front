@@ -1,4 +1,4 @@
-export default function LarzarDado (props) {
+export default function BotonDado (props) {
     function numeroAletorio() {
         var myMin = 1;
         var myMax = 6;

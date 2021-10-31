@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
 import Iniciar from "./BotonIniciar";
 import Chat from "./Chat";
-import LarzarDado from "./LanzarDado";
+import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 
 export default function Lobby() {
@@ -80,7 +80,7 @@ export default function Lobby() {
                         >
                             Abandonar partida
                         </button>
-                        {iniciada ? <LarzarDado setDado={setDado}/> : null}
+                        {iniciada ? <BotonDado setDado={setDado}/> : null}
                     </div>
                     {dado !== -1 ? 
                     <h3 className="resultadoDado" style={{marginTop: '10px'}}>
