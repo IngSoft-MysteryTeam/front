@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router";
 import { iniciarPartida } from "../services";
 import Iniciar from "./BotonIniciar";
 import Chat from "./Chat";
+import LarzarDado from "./LanzarDado";
 import ListaJugadores from "./ListaJugadores";
 
 export default function Lobby() {
@@ -81,6 +82,7 @@ export default function Lobby() {
                     </div>
                 </div>
                 <Chat />
+                <LarzarDado />
             </div>
         </div>
     );
