@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
+import Iniciar from "./BotonIniciar";
 import Chat from "./Chat";
 import ListaJugadores from "./ListaJugadores";
 
 export default function Lobby() {
     const params = useParams();
     const location = useLocation();
-    const [jugadores, setJugadores] = useState([]);
+    const [jugadores, setJugadores] = useState([location.state.jugadores]);
 
     useEffect(() => {
         setJugadores(location.state.jugadores);
@@ -20,7 +21,7 @@ export default function Lobby() {
             let json = JSON.parse(msg.data);
             if (json.evento === "Nuevo Jugador") {
                 if (
-                    location.state.jugadores.findIndex(
+                    jugadores.findIndex(
                         (e) => e.nombre === json.jugador.nombre
                     ) === -1
                 ) {
@@ -59,12 +60,10 @@ export default function Lobby() {
                             columnGap: "10px",
                         }}
                     >
-                        <button
-                            className="btn btn-dark"
-                            disabled={jugadores.length < 2}
-                        >
-                            Iniciar partida
-                        </button>
+                        {jugadores[0].nombre ===
+                        sessionStorage.getItem("NombreJugador") ? (
+                            <Iniciar cantjugadores={jugadores.length} />
+                        ) : null}
                         <button
                             className="btn btn-dark"
                             style={{ flexGrow: 1 }}
