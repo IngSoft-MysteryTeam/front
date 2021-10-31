@@ -34,6 +34,10 @@ export default function ListaPartidas() {
           if (res.status === 200) {
             history.push({pathname: `/partidas/${res.data.id_partida}`, state: {...res.data, nombre: e.nombre}});
           }
+          if(res.status === 202){
+            alert("La partida esta completa")
+            obtPartidas()
+          }
         }).catch(err => {
           alert("Ocurrió un error. Revise la consola.")
           console.error(err)
