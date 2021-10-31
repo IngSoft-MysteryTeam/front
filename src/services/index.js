@@ -32,3 +32,10 @@ export function unirJugador(datos) {
         data: { nombre: datos.nombre },
     });
 }
+
+export function iniciarPartida(datos){
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/iniciar`,
+        method : "PUT",
+    })
+}

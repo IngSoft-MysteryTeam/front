@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
+import { iniciarPartida } from "../services";
 import Iniciar from "./BotonIniciar";
 import Chat from "./Chat";
 import ListaJugadores from "./ListaJugadores";
@@ -7,8 +8,9 @@ import ListaJugadores from "./ListaJugadores";
 export default function Lobby() {
     const params = useParams();
     const location = useLocation();
-    const [jugadores, setJugadores] = useState([location.state.jugadores]);
-
+    const [jugadores, setJugadores] = useState(location.state.jugadores);
+    const [iniciada, setIniciada] = useState(false)
+        /* params.id viene de la url de donde estas parado */
     useEffect(() => {
         setJugadores(location.state.jugadores);
         const socket = new WebSocket(
@@ -19,6 +21,7 @@ export default function Lobby() {
         );
         socket.addEventListener("message", (msg) => {
             let json = JSON.parse(msg.data);
+            console.log(msg.data)
             if (json.evento === "Nuevo Jugador") {
                 if (
                     jugadores.findIndex(
@@ -34,6 +37,9 @@ export default function Lobby() {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
+            }
+            else if (json.evento === "Comenzo la partida"){
+                setIniciada(true)
             }
         });
         socket.addEventListener("close", (e) =>
@@ -61,8 +67,8 @@ export default function Lobby() {
                         }}
                     >
                         {jugadores[0].nombre ===
-                        sessionStorage.getItem("NombreJugador") ? (
-                            <Iniciar cantjugadores={jugadores.length} />
+                        sessionStorage.getItem("NombreJugador") && !iniciada  ? (
+                            <Iniciar id_partida ={params.id} cantjugadores={jugadores.length} />
                         ) : null}
                         <button
                             className="btn btn-dark"
