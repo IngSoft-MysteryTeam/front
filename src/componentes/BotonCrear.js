@@ -1,10 +1,10 @@
-import React, {Link} from "react-router-dom";
+import React, { Link } from "react-router-dom";
 
-function BotonCrear () {
+function BotonCrear() {
     return (
         <div>
-            <Link to = "/crear-partida" className = "btn btn-dark">
-            Crear Partida
+            <Link to="/crear-partida" className="btn btn-dark">
+                Crear Partida
             </Link>
         </div>
     );

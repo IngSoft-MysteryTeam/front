@@ -1,81 +1,84 @@
 body {
-  background-color: rgb(0, 0, 0) !important;
-  color: white;
+    background-color: rgb(0, 0, 0) !important;
+    color: white;
 }
 
 .tablaPartidas {
-  table-layout: fixed;
-  margin: auto;
-  border-collapse: collapse;
-  width: 100%;
+    table-layout: fixed;
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.tablaPartidas td, th {
-  text-align: center;
-  padding: 5px;
-  border: 1px solid rgb(100, 100, 100);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.tablaPartidas td,
+th {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid rgb(100, 100, 100);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tablaPartidas tbody tr:hover {
-  background-color: rgb(70, 7, 7);
+    background-color: rgb(70, 7, 7);
 }
 
 .tablaJugadores {
-  table-layout: fixed;
-  margin: auto;
-  border-collapse: collapse;
-  width: 100%;
+    table-layout: fixed;
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .tablaJugadores td {
-  text-align: center;
-  padding: 5px;
-  border: 1px solid #ddd;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.contenedor{
-  width:990px;
-  margin:0 auto;
+.contenedor {
+    width: 990px;
+    margin: 0 auto;
 }
 
-.contenedorMedio{
-  width:890px; 
-  margin:0 auto; 
-  padding:50px 0;
+.contenedorMedio {
+    width: 890px;
+    margin: 0 auto;
+    padding: 50px 0;
 }
 
-.contenedorChico{
-  width:840px;
-  margin:0 auto;
-  clear:both;
+.contenedorChico {
+    width: 840px;
+    margin: 0 auto;
+    clear: both;
 }
 
 .literal_a {
-  margin: 0; 
-  padding: 0; 
-  font-size: 25px; 
-  font-family:'avenirLTStd-Book', sans-serif; 
-  font: weight 101px;; 
-  color:rgb(136, 1, 1); 
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    font-family: "avenirLTStd-Book", sans-serif;
+    font: weight 101px;
+    color: rgb(136, 1, 1);
 }
 
-.camposGrandes input{
-  border:1px solid #BCBDC0; 
-  padding:8px 8px; 
-  -webkit-border-radius:4px; 
-  -moz-border-radius:4px; 
-  border-radius:4px; 
-  color:#666; 
-  font-family:'avenirLTStd-Book', sans-serif; 
+.camposGrandes input {
+    border: 1px solid #bcbdc0;
+    padding: 8px 8px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    color: #666;
+    font-family: "avenirLTStd-Book", sans-serif;
 }
-form{margin:20px 0;}
+form {
+    margin: 20px 0;
+}
 
 h1 {
-  word-break: break-all;
+    word-break: break-all;
 }
