@@ -2,6 +2,15 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:8000/"
 
+
+export function nuevoJugador(nombre){
+    return(axios({
+         url:`${baseUrl}`,
+         method : 'POST',
+         data: nombre
+     }))
+ }
+
 export function traerPartidas(){
    return(axios({
         url:`${baseUrl}partidas/`,

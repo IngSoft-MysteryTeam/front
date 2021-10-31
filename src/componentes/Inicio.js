@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
+import { nuevoJugador } from "../services";
 
 export default function Inicio () {
     const history = useHistory()
@@ -19,7 +19,8 @@ export default function Inicio () {
 
     const enviarJugador = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/', {nombre: newjugador.nombre}).then((res) => {
+        nuevoJugador({nombre: newjugador.nombre})
+        .then((res) => {
             if (res.status === 200) {
                 history.push('/inicio')
                 sessionStorage.setItem("NombreJugador", newjugador.nombre)
