@@ -10,6 +10,7 @@ export default function Lobby() {
     const location = useLocation();
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     const [iniciada, setIniciada] = useState(false)
+    const [turno, setTurno] = useState(null);
         /* params.id viene de la url de donde estas parado */
     useEffect(() => {
         setJugadores(location.state.jugadores);
@@ -37,9 +38,10 @@ export default function Lobby() {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
-            }
-            else if (json.evento === "Comenzo la partida"){
-                setIniciada(true)
+            } else if (json.evento === "Comenzo la partida"){
+                setIniciada(true);
+            } else if (json.evento === "Nuevo turno") {
+                setTurno(json.turno);
             }
         });
         socket.addEventListener("close", (e) =>
@@ -58,7 +60,7 @@ export default function Lobby() {
                 }}
             >
                 <div style={{ flexGrow: 1, flexBasis: "300px" }}>
-                    <ListaJugadores jugadores={jugadores} />
+                    <ListaJugadores jugadores={jugadores} turno={turno} />
                     <div
                         style={{
                             display: "flex",
