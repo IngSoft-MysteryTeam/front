@@ -11,10 +11,10 @@ export default function Lobby() {
     const params = useParams();
     const location = useLocation();
     const [jugadores, setJugadores] = useState(location.state.jugadores);
-    const [iniciada, setIniciada] = useState(false)
+    const [iniciada, setIniciada] = useState(false);
     const [turno, setTurno] = useState(null);
     const [dado, setDado] = useState(-1);
-        /* params.id viene de la url de donde estas parado */
+    /* params.id viene de la url de donde estas parado */
     useEffect(() => {
         setJugadores(location.state.jugadores);
         const socket = new WebSocket(
@@ -25,7 +25,7 @@ export default function Lobby() {
         );
         socket.addEventListener("message", (msg) => {
             let json = JSON.parse(msg.data);
-            console.log(msg.data)
+            console.log(msg.data);
             if (json.evento === "Nuevo Jugador") {
                 if (
                     jugadores.findIndex(
@@ -41,10 +41,12 @@ export default function Lobby() {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
-            } else if (json.evento === "Comenzo la partida"){
+            } else if (json.evento === "Comenzo la partida") {
                 setIniciada(true);
             } else if (json.evento === "Nuevo turno") {
                 setTurno(json.turno);
+            } else if (json.evento === "Tiraron el dado") {
+                setDado(json.valor);
             }
         });
         socket.addEventListener("close", (e) =>
@@ -60,7 +62,7 @@ export default function Lobby() {
                     display: "flex",
                     gap: "10px",
                     flexWrap: "wrap-reverse",
-                    alignItems: "flex-end"
+                    alignItems: "flex-end",
                 }}
             >
                 <div style={{ flexGrow: 1, flexBasis: "300px" }}>
@@ -71,26 +73,28 @@ export default function Lobby() {
                             marginTop: "10px",
                             columnGap: "10px",
                             rowGap: "10px",
-                            flexWrap: "wrap"
+                            flexWrap: "wrap",
                         }}
                     >
                         {jugadores[0].nombre ===
-                        sessionStorage.getItem("NombreJugador") && !iniciada  ? (
-                            <Iniciar id_partida ={params.id} cantjugadores={jugadores.length} />
+                            sessionStorage.getItem("NombreJugador") &&
+                        !iniciada ? (
+                            <Iniciar
+                                id_partida={params.id}
+                                cantjugadores={jugadores.length}
+                            />
                         ) : null}
-                        <button
-                            className="btn btn-dark"
-                        >
+                        <button className="btn btn-dark">
                             Abandonar partida
                         </button>
-                        {iniciada ? 
-                        <>
-                        <BotonDado setDado={setDado}/>
-                        <PasarTurno />
-                        </> : null}
+                        {iniciada ? (
+                            <>
+                                <BotonDado id_partida={params.id} />
+                                <PasarTurno id_partida={params.id} />
+                            </>
+                        ) : null}
                     </div>
-                    {dado !== -1 ? 
-                    <Dado numero={dado} /> : null}
+                    {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
                 <Chat />
             </div>

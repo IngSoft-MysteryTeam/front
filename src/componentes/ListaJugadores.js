@@ -8,7 +8,14 @@ export default function ListaJugadores(props) {
             <tbody>
                 {props.jugadores.map((e, index) => (
                     <tr key={index}>
-                        <td style={{border: props.turno -1 === index ? '5px solid red' : ''}}>
+                        <td
+                            style={{
+                                border:
+                                    props.turno === e.orden
+                                        ? "5px solid red"
+                                        : "",
+                            }}
+                        >
                             <span style={{ color: e.color }}>●</span> {e.nombre}{" "}
                             {index === 0 ? (
                                 <FontAwesomeIcon icon={faCrown} />

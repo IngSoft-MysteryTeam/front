@@ -33,9 +33,23 @@ export function unirJugador(datos) {
     });
 }
 
-export function iniciarPartida(datos){
+export function iniciarPartida(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/iniciar`,
-        method : "PUT",
-    })
+        method: "PUT",
+    });
+}
+
+export function pasarTurno(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/pasarturno`,
+        method: "PUT",
+    });
+}
+
+export function obtDado(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/tirardado`,
+        method: "GET",
+    });
 }
