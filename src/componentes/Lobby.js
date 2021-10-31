@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
 import Iniciar from "./BotonIniciar";
+import PasarTurno from "./BotonPasarTurno";
 import Chat from "./Chat";
+import Dado from "./Dado";
 import LarzarDado from "./LanzarDado";
 import ListaJugadores from "./ListaJugadores";
 
@@ -68,6 +70,8 @@ export default function Lobby() {
                             display: "flex",
                             marginTop: "10px",
                             columnGap: "10px",
+                            rowGap: "10px",
+                            flexWrap: "wrap"
                         }}
                     >
                         {jugadores[0].nombre ===
@@ -76,16 +80,17 @@ export default function Lobby() {
                         ) : null}
                         <button
                             className="btn btn-dark"
-                            style={{ flexGrow: 1 }}
                         >
                             Abandonar partida
                         </button>
-                        {iniciada ? <LarzarDado setDado={setDado}/> : null}
+                        {iniciada ? 
+                        <>
+                        <LarzarDado setDado={setDado}/>
+                        <PasarTurno />
+                        </> : null}
                     </div>
                     {dado !== -1 ? 
-                    <h3 className="resultadoDado" style={{marginTop: '10px'}}>
-                    {dado}  
-                    </h3> : null}
+                    <Dado numero={dado} /> : null}
                 </div>
                 <Chat />
             </div>
