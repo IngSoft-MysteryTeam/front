@@ -4,7 +4,7 @@ import Iniciar from "./BotonIniciar";
 import PasarTurno from "./BotonPasarTurno";
 import Chat from "./Chat";
 import Dado from "./Dado";
-import LarzarDado from "./LanzarDado";
+import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 
 export default function Lobby() {
@@ -85,7 +85,7 @@ export default function Lobby() {
                         </button>
                         {iniciada ? 
                         <>
-                        <LarzarDado setDado={setDado}/>
+                        <BotonDado setDado={setDado}/>
                         <PasarTurno />
                         </> : null}
                     </div>
