@@ -10,10 +10,8 @@ export default function LarzarDado (props) {
     }
 
     return (
-        <div style={{maxWidth: '500px', margin: 'auto'}}>
-            <button className = "btn btn-dark" onClick={e => numeroAletorio(1,6)}>
-            Lanzar dado
-            </button>
-        </div>
+        <button className = "btn btn-dark" onClick={e => numeroAletorio(1,6)}>
+        Lanzar dado
+        </button>
     );
 }
