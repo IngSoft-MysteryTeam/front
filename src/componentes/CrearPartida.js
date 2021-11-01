@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router";
-import { nuevaPartida } from "../services";
+import { nuevaPartida, obtNombrejugador } from "../services";
 
 export default function CreaPartida() {
     const history = useHistory();
-    const jugador = sessionStorage.getItem("NombreJugador");
+    const jugador = obtNombrejugador();
     const [newpartida, setNombre] = useState({
         nombre: "",
     });

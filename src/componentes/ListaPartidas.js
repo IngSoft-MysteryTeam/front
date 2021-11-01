@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
-import { unirJugador, traerPartidas } from "../services";
+import { unirJugador, traerPartidas, obtNombrejugador } from "../services";
 import BotonCrear from "./BotonCrear";
 import BotonUnirse from "./BotonUnirse";
 import BotonAct from "./BotonAct";
@@ -26,7 +26,7 @@ export default function ListaPartidas() {
     function Unirsepartida(e) {
         unirJugador({
             id_partida: e.id_partida,
-            nombre: sessionStorage.getItem("NombreJugador"),
+            nombre: obtNombrejugador(),
         })
             .then((res) => {
                 if (res.status === 200) {

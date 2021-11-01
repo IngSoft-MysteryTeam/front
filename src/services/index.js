@@ -53,3 +53,11 @@ export function obtDado(datos) {
         method: "GET",
     });
 }
+
+export function obtNombrejugador() {
+    return sessionStorage.getItem("NombreJugador");
+}
+
+export function asigNombrejugador(datos) {
+    return sessionStorage.setItem("NombreJugador", datos.nombre);
+}

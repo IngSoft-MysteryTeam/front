@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { nuevoJugador } from "../services";
+import { asigNombrejugador, nuevoJugador} from "../services";
 
 export default function Inicio() {
     const history = useHistory();
@@ -23,7 +23,7 @@ export default function Inicio() {
             .then((res) => {
                 if (res.status === 200) {
                     history.push("/inicio");
-                    sessionStorage.setItem("NombreJugador", newjugador.nombre);
+                    asigNombrejugador({nombre: newjugador.nombre})
                 } else {
                     alert("Error desconocido. Revise la consola.");
                     console.log(res);
@@ -40,12 +40,6 @@ export default function Inicio() {
                 }
             });
     };
-
-    useEffect(() => {
-        if (localStorage.getItem("NombreJugador")) {
-            history.push("/inicio");
-        }
-    });
 
     return (
         <Fragment>

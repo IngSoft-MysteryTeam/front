@@ -6,6 +6,7 @@ import Chat from "./Chat";
 import Dado from "./Dado";
 import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
+import { obtNombrejugador } from "../services";
 
 export default function Lobby() {
     const params = useParams();
@@ -74,9 +75,8 @@ export default function Lobby() {
                             flexWrap: "wrap",
                         }}
                     >
-                        {jugadores[0].nombre ===
-                            sessionStorage.getItem("NombreJugador") &&
-                            turno === null ? (
+                        {jugadores[0].nombre === obtNombrejugador() &&
+                        turno === null ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -85,12 +85,15 @@ export default function Lobby() {
                         <button className="btn btn-dark">
                             Abandonar partida
                         </button>
-                        {turno != null 
-                            && jugadores.find(e => e.orden === turno).nombre ===
-                            sessionStorage.getItem('NombreJugador') ? 
-                            dado === -1 ? <BotonDado id_partida={params.id} /> : 
-                            <PasarTurno id_partida={params.id} />
-                        : null}
+                        {turno != null &&
+                        jugadores.find((e) => e.orden === turno).nombre ===
+                            obtNombrejugador() ? (
+                            dado === -1 ? (
+                                <BotonDado id_partida={params.id} />
+                            ) : (
+                                <PasarTurno id_partida={params.id} />
+                            )
+                        ) : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
