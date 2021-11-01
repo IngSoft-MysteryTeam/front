@@ -87,12 +87,14 @@ export default function Lobby() {
                         <button className="btn btn-dark">
                             Abandonar partida
                         </button>
-                        {iniciada ? (
+                        
+                        {jugadores.map((e, key) => (
+                            e.nombre === sessionStorage.getItem("NombreJugador") && iniciada && turno === e.orden ? (
                             <>
                                 <BotonDado id_partida={params.id} />
                                 <PasarTurno id_partida={params.id} />
                             </>
-                        ) : null}
+                        ) : null))}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
