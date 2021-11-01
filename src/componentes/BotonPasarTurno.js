@@ -1,5 +1,10 @@
 import { pasarTurno } from "../services";
 
+/**
+ * Boton para finalizar turno
+ * @param {id_partida} props 
+ * @returns evento click
+ */
 export default function PasarTurno(props) {
     return (
         <button

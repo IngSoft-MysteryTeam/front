@@ -7,10 +7,17 @@ import BotonCrear from "./BotonCrear";
 import BotonUnirse from "./BotonUnirse";
 import BotonAct from "./BotonAct";
 
+/**
+ * Muestra una lista con las partidas aun no iniciadas.
+ * @returns Renderizado JSX
+ */
 export default function ListaPartidas() {
     const history = useHistory();
     const [partidas, setPartidas] = useState([]);
 
+    /**
+     * Obtiene las partidas desde el back.
+     */
     function obtPartidas() {
         traerPartidas()
             .then((res) => {
@@ -23,6 +30,10 @@ export default function ListaPartidas() {
             });
     }
 
+    /**
+     * Redirecciona a la partida.
+     * @param {Evento} e 
+     */
     function Unirsepartida(e) {
         unirJugador({
             id_partida: e.id_partida,

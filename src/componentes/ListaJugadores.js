@@ -2,6 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
+/**
+ * Lista los jugadores que se unieron a una partida. Llamada en Lobby.js
+ * @param {Jugadores | Turno } props 
+ * @returns Renderizado JSX
+ */
 export default function ListaJugadores(props) {
     return (
         <table className="tablaJugadores">
