@@ -11,7 +11,6 @@ export default function Lobby() {
     const params = useParams();
     const location = useLocation();
     const [jugadores, setJugadores] = useState(location.state.jugadores);
-    const [iniciada, setIniciada] = useState(false);
     const [turno, setTurno] = useState(null);
     const [dado, setDado] = useState(-1);
     /* params.id viene de la url de donde estas parado */
@@ -41,10 +40,9 @@ export default function Lobby() {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
-            } else if (json.evento === "Comenzo la partida") {
-                setIniciada(true);
             } else if (json.evento === "Nuevo turno") {
                 setTurno(json.turno);
+                setDado(-1);
             } else if (json.evento === "Tiraron el dado") {
                 setDado(json.valor);
             }
@@ -78,7 +76,7 @@ export default function Lobby() {
                     >
                         {jugadores[0].nombre ===
                             sessionStorage.getItem("NombreJugador") &&
-                        !iniciada ? (
+                            turno === null ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -87,14 +85,12 @@ export default function Lobby() {
                         <button className="btn btn-dark">
                             Abandonar partida
                         </button>
-                        
-                        {jugadores.map((e, key) => (
-                            e.nombre === sessionStorage.getItem("NombreJugador") && iniciada && turno === e.orden ? (
-                            <>
-                                <BotonDado id_partida={params.id} />
-                                <PasarTurno id_partida={params.id} />
-                            </>
-                        ) : null))}
+                        {turno != null 
+                            && jugadores.find(e => e.orden === turno).nombre ===
+                            sessionStorage.getItem('NombreJugador') ? 
+                            dado === -1 ? <BotonDado id_partida={params.id} /> : 
+                            <PasarTurno id_partida={params.id} />
+                        : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
