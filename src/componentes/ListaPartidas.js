@@ -50,7 +50,10 @@ export default function ListaPartidas() {
                     alert("La partida esta completa");
                     obtPartidas();
                 }
-            })
+                if (res.status === 204) {
+                    alert("La partida inicio");
+                    obtPartidas();
+            }})
             .catch((err) => {
                 alert("Ocurrió un error. Revise la consola.");
                 console.error(err);
