@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: routers/AppRouter.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,50 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: routers/AppRouter.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CrearPartida from "../componentes/CrearPartida";
+import Inicio from "../componentes/Inicio";
+import ListaPartidas from "../componentes/ListaPartidas";
+import Lobby from "../componentes/Lobby";
+/**
+ * Establece los path donde se renderizan las componentes.
+ */
+export default function Approuter() {
+    return (
+        &lt;Router>
+            &lt;Switch>
+                &lt;Route path="/inicio">
+                    &lt;ListaPartidas />
+                &lt;/Route>
+                &lt;Route path="/partidas/:id">
+                    &lt;Lobby />
+                &lt;/Route>
+                &lt;Route path="/crear-partida">
+                    &lt;CrearPartida />
+                &lt;/Route>
+                &lt;Route path="/">
+                    &lt;Inicio />
+                &lt;/Route>
+                &lt;Route path="/*">
+                    &lt;h1> 404 Not Found &lt;/h1>
+                &lt;/Route>
+            &lt;/Switch>
+        &lt;/Router>
+    );
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

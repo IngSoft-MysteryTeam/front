@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: BotonIniciar.js</title>
+    <title>JSDoc: Source: BotonCrear.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: BotonIniciar.js</h1>
+    <h1 class="page-title">Source: BotonCrear.js</h1>
 
     
 
@@ -26,24 +26,22 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { iniciarPartida } from "../services";
-
+            <pre class="prettyprint source linenums"><code>import React, { Link } from "react-router-dom";
 /**
- * Boton para iniciar partida creada.
- * @param {id_partida | cantidadJugadores} props 
- * @returns evento click
+ * Boton que te redirige a la componente que crea una partida
+ * @returns evento click link to path
  */
-export default function Iniciar(props) {
+function BotonCrear() {
     return (
-        &lt;button
-            className="btn btn-dark"
-            disabled={props.cantjugadores &lt; 2}
-            onClick={(e) => iniciarPartida({ id_partida: props.id_partida })}
-        >
-            Iniciar
-        &lt;/button>
+        &lt;div>
+            &lt;Link to="/crear-partida" className="btn btn-dark">
+                Crear Partida
+            &lt;/Link>
+        &lt;/div>
     );
 }
+
+export default BotonCrear;
 </code></pre>
         </article>
     </section>

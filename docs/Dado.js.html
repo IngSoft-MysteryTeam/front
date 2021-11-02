@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: BotonIniciar.js</title>
+    <title>JSDoc: Source: Dado.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: BotonIniciar.js</h1>
+    <h1 class="page-title">Source: Dado.js</h1>
 
     
 
@@ -26,22 +26,16 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { iniciarPartida } from "../services";
-
-/**
- * Boton para iniciar partida creada.
- * @param {id_partida | cantidadJugadores} props 
- * @returns evento click
+            <pre class="prettyprint source linenums"><code>/**
+ * Obtiene el resultadop del dado desde el back.
+ * @param {numero} props 
+ * @returns renderizado HTML.
  */
-export default function Iniciar(props) {
+export default function Dado(props) {
     return (
-        &lt;button
-            className="btn btn-dark"
-            disabled={props.cantjugadores &lt; 2}
-            onClick={(e) => iniciarPartida({ id_partida: props.id_partida })}
-        >
-            Iniciar
-        &lt;/button>
+        &lt;h3 className="resultadoDado" style={{ marginTop: "10px" }}>
+            {props.numero}
+        &lt;/h3>
     );
 }
 </code></pre>

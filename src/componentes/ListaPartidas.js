@@ -31,7 +31,7 @@ export default function ListaPartidas() {
     }
 
     /**
-     * Redirecciona a la partida.
+     * Redirecciona a la partida y envia al jugador al back
      * @param {Evento} e 
      */
     function Unirsepartida(e) {
@@ -56,7 +56,9 @@ export default function ListaPartidas() {
                 console.error(err);
             });
     }
-
+    /**
+     * Renderiza la lista de partidas actualizada
+     */
     useEffect(() => {
         obtPartidas();
     }, []);

@@ -1,3 +1,7 @@
+/**
+ * Cuadro donde se podran visualizar mensajes en el looby. 
+ * Logica no implementada.
+ */
 export default function Chat() {
     return (
         <div

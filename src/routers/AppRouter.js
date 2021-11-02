@@ -4,7 +4,9 @@ import CrearPartida from "../componentes/CrearPartida";
 import Inicio from "../componentes/Inicio";
 import ListaPartidas from "../componentes/ListaPartidas";
 import Lobby from "../componentes/Lobby";
-
+/**
+ * Establece los path donde se renderizan las componentes.
+ */
 export default function Approuter() {
     return (
         <Router>

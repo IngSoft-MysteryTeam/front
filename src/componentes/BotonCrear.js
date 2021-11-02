@@ -1,5 +1,8 @@
 import React, { Link } from "react-router-dom";
-
+/**
+ * Boton que te redirige a la componente que crea una partida
+ * @returns evento click link to path
+ */
 function BotonCrear() {
     return (
         <div>

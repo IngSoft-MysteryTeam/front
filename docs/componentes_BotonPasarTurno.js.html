@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: componentes/BotonPasarTurno.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: componentes/BotonPasarTurno.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { pasarTurno } from "../services";
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Boton para finalizar turno
+ * @param {id_partida} props 
+ * @returns evento click
+ */
+export default function PasarTurno(props) {
+    return (
+        &lt;button
+            className="btn btn-dark"
+            onClick={(e) => pasarTurno({ id_partida: props.id_partida })}
+        >
+            Pasar turno
+        &lt;/button>
+    );
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

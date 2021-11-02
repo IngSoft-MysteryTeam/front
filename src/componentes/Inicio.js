@@ -1,18 +1,21 @@
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { asigNombrejugador, nuevoJugador} from "../services";
+import { asigNombrejugador, nuevoJugador } from "../services";
 
 /**
  * Esta funcion renderiza el inicio del juego
- * @returns {Fragment}
+ * @returns Renderizado JSX
  */
 export default function Inicio() {
     const history = useHistory();
-
     const [newjugador, setNombre] = useState({
         nombre: "",
     });
-
+    /**
+     * Nos permite visualizar los input por teclado del usuario en consola
+     * y guardarlos en la constante "newpartida"
+     * @param  {Evento} evento Evento generado por input del usuario.
+     */
     const controlEvents = (evento) => {
         console.log(evento.target.value);
         setNombre({
@@ -31,7 +34,7 @@ export default function Inicio() {
             .then((res) => {
                 if (res.status === 200) {
                     history.push("/inicio");
-                    asigNombrejugador({nombre: newjugador.nombre})
+                    asigNombrejugador({ nombre: newjugador.nombre });
                 } else {
                     alert("Error desconocido. Revise la consola.");
                     console.log(res);
@@ -50,7 +53,7 @@ export default function Inicio() {
     };
 
     return (
-        <Fragment>
+        <div>
             <header id="header">
                 <h1
                     style={{
@@ -88,6 +91,6 @@ export default function Inicio() {
                     </div>
                 </form>
             </div>
-        </Fragment>
+        </div>
     );
 }
