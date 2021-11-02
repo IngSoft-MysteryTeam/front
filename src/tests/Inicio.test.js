@@ -5,6 +5,17 @@ import { nuevoJugador, traerPartidas } from '../services/index';
 
 jest.mock('../services/index')
 
+test('si el input está vacío, no avanza a la lista de partidas', async () => {
+  render(<App />);
+
+  let input = screen.getByRole('textbox')
+    
+  fireEvent.click(input)
+  fireEvent.keyDown(input, {key: 'Enter'})
+
+  await waitFor(() => expect(screen.queryByText('Unirse a una partida')).toBeNull())
+})
+
 test('el input no deja ingresar mas de 20 caracteres', async () => {
   render(<App />);
   
