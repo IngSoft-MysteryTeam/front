@@ -40,20 +40,23 @@ export default function ListaPartidas() {
             nombre: obtNombrejugador(),
         })
             .then((res) => {
+                console.log(res)
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
                         state: { ...res.data, nombre: e.nombre },
                     });
                 }
-                if (res.status === 202) {
-                    alert("La partida esta completa");
-                    obtPartidas();
-                }
-                if (res.status === 204) {
-                    alert("La partida inicio");
-                    obtPartidas();
-            }})
+                else if (res.status === 202) {
+                    //console.log(res)
+                    if (res.data.detail === "La partida ya fue iniciada") {
+                        alert("La partida ya fue iniciada");
+                        obtPartidas();                   
+                    }
+                    else if (res.data.detail === "La partida esta llena") {
+                        alert("La partida esta completa");
+                        obtPartidas();        
+            }}})
             .catch((err) => {
                 alert("Ocurrió un error. Revise la consola.");
                 console.error(err);
