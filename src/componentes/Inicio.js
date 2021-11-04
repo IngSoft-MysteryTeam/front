@@ -55,15 +55,7 @@ export default function Inicio() {
     return (
         <div>
             <header id="header">
-                <h1
-                    style={{
-                        marginTop: "10px",
-                        textAlign: "center",
-                        color: "yellow",
-                    }}
-                >
-                    MISTERIO{" "}
-                </h1>
+                <img src={`/logomisterio.png`} className="logo" alt="logo" />
             </header>
 
             <div

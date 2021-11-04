@@ -8,8 +8,6 @@ import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
-//import imagen from './src/imagenes/alcoba.png';
-
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
