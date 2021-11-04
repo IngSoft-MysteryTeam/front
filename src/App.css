@@ -92,3 +92,10 @@ h1 {
     font-size:75px;
     text-align:center;
 }
+
+
+.imagenes {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+  }

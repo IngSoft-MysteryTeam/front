@@ -1,12 +1,16 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import App from '../App';
+import { Component } from 'react';
 import { nuevoJugador, traerPartidas } from '../services/index';
+import '@testing-library/jest-dom/extend-expect'
+//import { render } from '@testing-library/react'
+import Inicio from '../componentes/Inicio';
 
 jest.mock('../services/index')
 
 test('si el input está vacío, no avanza a la lista de partidas', async () => {
-  render(<App />);
+  render(<Inicio />);
 
   let input = screen.getByRole('textbox')
     
@@ -17,7 +21,7 @@ test('si el input está vacío, no avanza a la lista de partidas', async () => {
 })
 
 test('el input no deja ingresar mas de 20 caracteres', async () => {
-  render(<App />);
+  render(<Inicio />);
   
   let input = screen.getByRole('textbox')
 
@@ -30,7 +34,7 @@ test('el input no deja ingresar mas de 20 caracteres', async () => {
 })
 
 test('al ingresar un nombre válido y enviarlo, redirecciona a la lista de partidas', async () => {
-  render(<App />);
+  render(<Inicio />);
   
   let input = screen.getByRole('textbox')
   let submit = screen.getByRole('button')
@@ -41,5 +45,8 @@ test('al ingresar un nombre válido y enviarlo, redirecciona a la lista de parti
   fireEvent.change(input, {target: {value: 'David'}})
   fireEvent.click(submit);
   
+  /* const component;
+  component.debug(); */
+
   await waitFor(() => expect(screen.getByText('Unirse a una partida')))
 })

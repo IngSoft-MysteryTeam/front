@@ -6,7 +6,10 @@ import Chat from "./Chat";
 import Dado from "./Dado";
 import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
+import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
+//import imagen from './src/imagenes/alcoba.png';
+
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -18,6 +21,7 @@ export default function Lobby() {
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     const [turno, setTurno] = useState(null);
     const [dado, setDado] = useState(-1);
+    const [cartas, setCartas] = useState([]);
     /* params.id viene de la url de donde estas parado */
     useEffect(() => {
         setJugadores(location.state.jugadores);
@@ -50,6 +54,9 @@ export default function Lobby() {
                 setDado(-1);
             } else if (json.evento === "Tiraron el dado") {
                 setDado(json.valor);
+            } else if (json.evento === "Reparto de cartas") {
+                console.log(json.cartas)
+                setCartas(json.cartas);
             }
         });
         socket.addEventListener("close", (e) =>
@@ -101,8 +108,9 @@ export default function Lobby() {
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                <Chat />
+                <Chat/>
             </div>
+            <DistribuirCartas cartas={cartas}/>
         </div>
     );
 }
