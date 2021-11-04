@@ -8,6 +8,7 @@ import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
+import BotonSospechar from "./BotonSospechar";
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -103,10 +104,12 @@ export default function Lobby() {
                                 <PasarTurno id_partida={params.id} />
                             )
                         ) : null}
+                        <BotonSospechar />
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
                 <Chat/>
+                
             </div>
             <DistribuirCartas cartas={cartas}/>
         </div>
