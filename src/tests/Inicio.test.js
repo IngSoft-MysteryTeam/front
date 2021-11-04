@@ -20,6 +20,20 @@ test('si el input está vacío, no avanza a la lista de partidas', async () => {
   await waitFor(() => expect(screen.queryByText('Unirse a una partida')).toBeNull())
 })
 
+test('al ingresar un nombre ya existente, salta una alerta', async () => {
+  render(<App />)
+
+  const alertMock = jest.spyOn(global, 'alert').mockImplementation()
+
+  let submit = screen.getByRole('button')
+
+  nuevoJugador.mockResolvedValue(Promise.resolve({status: 404}))
+
+  fireEvent.click(submit);
+
+  await waitFor(() => expect(alertMock).toHaveBeenCalledTimes(1))
+})
+
 test('el input no deja ingresar mas de 20 caracteres', async () => {
   render(<Inicio />);
   

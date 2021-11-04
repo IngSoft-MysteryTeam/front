@@ -8,7 +8,7 @@ export default function Chat() {
             style={{
                 flexBasis: "440px",
                 height: "400px",
-                border: "1px solid #ddd",
+                border: "1px solid rgb(100, 100, 100)",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
