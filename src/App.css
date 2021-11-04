@@ -93,9 +93,21 @@ h1 {
     text-align:center;
 }
 
-
 .imagenes {
     width: 150px;
     height: auto;
     border-radius: 50%;
-  }
+}
+
+.divCarta {
+    overflow: hidden;
+}
+
+.divCarta:hover {
+    overflow: visible;
+}
+
+.carta {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,8 +1,7 @@
-import React from 'react';
-
-export default function Carta (props) {
-
-        return (
-            <img src={`/cartas/${props.carta}.png`} className="imagenes" alt="imagen" />
-        )
+export default function Carta(props) {
+    return (
+        <div className='divCarta'>
+            <img className='carta' src={`/cartas/${props.carta}.png`} height='200px' alt={props.carta} />
+        </div>
+    )
 }
