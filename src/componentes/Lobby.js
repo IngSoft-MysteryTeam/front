@@ -8,7 +8,7 @@ import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
-import BotonSospechar from "./BotonSospechar";
+import ListadeCartas from "./ListadeCartas";
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -21,6 +21,7 @@ export default function Lobby() {
     const [turno, setTurno] = useState(null);
     const [dado, setDado] = useState(-1);
     const [cartas, setCartas] = useState([]);
+    const [sospechar, setSospechar] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
     useEffect(() => {
@@ -35,13 +36,16 @@ export default function Lobby() {
             console.log(msg.data);
             if (json.evento === "Nuevo Jugador") {
                 setJugadores((oldJugadores) => {
-                    if (oldJugadores.find(e => e.nombre === json.jugador.nombre)
-                        === undefined) {
-                        return [...oldJugadores, json.jugador]
+                    if (
+                        oldJugadores.find(
+                            (e) => e.nombre === json.jugador.nombre
+                        ) === undefined
+                    ) {
+                        return [...oldJugadores, json.jugador];
                     } else {
-                        return oldJugadores
+                        return oldJugadores;
                     }
-                })
+                });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
@@ -52,7 +56,7 @@ export default function Lobby() {
             } else if (json.evento === "Tiraron el dado") {
                 setDado(json.valor);
             } else if (json.evento === "Reparto de cartas") {
-                console.log(json.cartas)
+                console.log(json.cartas);
                 setCartas(json.cartas);
             }
         });
@@ -99,17 +103,26 @@ export default function Lobby() {
                             dado === -1 ? (
                                 <BotonDado id_partida={params.id} />
                             ) : (
-                                <PasarTurno id_partida={params.id} />
+                                <div>
+                                    <PasarTurno
+                                        id_partida={params.id}
+                                        sospechar={setSospechar}
+                                    />
+                                    <button
+                                        className={"btn btn-dark"}
+                                        onClick={(e) => setSospechar(true)}
+                                    >
+                                        Sospechar
+                                    </button>
+                                </div>
                             )
                         ) : null}
-                        <BotonSospechar />
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                <Chat/>
-                
+                {sospechar ? <ListadeCartas /> : null}
             </div>
-            <DistribuirCartas cartas={cartas}/>
+            <DistribuirCartas cartas={cartas} />
         </div>
     );
 }
