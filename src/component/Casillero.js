@@ -42,7 +42,7 @@ export default function Casillero(props) {
       className={`casillero${esEntrada(props.x, props.y) ? " entrada" : ""}`}
       style={{
         gridColumnStart: props.x+1,
-        gridRowStart: props.y+1,
+        gridRowStart: props.y+1
       }}
       onMouseOver={e => setHovering(true)}
       onMouseOut={e => setHovering(false)}
