@@ -15,12 +15,38 @@ import ListadeCartas from "./ListadeCartas";
  * @returns Renderizado de una partida particular del juego.
  */
 export default function Lobby() {
+    /**
+     * Nos indica los parametros para armar la url de la partida.
+     */
     const params = useParams();
+    /**
+     * Nos indica el id del jugador para armar la url de la partida
+     */
     const location = useLocation();
+    /**
+     * Estado que guarda el nombre de los jugadores de la partida
+     * @param  {List} location.state.jugadores Jugadores en la partida
+     */
     const [jugadores, setJugadores] = useState(location.state.jugadores);
+    /**
+     * Estado que nos indica el turno del jugador
+     * @param  {int} null Numero que indica el orden del jugador
+     */
     const [turno, setTurno] = useState(null);
+    /**
+     * Estado que indica si lanzo el dado y guarda el valor obtenido.
+     * @param  {int} -1 Numero del dado
+     */
     const [dado, setDado] = useState(-1);
+    /**
+     * Estado que nos indica las cartas que le tocaron al jugador
+     * @param  {List} [] Lista de cartas
+     */
     const [cartas, setCartas] = useState([]);
+    /**
+     * Estado que indica si el jugador esta sospechando.
+     * @param  {bool} false
+     */
     const [sospechar, setSospechar] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
@@ -101,7 +127,7 @@ export default function Lobby() {
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
-                                <BotonDado id_partida={params.id} />
+                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador}/>
                             ) : (
                                 <div>
                                     <PasarTurno

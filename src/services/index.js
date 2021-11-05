@@ -69,7 +69,7 @@ export function pasarTurno(datos) {
  */
 export function obtDado(datos) {
     return axios({
-        url: `${baseUrl}partida/${datos.id_partida}/tirardado`,
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/tirardado`,
         method: "GET",
     });
 }
