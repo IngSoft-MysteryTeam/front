@@ -1,5 +1,8 @@
 import Carta from './Carta';
-
+/**
+ * Reparte las cartas a los jugadores
+ * @param  {object} props Cartas obtenidas del back
+ */
 export default function DistribuirCartas(props) {
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>

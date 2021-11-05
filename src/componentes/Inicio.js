@@ -7,7 +7,15 @@ import { asigNombrejugador, nuevoJugador } from "../services";
  * @returns Renderizado JSX
  */
 export default function Inicio() {
+    /**
+     * Ayuda a redireccionar al jugador hacia la lsita de partidas
+     */
     const history = useHistory();
+    /**
+     * Estado que nos ayuda a guardar el nombre del jugador
+     * @param  {""} nombre Parametros ingresados por teclado
+     * @param  {object} Guarda la cadana de caracteres ingresados 
+     */
     const [newjugador, setNombre] = useState({
         nombre: "",
     });

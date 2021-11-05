@@ -7,8 +7,19 @@ import { nuevaPartida, obtNombrejugador } from "../services";
  * @returns Renderizado JSX
  */
 export default function CreaPartida() {
+    /**
+     * Ayuda a redireccionar al jugador a la partida creada
+     */
     const history = useHistory();
+    /**
+     * Guarda el nombre del jugador creador de la partida
+     */
     const jugador = obtNombrejugador();
+    /**
+     * Guardamos el nombre de la nueva partida
+     * @param  {""} Cadena de caracteres
+     * @param  {object} Nombre de la partida
+     */
     const [newpartida, setNombre] = useState({
         nombre: "",
     });

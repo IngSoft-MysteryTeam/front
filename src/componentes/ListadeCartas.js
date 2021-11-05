@@ -1,5 +1,7 @@
 import React from "react"
-
+/**
+ * Lista de cartas para poder sospechar o acusar
+ */
 export default function ListadeCartas() {
     
     return(

@@ -12,7 +12,14 @@ import BotonAct from "./BotonAct";
  * @returns Renderizado JSX
  */
 export default function ListaPartidas() {
+    /**
+     * Ayuda a redireccionar al jugador a la partida
+     */
     const history = useHistory();
+    /**
+     * Estado que nos guarda las partidas no iniciadas obtenidas del back
+     * @param  {list} [] Lista de partidas obtenidas del back
+     */
     const [partidas, setPartidas] = useState([]);
 
     /**
@@ -31,7 +38,7 @@ export default function ListaPartidas() {
     }
 
     /**
-     * Redirecciona a la partida y envia al jugador al back
+     * Redirecciona al jugador a la partida y envia al jugador al back
      * @param {Evento} e 
      */
     function Unirsepartida(e) {

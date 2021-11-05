@@ -1,3 +1,7 @@
+/**
+ * Componente que renderiza una carta
+ * @param  {object} props Cartas
+ */
 export default function Carta(props) {
     return (
         <div className='divCarta'>
