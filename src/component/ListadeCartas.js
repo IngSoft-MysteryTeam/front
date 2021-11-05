@@ -1,46 +1,45 @@
-import React from "react"
+import React, {Fragment, useState} from 'react'
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
 /**
  * Lista de cartas para poder sospechar o acusar
  */
 export default function ListadeCartas() {
-    
+    const [dropdown1, setDropdown1] = useState(false);
+    const [dropdown2, setDropdown2] = useState(false);
+    const abricerrarDropdown1=()=>{
+        setDropdown1(!dropdown1)
+    }
+    const abricerrarDropdown2=()=>{
+        setDropdown2(!dropdown2)
+    }
     return(
-        <table className="tablaPartidas" style={{ marginBottom: "10px" }}>
-                <thead>
-                    <tr>
-                        <th>Victimas</th>
-                        <th>Monstruos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/CONDE.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/DRACULA.png`} height='100px' alt='Error img' /></th>
-
-                    </tr>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/CONDESA.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/FRANKENSTEIN.png`} height='100px' alt='Error img' /></th>
-
-                    </tr>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/AMADELLAVES.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/HOMBRELOBO.png`} height='100px' alt='Error img' /></th>
-
-                    </tr>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/MAYORDOMO.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/FANTASMA.png`} height='100px' alt='Error img' /></th>
-                    </tr>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/DONCELLA.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/MOMIA.png`} height='100px' alt='Error img' /></th>
-                    </tr>
-                    <tr>
-                        <th><img className='carta' src={`/cartas/JARDINERO.png`} height='100px' alt='Error img' /></th>
-                        <th><img className='carta' src={`/cartas/JEKYLLHYDE.png`} height='100px' alt='Error img' /></th>
-                    </tr>
-                </tbody>
-            </table>
+        <Fragment>
+        <Dropdown isOpen={dropdown1} toggle={abricerrarDropdown1}>
+            <DropdownToggle caret>
+                Victimas
+            </DropdownToggle>
+            <DropdownMenu>
+                <DropdownItem> CONDE  </DropdownItem>
+                <DropdownItem> CONDESA  </DropdownItem>
+                <DropdownItem> AMADELLAVES  </DropdownItem>
+                <DropdownItem> MAYORDOMO  </DropdownItem>
+                <DropdownItem> DONCELLA  </DropdownItem>
+                <DropdownItem> JARDINERO  </DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+            <Dropdown isOpen={dropdown2} toggle={abricerrarDropdown2}>
+            <DropdownToggle caret>
+                Monstruos
+            </DropdownToggle>
+            <DropdownMenu>
+                <DropdownItem> DRACULA </DropdownItem>
+                <DropdownItem> FRANKENSTEIN </DropdownItem>
+                <DropdownItem> HOMBRELOBO </DropdownItem>
+                <DropdownItem> FANTASMA </DropdownItem>
+                <DropdownItem> MOMIA </DropdownItem>
+                <DropdownItem> JEKYLLHYDE </DropdownItem>
+            </DropdownMenu>
+            </Dropdown>
+        </Fragment>
     )
 }
