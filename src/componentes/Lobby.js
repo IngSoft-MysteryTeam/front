@@ -22,8 +22,8 @@ export default function Lobby() {
     const [dado, setDado] = useState(-1);
     const [cartas, setCartas] = useState([]);
     /* params.id viene de la url de donde estas parado */
+
     useEffect(() => {
-        setJugadores(location.state.jugadores);
         const socket = new WebSocket(
             `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
         );
@@ -34,16 +34,14 @@ export default function Lobby() {
             let json = JSON.parse(msg.data);
             console.log(msg.data);
             if (json.evento === "Nuevo Jugador") {
-                if (
-                    jugadores.findIndex(
-                        (e) => e.nombre === json.jugador.nombre
-                    ) === -1
-                ) {
-                    setJugadores((oldJugadores) => [
-                        ...oldJugadores,
-                        json.jugador,
-                    ]);
-                }
+                setJugadores((oldJugadores) => {
+                    if (oldJugadores.find(e => e.nombre === json.jugador.nombre)
+                        === undefined) {
+                        return [...oldJugadores, json.jugador]
+                    } else {
+                        return oldJugadores
+                    }
+                })
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
@@ -61,7 +59,7 @@ export default function Lobby() {
         socket.addEventListener("close", (e) =>
             console.log("Se cayo la conexion")
         );
-    }, []);
+    }, [location.state.id_jugador, params.id]);
 
     return (
         <div style={{ maxWidth: "750px", margin: "auto" }}>
