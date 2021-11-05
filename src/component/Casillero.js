@@ -47,8 +47,8 @@ export default function Casillero(props) {
       onMouseOver={e => setHovering(true)}
       onMouseOut={e => setHovering(false)}
     >
-      {buscarJugadores(props.jugadores, props.x, props.y).map(e => (
-        <Ficha color={e.color} />
+      {buscarJugadores(props.jugadores, props.x, props.y).map((e, i) => (
+        <Ficha key={i} color={e.color} />
       ))}
       {esPosicionPosible(props.posDisponibles, props.x, props.y) ?
       <div style={{opacity: hovering ? '50%' : '0%'}}>

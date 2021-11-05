@@ -90,12 +90,19 @@ export default function Tablero(props) {
         {[...Array(20)].map((e, i) => (
           [...Array(20)].map((e, j) => (
             esCasillero(i, j) ?
-            <Casillero x={i} y={j} jugadores={props.jugadores} posDisponibles={props.posDisponibles} />
+            <Casillero
+              key={j}
+              x={i}
+              y={j}
+              jugadores={props.jugadores}
+              posDisponibles={props.posDisponibles}
+            />
             : null
           ))
         ))}
-        {recintos.map((e) => (
-          <div className='recinto' style={{
+        {recintos.map((e, i) => (
+          <div className='recinto' key={i}
+            style={{
             gridColumnStart: e.xInicio+1, 
             gridColumnEnd: e.xFin+1, 
             gridRowStart: e.yInicio+1, 
