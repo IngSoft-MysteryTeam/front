@@ -9,6 +9,7 @@ import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
 import ListadeCartas from "./ListadeCartas";
+import Tablero from "./Tablero";
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -84,6 +85,13 @@ export default function Lobby() {
             } else if (json.evento === "Reparto de cartas") {
                 console.log(json.cartas);
                 setCartas(json.cartas);
+            } else if (json.evento === "Nueva posicion") {
+                setJugadores(oldJugadores => {
+                    let jugador = oldJugadores.find(e => e.nombre === json.nombre);
+                    jugador.posX = json.x;
+                    jugador.posY = json.y;
+                    return oldJugadores
+                })
             }
         });
         socket.addEventListener("close", (e) =>
@@ -149,6 +157,7 @@ export default function Lobby() {
                 {sospechar ? <ListadeCartas /> : null}
             </div>
             <DistribuirCartas cartas={cartas} />
+            <Tablero jugadores={jugadores} />
         </div>
     );
 }
