@@ -51,6 +51,13 @@ export default function Lobby() {
     const [sospechar, setSospechar] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
+    /**
+     * Estado que indica las posiciones a las que se puede mover
+     * el jugador que tiró el dado.
+     * @param  {bool} false
+     */
+    const [posDisponibles, setPosDisponibles] = useState([])
+
     useEffect(() => {
         const socket = new WebSocket(
             `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
@@ -135,12 +142,13 @@ export default function Lobby() {
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
-                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador}/>
+                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador} setPosDisponibles={setPosDisponibles} />
                             ) : (
                                 <div>
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechar={setSospechar}
+                                        setPosDisponibles={setPosDisponibles}
                                     />
                                     <button
                                         className={"btn btn-dark"}
@@ -157,7 +165,7 @@ export default function Lobby() {
                 {sospechar ? <ListadeCartas /> : null}
             </div>
             <DistribuirCartas cartas={cartas} />
-            <Tablero jugadores={jugadores} />
+            <Tablero jugadores={jugadores} posDisponibles={posDisponibles} />
         </div>
     );
 }

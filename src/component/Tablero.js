@@ -1,17 +1,4 @@
-import Ficha from "./Ficha"
-
-function esEntrada(x, y) {
-  if (x === 0 || x === 19) {
-    if (y === 6 || y === 13) {
-      return true
-    }
-  } else if (x === 6 || x === 13) {
-    if (y === 0 || y === 19) {
-      return true
-    }
-  }
-  return false
-}
+import Casillero from "./Casillero"
 
 function esCasillero(x, y) {
   return (x === 6 || x === 13) || (y === 6 || y === 13)
@@ -96,16 +83,6 @@ const recintos = [
   }
 ]
 
-function buscarJugadores(jugadores, x, y) {
-  let res = Array.from(jugadores)
-
-  res = res.filter(jugador => jugador.posX === x && jugador.posY === y)
-
-  console.log(res);
-
-  return res;
-}
-
 export default function Tablero(props) {
   return (
     <div className='tableroDiv'>
@@ -113,18 +90,8 @@ export default function Tablero(props) {
         {[...Array(20)].map((e, i) => (
           [...Array(20)].map((e, j) => (
             esCasillero(i, j) ?
-            <div 
-              className={`casillero${esEntrada(i,j) ? " entrada" : ""}`}
-              style={{
-                gridColumnStart: i+1,
-                gridRowStart: j+1,
-              }}
-            >
-              {buscarJugadores(props.jugadores, i, j).map(e => (
-                <Ficha color={e.color} />
-              ))}
-            </div> :
-            null
+            <Casillero x={i} y={j} jugadores={props.jugadores} posDisponibles={props.posDisponibles} />
+            : null
           ))
         ))}
         {recintos.map((e) => (
@@ -136,7 +103,7 @@ export default function Tablero(props) {
             backgroundColor: e.color
           }}
           >
-            <img src={`/tablero/${e.imagen}.png`} width='200px'></img>
+            <img src={`/tablero/${e.imagen}.png`} width='200px' alt={e.nombre}></img>
           </div>
         ))}
       </div>

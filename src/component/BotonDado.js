@@ -8,7 +8,9 @@ import { obtDado } from "../services";
 export default function BotonDado(props) {
     return (
         <button className="btn btn-dark" onClick={(e) => {
-            obtDado({id_partida : props.id_partida, id_jugador: props.id_jugador}).then(res => console.log(res)).catch(err => console.error)
+            obtDado({id_partida : props.id_partida, id_jugador: props.id_jugador})
+            .then(res => props.setPosDisponibles(res.data.casilleros))
+            .catch(err => console.error(err))
         }}>
             Lanzar dado
         </button>
