@@ -11,7 +11,6 @@ export default function PasarTurno(props) {
             className="btn btn-dark"
             onClick={(e) => {
                 pasarTurno({ id_partida: props.id_partida });
-                props.setPosDisponibles([]);
                 props.sospechar(false);
             }}
         >

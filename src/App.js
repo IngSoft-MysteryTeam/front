@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
     return (
-        <div style={{ marginTop: "10px" }}>
+        <div>
             <br />
             <Approuter />
         </div>

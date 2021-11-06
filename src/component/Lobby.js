@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
 import Iniciar from "./BotonIniciar";
 import PasarTurno from "./BotonPasarTurno";
-import Chat from "./Chat";
 import Dado from "./Dado";
 import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
@@ -107,8 +106,7 @@ export default function Lobby() {
     }, [location.state.id_jugador, params.id]);
 
     return (
-        <div style={{ maxWidth: "750px", margin: "auto" }}>
-            <h1>{location.state.nombre}</h1>
+        <div style={{ maxWidth: "1100px", margin: "auto" }}>
             <div
                 style={{
                     display: "flex",
@@ -117,7 +115,8 @@ export default function Lobby() {
                     alignItems: "flex-end",
                 }}
             >
-                <div style={{ flexGrow: 1, flexBasis: "300px" }}>
+                <div style={{ flexGrow: 1, flexBasis: "100px" }}>
+                    <h1>{location.state.nombre}</h1>
                     <ListaJugadores jugadores={jugadores} turno={turno} />
                     <div
                         style={{
@@ -144,11 +143,10 @@ export default function Lobby() {
                             dado === -1 ? (
                                 <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador} setPosDisponibles={setPosDisponibles} />
                             ) : (
-                                <div>
+                                <>
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechar={setSospechar}
-                                        setPosDisponibles={setPosDisponibles}
                                     />
                                     <button
                                         className={"btn btn-dark"}
@@ -156,16 +154,22 @@ export default function Lobby() {
                                     >
                                         Sospechar
                                     </button>
-                                </div>
+                                </>
                             )
                         ) : null}
+                        {sospechar ? <ListadeCartas /> : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                {sospechar ? <ListadeCartas /> : null}
+                <Tablero
+                    jugadores={jugadores}
+                    posDisponibles={posDisponibles}
+                    setPosDisponibles={setPosDisponibles}
+                    id_partida={params.id}
+                    id_jugador={location.state.id_jugador}
+                />
             </div>
             <DistribuirCartas cartas={cartas} />
-            <Tablero jugadores={jugadores} posDisponibles={posDisponibles} />
         </div>
     );
 }
