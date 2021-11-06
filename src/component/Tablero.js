@@ -116,7 +116,7 @@ export default function Tablero(props) {
             backgroundColor: e.color
           }}
           >
-            <img src={`/tablero/${e.imagen}.png`} width='200px' alt={e.nombre}></img>
+            <img src={`/tablero/${e.imagen}.png`} width='245px' alt={e.nombre}></img>
           </div>
         ))}
       </div>
