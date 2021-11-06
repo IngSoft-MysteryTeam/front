@@ -3,7 +3,11 @@ import Ficha from './Ficha'
 import { obtNombrejugador, moverFicha } from "../services"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faArrowLeft, faArrowRight, faArrowUp } from '@fortawesome/free-solid-svg-icons'
-
+/**
+ * Calcula las entradas de inicio del tablero
+ * @param  {int} x Posicion del tablero
+ * @param  {int} y Posicion del tablero
+ */
 function esEntrada(x, y) {
   if (x === 0 || x === 19) {
     if (y === 6 || y === 13) {
@@ -16,7 +20,12 @@ function esEntrada(x, y) {
   }
   return false
 }
-
+/**
+ * Busca las posiciones donde estan los jugadores
+ * @param  {Array} jugadores
+ * @param  {int} x
+ * @param  {int} y
+ */
 function buscarJugadores(jugadores, x, y) {
   let res = Array.from(jugadores)
 
@@ -24,18 +33,30 @@ function buscarJugadores(jugadores, x, y) {
 
   return res;
 }
-
+/**
+ * Calcula si la posiciones son posibles acceder con la ficha del jugador 
+ * @param  {Array} posPosibles Posiciones que envia el back
+ * @param  {int} x Posicion del tablero
+ * @param  {int} y Posicion del tablero
+ */
 function esPosicionPosible(posPosibles, x, y) {
   if (posPosibles.findIndex(e => e.x === x && e.y === y) !== -1) {
     return true;
   }
   return false;
 }
-
+/**
+ * Obtiene el color de un jugador
+ * @param  {object} jugadores, Lista de jugadores
+ */
 function miColor(jugadores) {
   return jugadores.find(e => e.nombre === obtNombrejugador()).color
 }
-
+/**
+ * Calcula las entradas a los recintos
+ * @param  {int} x Posicion del tablero
+ * @param  {int} y Posicion del tablero
+ */
 function esEntradaRecinto(x, y) {
   const entradas = [
     {
@@ -132,6 +153,14 @@ function esEntradaRecinto(x, y) {
   }
 }
 
+/**
+ * Calcula el tamaño adecuado de la ficha en base a la cantidad de jugadores
+ * que hay en el casillero.
+ * @param {*} jugadores 
+ * @param {*} x 
+ * @param {*} y 
+ * @returns {string}
+ */
 function getTamañoFicha(jugadores, x, y) {
   let arreglo = buscarJugadores(jugadores, x, y);
   if (arreglo.length > 1) {
@@ -141,6 +170,10 @@ function getTamañoFicha(jugadores, x, y) {
   }
 }
 
+/**
+ * Renderiza las fichas y las posibles elecciones de casillas para moverse.
+ * @param  {object} props Id partida y jugador. Posiciones en el tablero
+ */
 export default function Casillero(props) {
   const [hovering, setHovering] = useState(false);
 
