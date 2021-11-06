@@ -149,7 +149,7 @@ export default function Casillero(props) {
         <Ficha key={i} color={e.color} />
       ))}
       {esPosicionPosible(props.posDisponibles, props.x, props.y) ?
-      <div style={{opacity: hovering ? '50%' : '0%', cursor: hovering ? 'pointer': '', position: 'absolute'}}
+      <div style={{opacity: hovering ? '50%' : '0%', cursor: hovering ? 'pointer': '', position: 'absolute', zIndex: 1}}
       onClick={e => {
           moverFicha({
             id_partida: props.id_partida,
