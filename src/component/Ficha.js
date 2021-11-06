@@ -3,7 +3,7 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 export default function Ficha(props) {
   return (
     <div>
-      <FontAwesomeIcon icon={faUserSecret} style={{color: props.color, fontSize: '30px'}} />
+      <FontAwesomeIcon icon={faUserSecret} style={{color: props.color, fontSize: '30px', position: 'relative', zIndex: 1}} />
     </div>
   )
 }
