@@ -1,5 +1,9 @@
 import Casillero from "./Casillero"
-
+/**
+ * Calcula los casillero del tablero
+ * @param  {int} x Posicion del tablero
+ * @param  {int} y Posicion del tablero
+ */
 function esCasillero(x, y) {
   return (x === 6 || x === 13) || (y === 6 || y === 13)
 }
@@ -78,7 +82,10 @@ const recintos = [
     imagen: "laboratorio",
   }
 ]
-
+/**
+ * Renderiza el tablero
+ * @param  {object} props ID partida y jugador
+ */
 export default function Tablero(props) {
   return (
     <div className='tableroDiv'>

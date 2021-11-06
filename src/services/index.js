@@ -86,7 +86,10 @@ export function obtNombrejugador() {
 export function asigNombrejugador(datos) {
     return sessionStorage.setItem("NombreJugador", datos.nombre);
 }
-
+/**
+ * Envia al back la posicion a donde se mueve el jugador en el tablero
+ * @param  {object} datos Id de partida y jugador, posicion en el tablero
+ */
 export function moverFicha(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/moverficha`,
@@ -94,7 +97,10 @@ export function moverFicha(datos) {
         data: {x: datos.x, y: datos.y}
     });
 }
-
+/**
+ * Envia al back el monstruo, victima y recinto para hacer una sospecha
+ * @param  {object} datos Id de partida y jugador, monstruo y victima
+ */
 export function hacerSospecha(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}`,
