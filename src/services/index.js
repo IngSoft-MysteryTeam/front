@@ -94,3 +94,11 @@ export function moverFicha(datos) {
         data: {x: datos.x, y: datos.y}
     });
 }
+
+export function hacerSospecha(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}`,
+        method: "GET",
+        params: {victima: datos.victima, monstruo: datos.monstruo}
+    });
+}

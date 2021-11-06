@@ -9,6 +9,7 @@ import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
 import ListadeCartas from "./ListadeCartas";
 import Tablero from "./Tablero";
+import Sospechar from "./BotonSospechar";
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -148,16 +149,11 @@ export default function Lobby() {
                                         id_partida={params.id}
                                         sospechar={setSospechar}
                                     />
-                                    <button
-                                        className={"btn btn-dark"}
-                                        onClick={(e) => setSospechar(true)}
-                                    >
-                                        Sospechar
-                                    </button>
+                                    <Sospechar sospechar={setSospechar}/>
                                 </>
                             )
                         ) : null}
-                        {sospechar ? <ListadeCartas /> : null}
+                        {sospechar ? <ListadeCartas id_jugador={location.state.id_jugador} id_partida={params.id}/> : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
