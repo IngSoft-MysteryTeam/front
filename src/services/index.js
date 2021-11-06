@@ -91,10 +91,6 @@ export function moverFicha(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/moverficha`,
         method: "PUT",
-<<<<<<< HEAD
-        data: {X: datos.X, Y: datos.Y}
-=======
         data: {x: datos.x, y: datos.y}
->>>>>>> a173549f40247814c00553faf6a8db2bfbdd6212
     });
 }
