@@ -5,7 +5,7 @@ import Carta from './Carta';
  */
 export default function DistribuirCartas(props) {
     return (
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
             {props.cartas.map((e, index) => 
                 <Carta carta={e} key={index} />
             )}
