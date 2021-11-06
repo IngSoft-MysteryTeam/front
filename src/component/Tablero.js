@@ -19,8 +19,7 @@ const recintos = [
     yInicio: 0,
     xFin: 13,
     yFin: 13,
-    imagen: "alcoba",
-    color: "#943C29"
+    imagen: "alcoba"
   },
   {
     nombre: "Biblioteca",
@@ -28,8 +27,7 @@ const recintos = [
     yInicio: 0,
     xFin: 19,
     yFin: 13,
-    imagen: "biblioteca",
-    color: "#453725"
+    imagen: "biblioteca"
   },
   {
     nombre: "Vestíbulo",
@@ -37,8 +35,7 @@ const recintos = [
     yInicio: 7,
     xFin: 7,
     yFin: 13,
-    imagen: "vestibulo",
-    color: "#511B11"
+    imagen: "vestibulo"
   },
   {
     nombre: "Misterio",
@@ -54,8 +51,7 @@ const recintos = [
     yInicio: 7,
     xFin: 19,
     yFin: 13,
-    imagen: "panteon",
-    color: "#3F3C29"
+    imagen: "panteon"
   },
   {
     nombre: "Bodega",
@@ -109,8 +105,7 @@ export default function Tablero(props) {
             gridColumnStart: e.xInicio+1, 
             gridColumnEnd: e.xFin+1, 
             gridRowStart: e.yInicio+1, 
-            gridRowEnd: e.yFin+1,
-            backgroundColor: e.color
+            gridRowEnd: e.yFin+1
           }}
           >
             <img src={`/tablero/${e.imagen}.png`} width='245px' alt={e.nombre}></img>
