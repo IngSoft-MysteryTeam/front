@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Ficha from './Ficha'
-import { obtNombrejugador } from "../services"
+import { moverFicha, obtNombrejugador } from "../services"
+import { useParams } from 'react-router'
 
 function esEntrada(x, y) {
   if (x === 0 || x === 19) {
@@ -51,7 +52,7 @@ export default function Casillero(props) {
         <Ficha key={i} color={e.color} />
       ))}
       {esPosicionPosible(props.posDisponibles, props.x, props.y) ?
-      <div style={{opacity: hovering ? '50%' : '0%'}}>
+      <div style={{opacity: hovering ? '50%' : '0%'}} onClick={moverFicha({X: props.x, Y: props.y, id_jugador: location.state.id_jugador, id_partida: params.id_partida })}>
         <Ficha color={miColor(props.jugadores)} />
       </div> : null}
     </div>

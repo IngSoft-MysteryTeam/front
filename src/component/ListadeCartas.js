@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react'
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
 /**
- * Lista de cartas para poder sospechar o acusar
+ * Lista de cartas para 
  */
 export default function ListadeCartas() {
     const [dropdown1, setDropdown1] = useState(false);

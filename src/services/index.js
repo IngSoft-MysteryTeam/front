@@ -86,3 +86,11 @@ export function obtNombrejugador() {
 export function asigNombrejugador(datos) {
     return sessionStorage.setItem("NombreJugador", datos.nombre);
 }
+
+export function moverFicha(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/moverficha`,
+        method: "PUT",
+        data: {X: datos.X, Y: datos.Y}
+    });
+}
