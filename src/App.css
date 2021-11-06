@@ -153,6 +153,7 @@ h1 {
     align-items: center;
     background-color: black;
     overflow: hidden;
+    column-gap: 2px;
 }
 
 .recinto {

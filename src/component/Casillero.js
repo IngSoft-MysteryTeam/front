@@ -132,6 +132,15 @@ function esEntradaRecinto(x, y) {
   }
 }
 
+function getTamañoFicha(jugadores, x, y) {
+  let arreglo = buscarJugadores(jugadores, x, y);
+  if (arreglo.length > 1) {
+    return '18px';
+  } else {
+    return '30px';
+  }
+}
+
 export default function Casillero(props) {
   const [hovering, setHovering] = useState(false);
 
@@ -146,7 +155,7 @@ export default function Casillero(props) {
       onMouseOut={e => setHovering(false)}
     >
       {buscarJugadores(props.jugadores, props.x, props.y).map((e, i) => (
-        <Ficha key={i} color={e.color} />
+        <Ficha key={i} color={e.color} tamaño={getTamañoFicha(props.jugadores, props.x, props.y)} />
       ))}
       {esPosicionPosible(props.posDisponibles, props.x, props.y) ?
       <div style={{opacity: hovering ? '50%' : '0%', cursor: hovering ? 'pointer': '', position: 'absolute', zIndex: 1}}
@@ -158,7 +167,7 @@ export default function Casillero(props) {
             y: props.y
           }).then(() => props.setPosDisponibles([]));
         }}>
-        <Ficha color={miColor(props.jugadores)} />
+        <Ficha color={miColor(props.jugadores)} tamaño='30px' />
       </div> : null}
       {esEntradaRecinto(props.x, props.y)}
     </div>
