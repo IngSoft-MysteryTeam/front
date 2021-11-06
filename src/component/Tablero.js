@@ -1,4 +1,5 @@
 import Casillero from "./Casillero"
+import { useEffect } from 'react'
 
 function esCasillero(x, y) {
   return (x === 6 || x === 13) || (y === 6 || y === 13)
@@ -84,6 +85,8 @@ const recintos = [
 ]
 
 export default function Tablero(props) {
+  useEffect(() => null, [props.jugadores])
+
   return (
     <div className='tableroDiv'>
       <div className='tablero'>
@@ -96,6 +99,9 @@ export default function Tablero(props) {
               y={j}
               jugadores={props.jugadores}
               posDisponibles={props.posDisponibles}
+              id_partida={props.id_partida}
+              id_jugador={props.id_jugador}
+              setPosDisponibles={props.setPosDisponibles}
             />
             : null
           ))

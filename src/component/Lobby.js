@@ -147,7 +147,6 @@ export default function Lobby() {
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechar={setSospechar}
-                                        setPosDisponibles={setPosDisponibles}
                                     />
                                     <button
                                         className={"btn btn-dark"}
@@ -162,7 +161,13 @@ export default function Lobby() {
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                <Tablero jugadores={jugadores} posDisponibles={posDisponibles} />
+                <Tablero
+                    jugadores={jugadores}
+                    posDisponibles={posDisponibles}
+                    setPosDisponibles={setPosDisponibles}
+                    id_partida={params.id}
+                    id_jugador={location.state.id_jugador}
+                />
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>
