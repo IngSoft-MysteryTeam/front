@@ -1,11 +1,11 @@
 import { render, waitFor, screen } from "@testing-library/react";
-import ListaPartidas from "../componentes/ListaPartidas";
+import ListaPartidas from "../component/ListaPartidas";
 import { traerPartidas, unirJugador } from "../services";
 
 jest.mock("../services/index");
 
 // mockeo el boton crear asi no se queja de que uso <Link> fuera de un <Router>
-jest.mock("../componentes/BotonCrear", () => "a");
+jest.mock("../component/BotonCrear", () => "a");
 
 test("si no hay partidas, se muestra en la tabla un mensaje indicandolo", async () => {
     traerPartidas.mockResolvedValue(Promise.resolve({ data: [] }));

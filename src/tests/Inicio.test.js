@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { nuevoJugador, traerPartidas } from "../services/index";
 import userEvent from "@testing-library/user-event";
-import Inicio from "../componentes/Inicio";
+import Inicio from "../component/Inicio";
 
 jest.mock("../services/index");
 
