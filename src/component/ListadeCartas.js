@@ -78,8 +78,9 @@ export default function ListadeCartas(props) {
                         <select
                             className="form-select form-select-sm"
                             onChange={(e) => setVictima(e.target.value)}
+                            defaultValue=""
                         >
-                            <option selected>Víctimas</option>
+                            <option value="">Víctimas</option>
                             {victimas.map((e, i) => (
                                 <option value={e.valor}>{e.nombre}</option>
                             ))}
@@ -99,8 +100,9 @@ export default function ListadeCartas(props) {
                         <select
                             className="form-select form-select-sm"
                             onChange={(e) => setMonstruo(e.target.value)}
+                            defaultValue=""
                         >
-                            <option selected>Monstruos</option>
+                            <option value="">Monstruos</option>
                             {monstruos.map((e, i) => (
                                 <option value={e.valor}>{e.nombre}</option>
                             ))}
