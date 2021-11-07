@@ -275,6 +275,7 @@ export default function Tablero(props) {
                 )}
                 {recintos.map((e, i) => (
                     <Recinto
+                        key={i}
                         jugadores={props.jugadores}
                         nombre={e.nombre}
                         imagen={e.imagen}
