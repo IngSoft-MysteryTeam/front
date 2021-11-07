@@ -167,3 +167,8 @@ h1 {
     font-weight: bold;
     column-gap: 10px;
 }
+
+.extraCasillero {
+    position: absolute;
+    font-size: 1.5em;
+}

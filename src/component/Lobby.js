@@ -12,6 +12,13 @@ import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
 import EntrarRecinto from "./BotonEntrarRecinto";
 
+/**
+ * Devuelve true si las coordenadas dadas corresponden a
+ * las de una una entrada.
+ * @param {int} x 
+ * @param {int} y 
+ * @returns {boolean}
+ */
 function estaEnUnaEntrada(x, y) {
     const entradas = [
         {
@@ -118,7 +125,7 @@ export default function Lobby() {
      * el jugador que tiró el dado.
      * @param  {bool} false
      */
-    const [posDisponibles, setPosDisponibles] = useState([]);
+    const [posPosibles, setPosPosibles] = useState([]);
 
     useEffect(() => {
         const socket = new WebSocket(
@@ -211,7 +218,7 @@ export default function Lobby() {
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
-                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador} setPosDisponibles={setPosDisponibles} />
+                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador} setPosPosibles={setPosPosibles} />
                             ) : (
                                 <>
                                     <PasarTurno
@@ -231,8 +238,8 @@ export default function Lobby() {
                 </div>
                 <Tablero
                     jugadores={jugadores}
-                    posDisponibles={posDisponibles}
-                    setPosDisponibles={setPosDisponibles}
+                    posPosibles={posPosibles}
+                    setPosPosibles={setPosPosibles}
                     id_partida={params.id}
                     id_jugador={location.state.id_jugador}
                 />

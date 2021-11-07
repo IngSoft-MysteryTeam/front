@@ -1,5 +1,7 @@
+import { faArrowDown, faArrowLeft, faArrowRight, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Casillero from "./Casillero"
-import Ficha from "./Ficha";
+import Recinto from "./Recinto";
 /**
  * Calcula los casillero del tablero
  * @param  {int} x Posicion del tablero
@@ -7,14 +9,6 @@ import Ficha from "./Ficha";
  */
 function esCasillero(x, y) {
   return (x === 6 || x === 13) || (y === 6 || y === 13)
-}
-
-function buscarJugadoresRecintos(jugadores, recinto) {
-  let res = Array.from(jugadores);
-
-  res = res.filter(e => e.recinto === recinto);
-
-  return res;
 }
 
 const recintos = [
@@ -91,6 +85,131 @@ const recintos = [
     imagen: "laboratorio",
   }
 ]
+
+const casillerosEspeciales = [
+  {
+    x: 0,
+    y: 6,
+    color: 'grey'
+  },
+  {
+    x: 0,
+    y: 13,
+    color: 'grey'
+  },
+  {
+    x: 6,
+    y: 0,
+    color: 'grey'
+  },
+  {
+    x: 6,
+    y: 19,
+    color: 'grey'
+  },
+  {
+    x: 13,
+    y: 0,
+    color: 'grey'
+  },
+  {
+    x: 13,
+    y: 19,
+    color: 'grey'
+  },
+  {
+    x: 19,
+    y: 6,
+    color: 'grey'
+  },
+  {
+    x: 19,
+    y: 13,
+    color: 'grey'
+  },
+  {
+    x: 4,
+    y: 6,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowDown} />
+  },
+  {
+    x: 3,
+    y: 13,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowUp} />
+  },
+  {
+    x: 6,
+    y: 10,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowLeft} />
+  },
+  {
+    x: 6,
+    y: 2,
+    color: "black",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowLeft} />
+  },
+  {
+    x: 6,
+    y: 15,
+    color: "black",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowLeft} />
+  },
+  {
+    x: 10,
+    y: 6,
+    color: "#943C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowUp} />
+  },
+  {
+    x: 13,
+    y: 4,
+    color: "black",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowRight} />
+  },
+  {
+    x: 13,
+    y: 10,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowRight} />
+  },
+  {
+    x: 13,
+    y: 16,
+    color: "black",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowRight} />
+  },
+  {
+    x: 15,
+    y: 6,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowDown} />
+  },
+  {
+    x: 10,
+    y: 13,
+    color: "#943C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowDown} />
+  },
+  {
+    x: 16,
+    y: 13,
+    color: "#3F3C29",
+    extra: () => <FontAwesomeIcon className='extraCasillero' icon={faArrowUp} />
+  }
+]
+
+/**
+ * Obtiene propiedades de casilleros especiales como color o símbolos extra.
+ * @param {int} x 
+ * @param {int} y 
+ * @returns {object}
+ */
+const obtCasilleroEspecial = (x, y) => 
+  casillerosEspeciales.find(e => e.x === x && e.y === y);
+
 /**
  * Renderiza el tablero
  * @param  {object} props ID partida y jugador
@@ -107,28 +226,26 @@ export default function Tablero(props) {
               x={i}
               y={j}
               jugadores={props.jugadores}
-              posDisponibles={props.posDisponibles}
+              posPosibles={props.posPosibles}
               id_partida={props.id_partida}
               id_jugador={props.id_jugador}
-              setPosDisponibles={props.setPosDisponibles}
+              setPosPosibles={props.setPosPosibles}
+              color={obtCasilleroEspecial(i, j) ? obtCasilleroEspecial(i, j).color : null}
+              extra={obtCasilleroEspecial(i, j) ? obtCasilleroEspecial(i, j).extra : null}
             />
             : null
           ))
         ))}
         {recintos.map((e, i) => (
-          <div className='recinto' key={i}
-            style={{
-            gridColumnStart: e.xInicio+1, 
-            gridColumnEnd: e.xFin+1, 
-            gridRowStart: e.yInicio+1, 
-            gridRowEnd: e.yFin+1
-          }}
-          >
-            <img src={`/tablero/${e.imagen}.png`} width='245px' alt={e.nombre} style={{position: 'absolute'}}></img>
-            {buscarJugadoresRecintos(props.jugadores, e.imagen.toUpperCase()).map((e, i) => (
-              <Ficha color={e.color} tamaño='30px' />
-            ))}
-          </div>
+          <Recinto 
+            jugadores={props.jugadores}
+            nombre={e.nombre}
+            imagen={e.imagen}
+            xInicio={e.xInicio}
+            yInicio={e.yInicio}
+            xFin={e.xFin}
+            yFin={e.yFin} 
+          />
         ))}
       </div>
     </div>
