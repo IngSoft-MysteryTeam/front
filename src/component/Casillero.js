@@ -29,7 +29,7 @@ function esEntrada(x, y) {
 function buscarJugadores(jugadores, x, y) {
   let res = Array.from(jugadores)
 
-  res = res.filter(jugador => jugador.posX === x && jugador.posY === y)
+  res = res.filter(jugador => jugador.posX === x && jugador.posY === y && jugador.recinto === "")
 
   return res;
 }

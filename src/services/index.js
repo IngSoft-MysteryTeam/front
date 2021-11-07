@@ -108,3 +108,10 @@ export function hacerSospecha(datos) {
         params: {victima: datos.victima, monstruo: datos.monstruo}
     });
 }
+
+export function entrarRecinto(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/entrar-recinto`,
+        method: "PUT"
+    })
+}

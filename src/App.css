@@ -165,4 +165,5 @@ h1 {
     width: 245px;
     font-size: x-large;
     font-weight: bold;
+    column-gap: 10px;
 }

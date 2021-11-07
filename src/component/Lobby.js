@@ -10,6 +10,68 @@ import { obtNombrejugador } from "../services";
 import ListadeCartas from "./ListadeCartas";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
+import EntrarRecinto from "./BotonEntrarRecinto";
+
+function estaEnUnaEntrada(x, y) {
+    const entradas = [
+        {
+            x: 4,
+            y: 6
+        },
+        {
+            x: 3,
+            y: 13
+        },
+        {
+            x: 6,
+            y: 10
+        },
+        {
+            x: 6,
+            y: 2
+        },
+        {
+            x: 6,
+            y: 15
+        },
+        {
+            x: 10,
+            y: 6
+        },
+        {
+            x: 13,
+            y: 4
+        },
+        {
+            x: 13,
+            y: 10
+        },
+        {
+            x: 13,
+            y: 16
+        },
+        {
+            x: 15,
+            y: 6
+        },
+        {
+            x: 10,
+            y: 13
+        },
+        {
+            x: 16,
+            y: 13
+        }
+    ]
+
+    let entrada = entradas.find(e => e.x === x && e.y === y);
+
+    if (entrada) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Esta funcion visualiza la partida a los jugadores que se han unido.
@@ -56,13 +118,13 @@ export default function Lobby() {
      * el jugador que tiró el dado.
      * @param  {bool} false
      */
-    const [posDisponibles, setPosDisponibles] = useState([])
+    const [posDisponibles, setPosDisponibles] = useState([]);
 
     useEffect(() => {
         const socket = new WebSocket(
             `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
         );
-        socket.addEventListener("open", (e) =>
+        socket.addEventListener("open", e =>
             console.log("Conexion establecida")
         );
         socket.addEventListener("message", (msg) => {
@@ -72,7 +134,7 @@ export default function Lobby() {
                 setJugadores((oldJugadores) => {
                     if (
                         oldJugadores.find(
-                            (e) => e.nombre === json.jugador.nombre
+                            e => e.nombre === json.jugador.nombre
                         ) === undefined
                     ) {
                         return [...oldJugadores, json.jugador];
@@ -82,7 +144,7 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
-                    oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
+                    oldJugadores.filter(e => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
                 setTurno(json.turno);
@@ -94,14 +156,21 @@ export default function Lobby() {
                 setCartas(json.cartas);
             } else if (json.evento === "Nueva posicion") {
                 setJugadores(oldJugadores => {
-                    let jugador = oldJugadores.find(e => e.nombre === json.nombre);
-                    jugador.posX = json.x;
-                    jugador.posY = json.y;
-                    return oldJugadores
+                    let newJugadores = oldJugadores.map((e, i) => {
+                        if (e.nombre === json.nombre) {
+                            return {
+                                ...e,
+                                posX: json.x,
+                                posY: json.y,
+                                recinto: json.recinto
+                            }
+                        } else return e
+                    })
+                    return newJugadores;
                 })
             }
         });
-        socket.addEventListener("close", (e) =>
+        socket.addEventListener("close", e =>
             console.log("Se cayo la conexion")
         );
     }, [location.state.id_jugador, params.id]);
@@ -149,7 +218,10 @@ export default function Lobby() {
                                         id_partida={params.id}
                                         sospechar={setSospechar}
                                     />
-                                    <Sospechar sospechar={setSospechar}/>
+                                    {estaEnUnaEntrada(jugadores.find(e => e.nombre === obtNombrejugador()).posX, jugadores.find(e => e.nombre === obtNombrejugador()).posY)
+                                    && jugadores.find(e => e.nombre === obtNombrejugador()).recinto === "" ?
+                                    <EntrarRecinto id_partida={params.id} id_jugador={location.state.id_jugador} /> : null}
+                                    {jugadores.find(e => e.nombre === obtNombrejugador()).recinto ? <Sospechar sospechar={setSospechar}/> : null}
                                 </>
                             )
                         ) : null}

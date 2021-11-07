@@ -1,4 +1,5 @@
 import Casillero from "./Casillero"
+import Ficha from "./Ficha";
 /**
  * Calcula los casillero del tablero
  * @param  {int} x Posicion del tablero
@@ -6,6 +7,14 @@ import Casillero from "./Casillero"
  */
 function esCasillero(x, y) {
   return (x === 6 || x === 13) || (y === 6 || y === 13)
+}
+
+function buscarJugadoresRecintos(jugadores, recinto) {
+  let res = Array.from(jugadores);
+
+  res = res.filter(e => e.recinto === recinto);
+
+  return res;
 }
 
 const recintos = [
@@ -115,7 +124,10 @@ export default function Tablero(props) {
             gridRowEnd: e.yFin+1
           }}
           >
-            <img src={`/tablero/${e.imagen}.png`} width='245px' alt={e.nombre}></img>
+            <img src={`/tablero/${e.imagen}.png`} width='245px' alt={e.nombre} style={{position: 'absolute'}}></img>
+            {buscarJugadoresRecintos(props.jugadores, e.imagen.toUpperCase()).map((e, i) => (
+              <Ficha color={e.color} tamaño='30px' />
+            ))}
           </div>
         ))}
       </div>
