@@ -4,7 +4,7 @@ import React from "react";
 
 /**
  * Lista los jugadores que se unieron a una partida. Llamada en Lobby.js
- * @param {Jugadores | Turno } props 
+ * @param {Jugadores | Turno } props
  * @returns Renderizado JSX
  */
 export default function ListaJugadores(props) {

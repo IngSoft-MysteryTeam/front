@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "jsdoc": "^3.6.7"
+    "jsdoc": "^3.6.7",
+    "prettier": "2.4.1"
   }
 }

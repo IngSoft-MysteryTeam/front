@@ -1,44 +1,46 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { nuevoJugador, traerPartidas } from '../services/index';
-import userEvent from '@testing-library/user-event';
-import Inicio from '../componentes/Inicio';
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { nuevoJugador, traerPartidas } from "../services/index";
+import userEvent from "@testing-library/user-event";
+import Inicio from "../componentes/Inicio";
 
-jest.mock('../services/index')
+jest.mock("../services/index");
 
-test('si el input está vacío, no avanza a la lista de partidas', async () => {
-  render(<Inicio />);
+test("si el input está vacío, no avanza a la lista de partidas", async () => {
+    render(<Inicio />);
 
-  let input = screen.getByRole('textbox')
-    
-  fireEvent.click(input)
-  fireEvent.keyDown(input, {key: 'Enter'})
+    let input = screen.getByRole("textbox");
 
-  expect(nuevoJugador).not.toBeCalled()
-})
+    fireEvent.click(input);
+    fireEvent.keyDown(input, { key: "Enter" });
 
-test('al ingresar un nombre ya existente, salta una alerta', async () => {
-  render(<Inicio />)
+    expect(nuevoJugador).not.toBeCalled();
+});
 
-  global.alert = jest.fn()
+test("al ingresar un nombre ya existente, salta una alerta", async () => {
+    render(<Inicio />);
 
-  let submit = screen.getByRole('button')
+    global.alert = jest.fn();
 
-  nuevoJugador.mockResolvedValue(Promise.resolve({status: 404}))
+    let submit = screen.getByRole("button");
 
-  fireEvent.click(submit);
+    nuevoJugador.mockResolvedValue(Promise.resolve({ status: 404 }));
 
-  await waitFor(() => expect(global.alert).toHaveBeenCalled())
-})
+    fireEvent.click(submit);
 
-test('el input no deja ingresar mas de 20 caracteres', async () => {
-  render(<Inicio />);
-  
-  let input = screen.getByRole('textbox')
+    await waitFor(() => expect(global.alert).toHaveBeenCalled());
+});
 
-  nuevoJugador.mockResolvedValue(Promise.resolve({status: 200, data: null}))
-  traerPartidas.mockResolvedValue(Promise.resolve({data: []}))
-  
-  userEvent.type(input, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+test("el input no deja ingresar mas de 20 caracteres", async () => {
+    render(<Inicio />);
 
-  expect(input.value.length).toBe(20);
-})
+    let input = screen.getByRole("textbox");
+
+    nuevoJugador.mockResolvedValue(
+        Promise.resolve({ status: 200, data: null })
+    );
+    traerPartidas.mockResolvedValue(Promise.resolve({ data: [] }));
+
+    userEvent.type(input, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+    expect(input.value.length).toBe(20);
+});

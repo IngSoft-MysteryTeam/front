@@ -39,7 +39,7 @@ export default function ListaPartidas() {
 
     /**
      * Redirecciona al jugador a la partida y envia al jugador al back
-     * @param {Evento} e 
+     * @param {Evento} e
      */
     function Unirsepartida(e) {
         unirJugador({
@@ -47,23 +47,23 @@ export default function ListaPartidas() {
             nombre: obtNombrejugador(),
         })
             .then((res) => {
-                console.log(res)
+                console.log(res);
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
                         state: { ...res.data, nombre: e.nombre },
                     });
-                }
-                else if (res.status === 202) {
+                } else if (res.status === 202) {
                     //console.log(res)
                     if (res.data.detail === "La partida ya fue iniciada") {
                         alert("La partida ya fue iniciada");
-                        obtPartidas();                   
-                    }
-                    else if (res.data.detail === "La partida esta llena") {
+                        obtPartidas();
+                    } else if (res.data.detail === "La partida esta llena") {
                         alert("La partida esta completa");
-                        obtPartidas();        
-            }}})
+                        obtPartidas();
+                    }
+                }
+            })
             .catch((err) => {
                 alert("Ocurrió un error. Revise la consola.");
                 console.error(err);
@@ -94,7 +94,8 @@ export default function ListaPartidas() {
                             <td>{e.anfitrion}</td>
                             <td>
                                 <FontAwesomeIcon icon={faUserFriends} />{" "}
-                                {e.cantidad_jugadores}/6
+                                {e.cantidad_jugadores}
+                                /6
                             </td>
                             <td>
                                 <BotonUnirse

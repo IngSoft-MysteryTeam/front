@@ -94,7 +94,7 @@ export function moverFicha(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/moverficha`,
         method: "PUT",
-        data: {x: datos.x, y: datos.y}
+        data: { x: datos.x, y: datos.y },
     });
 }
 /**
@@ -105,13 +105,13 @@ export function hacerSospecha(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}`,
         method: "GET",
-        params: {victima: datos.victima, monstruo: datos.monstruo}
+        params: { victima: datos.victima, monstruo: datos.monstruo },
     });
 }
 
 export function entrarRecinto(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/entrar-recinto`,
-        method: "PUT"
-    })
+        method: "PUT",
+    });
 }

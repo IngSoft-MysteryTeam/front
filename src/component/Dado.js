@@ -1,6 +1,6 @@
 /**
  * Obtiene el resultadop del dado desde el back.
- * @param {numero} props 
+ * @param {numero} props
  * @returns renderizado HTML.
  */
 export default function Dado(props) {

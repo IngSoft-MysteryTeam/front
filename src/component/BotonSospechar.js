@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 
 export default function Sospechar(props) {
-    return(
+    return (
         <button
-        className={"btn btn-dark"}
-        onClick={(e) => props.sospechar(true)}
+            className={"btn btn-dark"}
+            onClick={(e) => props.sospechar(true)}
         >
-        Sospechar
+            Sospechar
         </button>
-    )
+    );
 }

@@ -14,7 +14,7 @@ export default function Inicio() {
     /**
      * Estado que nos ayuda a guardar el nombre del jugador
      * @param  {""} nombre Parametros ingresados por teclado
-     * @param  {object} Guarda la cadana de caracteres ingresados 
+     * @param  {object} Guarda la cadana de caracteres ingresados
      */
     const [newjugador, setNombre] = useState({
         nombre: "",

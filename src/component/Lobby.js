@@ -15,63 +15,63 @@ import EntrarRecinto from "./BotonEntrarRecinto";
 /**
  * Devuelve true si las coordenadas dadas corresponden a
  * las de una una entrada.
- * @param {int} x 
- * @param {int} y 
+ * @param {int} x
+ * @param {int} y
  * @returns {boolean}
  */
 function estaEnUnaEntrada(x, y) {
     const entradas = [
         {
             x: 4,
-            y: 6
+            y: 6,
         },
         {
             x: 3,
-            y: 13
+            y: 13,
         },
         {
             x: 6,
-            y: 10
+            y: 10,
         },
         {
             x: 6,
-            y: 2
+            y: 2,
         },
         {
             x: 6,
-            y: 15
+            y: 15,
         },
         {
             x: 10,
-            y: 6
+            y: 6,
         },
         {
             x: 13,
-            y: 4
+            y: 4,
         },
         {
             x: 13,
-            y: 10
+            y: 10,
         },
         {
             x: 13,
-            y: 16
+            y: 16,
         },
         {
             x: 15,
-            y: 6
+            y: 6,
         },
         {
             x: 10,
-            y: 13
+            y: 13,
         },
         {
             x: 16,
-            y: 13
-        }
-    ]
+            y: 13,
+        },
+    ];
 
-    let entrada = entradas.find(e => e.x === x && e.y === y);
+    let entrada = entradas.find((e) => e.x === x && e.y === y);
 
     if (entrada) {
         return true;
@@ -131,7 +131,7 @@ export default function Lobby() {
         const socket = new WebSocket(
             `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
         );
-        socket.addEventListener("open", e =>
+        socket.addEventListener("open", (e) =>
             console.log("Conexion establecida")
         );
         socket.addEventListener("message", (msg) => {
@@ -141,7 +141,7 @@ export default function Lobby() {
                 setJugadores((oldJugadores) => {
                     if (
                         oldJugadores.find(
-                            e => e.nombre === json.jugador.nombre
+                            (e) => e.nombre === json.jugador.nombre
                         ) === undefined
                     ) {
                         return [...oldJugadores, json.jugador];
@@ -151,7 +151,7 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
-                    oldJugadores.filter(e => e.nombre !== json.jugador.nombre)
+                    oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
                 setTurno(json.turno);
@@ -162,22 +162,22 @@ export default function Lobby() {
                 console.log(json.cartas);
                 setCartas(json.cartas);
             } else if (json.evento === "Nueva posicion") {
-                setJugadores(oldJugadores => {
+                setJugadores((oldJugadores) => {
                     let newJugadores = oldJugadores.map((e, i) => {
                         if (e.nombre === json.nombre) {
                             return {
                                 ...e,
                                 posX: json.x,
                                 posY: json.y,
-                                recinto: json.recinto
-                            }
-                        } else return e
-                    })
+                                recinto: json.recinto,
+                            };
+                        } else return e;
+                    });
                     return newJugadores;
-                })
+                });
             }
         });
-        socket.addEventListener("close", e =>
+        socket.addEventListener("close", (e) =>
             console.log("Se cayo la conexion")
         );
     }, [location.state.id_jugador, params.id]);
@@ -218,21 +218,51 @@ export default function Lobby() {
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
-                                <BotonDado id_partida={params.id} id_jugador={location.state.id_jugador} setPosPosibles={setPosPosibles} />
+                                <BotonDado
+                                    id_partida={params.id}
+                                    id_jugador={location.state.id_jugador}
+                                    setPosPosibles={setPosPosibles}
+                                />
                             ) : (
                                 <>
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechar={setSospechar}
                                     />
-                                    {estaEnUnaEntrada(jugadores.find(e => e.nombre === obtNombrejugador()).posX, jugadores.find(e => e.nombre === obtNombrejugador()).posY)
-                                    && jugadores.find(e => e.nombre === obtNombrejugador()).recinto === "" ?
-                                    <EntrarRecinto id_partida={params.id} id_jugador={location.state.id_jugador} /> : null}
-                                    {jugadores.find(e => e.nombre === obtNombrejugador()).recinto ? <Sospechar sospechar={setSospechar}/> : null}
+                                    {estaEnUnaEntrada(
+                                        jugadores.find(
+                                            (e) =>
+                                                e.nombre === obtNombrejugador()
+                                        ).posX,
+                                        jugadores.find(
+                                            (e) =>
+                                                e.nombre === obtNombrejugador()
+                                        ).posY
+                                    ) &&
+                                    jugadores.find(
+                                        (e) => e.nombre === obtNombrejugador()
+                                    ).recinto === "" ? (
+                                        <EntrarRecinto
+                                            id_partida={params.id}
+                                            id_jugador={
+                                                location.state.id_jugador
+                                            }
+                                        />
+                                    ) : null}
+                                    {jugadores.find(
+                                        (e) => e.nombre === obtNombrejugador()
+                                    ).recinto ? (
+                                        <Sospechar sospechar={setSospechar} />
+                                    ) : null}
                                 </>
                             )
                         ) : null}
-                        {sospechar ? <ListadeCartas id_jugador={location.state.id_jugador} id_partida={params.id}/> : null}
+                        {sospechar ? (
+                            <ListadeCartas
+                                id_jugador={location.state.id_jugador}
+                                id_partida={params.id}
+                            />
+                        ) : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
