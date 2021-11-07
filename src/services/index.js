@@ -111,8 +111,8 @@ export function hacerSospecha(datos) {
 
 /**
  * Envia al back la accion de entrar a un recinto
- * @param {object} datos Id de partida y jugador 
- * @returns 
+ * @param {object} datos Id de partida y jugador
+ * @returns
  */
 export function entrarRecinto(datos) {
     return axios({
