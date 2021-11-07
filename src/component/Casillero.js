@@ -72,6 +72,7 @@ export default function Casillero(props) {
             }}
             onMouseOver={(e) => setHovering(true)}
             onMouseOut={(e) => setHovering(false)}
+            data-testid="casillero"
         >
             {buscarJugadores(props.jugadores, props.x, props.y).map((e, i) => (
                 <Ficha
@@ -93,6 +94,7 @@ export default function Casillero(props) {
                         justifyContent: "center",
                         alignItems: "center",
                     }}
+                    data-testid="posPosible"
                     onClick={(e) => {
                         props.setPosPosibles([]);
                         moverFicha({
