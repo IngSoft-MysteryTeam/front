@@ -4,7 +4,7 @@ export default function Sospechar(props) {
     return (
         <button
             className={"btn btn-dark"}
-            onClick={(e) => props.sospechar(true)}
+            onClick={(e) => props.sospechando(true)}
         >
             Sospechar
         </button>

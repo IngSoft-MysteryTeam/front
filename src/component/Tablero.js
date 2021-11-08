@@ -95,42 +95,42 @@ const casillerosEspeciales = [
     {
         x: 0,
         y: 6,
-        color: "grey",
+        color: "white",
     },
     {
         x: 0,
         y: 13,
-        color: "grey",
+        color: "white",
     },
     {
         x: 6,
         y: 0,
-        color: "grey",
+        color: "white",
     },
     {
         x: 6,
         y: 19,
-        color: "grey",
+        color: "white",
     },
     {
         x: 13,
         y: 0,
-        color: "grey",
+        color: "white",
     },
     {
         x: 13,
         y: 19,
-        color: "grey",
+        color: "white",
     },
     {
         x: 19,
         y: 6,
-        color: "grey",
+        color: "white",
     },
     {
         x: 19,
         y: 13,
-        color: "grey",
+        color: "white",
     },
     {
         x: 4,

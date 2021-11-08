@@ -103,7 +103,7 @@ export function moverFicha(datos) {
  */
 export function hacerSospecha(datos) {
     return axios({
-        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}`,
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/sospechar`,
         method: "GET",
         params: { victima: datos.victima, monstruo: datos.monstruo },
     });

@@ -11,6 +11,7 @@ import ListadeCartas from "./ListadeCartas";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
 import EntrarRecinto from "./BotonEntrarRecinto";
+import MostrarSospecha from "./MostrarSospecha";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -117,7 +118,7 @@ export default function Lobby() {
      * Estado que indica si el jugador esta sospechando.
      * @param  {bool} false
      */
-    const [sospechar, setSospechar] = useState(false);
+    const [sospechando, setSospechando] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
     /**
@@ -126,6 +127,12 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [posPosibles, setPosPosibles] = useState([]);
+    
+    /**
+     * Estado que guarda la sospecha realizada por un jugador
+     * @param  {object} null Cartas y nombre del jugador
+     */
+    const [sospecha, setSospecha] = useState(null);
 
     useEffect(() => {
         const socket = new WebSocket(
@@ -154,6 +161,7 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
+                setSospecha(null)
                 setTurno(json.turno);
                 setDado(-1);
             } else if (json.evento === "Tiraron el dado") {
@@ -176,6 +184,9 @@ export default function Lobby() {
                     return newJugadores;
                 });
             }
+            else if (json.evento === "Nueva sospecha"){
+                setSospecha({nombre: json.nombre, cartas: json.cartas})
+            }
         });
         socket.addEventListener("close", (e) =>
             console.log("Se cayo la conexion")
@@ -191,7 +202,7 @@ export default function Lobby() {
                     flexWrap: "wrap-reverse",
                     alignItems: "flex-end",
                 }}
-            >
+                >
                 <div style={{ flexGrow: 1, flexBasis: "100px" }}>
                     <h1>{location.state.nombre}</h1>
                     <ListaJugadores jugadores={jugadores} turno={turno} />
@@ -203,12 +214,12 @@ export default function Lobby() {
                             rowGap: "10px",
                             flexWrap: "wrap",
                         }}
-                    >
+                        >
                         {jugadores[0].nombre === obtNombrejugador() &&
                         turno === null ? (
                             <Iniciar
-                                id_partida={params.id}
-                                cantjugadores={jugadores.length}
+                            id_partida={params.id}
+                            cantjugadores={jugadores.length}
                             />
                         ) : null}
                         <button className="btn btn-dark">
@@ -217,8 +228,8 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
-                            dado === -1 ? (
-                                <BotonDado
+                                dado === -1 ? (
+                                    <BotonDado
                                     id_partida={params.id}
                                     id_jugador={location.state.id_jugador}
                                     setPosPosibles={setPosPosibles}
@@ -227,8 +238,8 @@ export default function Lobby() {
                                 <>
                                     <PasarTurno
                                         id_partida={params.id}
-                                        sospechar={setSospechar}
-                                    />
+                                        sospechando={setSospechando}
+                                        />
                                     {estaEnUnaEntrada(
                                         jugadores.find(
                                             (e) =>
@@ -243,36 +254,37 @@ export default function Lobby() {
                                         (e) => e.nombre === obtNombrejugador()
                                     ).recinto === "" ? (
                                         <EntrarRecinto
-                                            id_partida={params.id}
-                                            id_jugador={
-                                                location.state.id_jugador
+                                        id_partida={params.id}
+                                        id_jugador={
+                                            location.state.id_jugador
                                             }
-                                        />
+                                            />
                                     ) : null}
                                     {jugadores.find(
                                         (e) => e.nombre === obtNombrejugador()
                                     ).recinto ? (
-                                        <Sospechar sospechar={setSospechar} />
+                                        <Sospechar sospechando={setSospechando} />
                                     ) : null}
                                 </>
                             )
                         ) : null}
-                        {sospechar ? (
+                        {sospechando ? (
                             <ListadeCartas
-                                id_jugador={location.state.id_jugador}
-                                id_partida={params.id}
+                            id_jugador={location.state.id_jugador}
+                            id_partida={params.id}
                             />
                         ) : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
+                {sospecha ? <MostrarSospecha sospecha={sospecha}/> : null}
                 <Tablero
                     jugadores={jugadores}
                     posPosibles={posPosibles}
                     setPosPosibles={setPosPosibles}
                     id_partida={params.id}
                     id_jugador={location.state.id_jugador}
-                />
+                    />
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>
