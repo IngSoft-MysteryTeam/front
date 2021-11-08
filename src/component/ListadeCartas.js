@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { hacerSospecha } from "../services";
+import BotonEnviarsospecha from "./BotonEnviarsospecha";
 /**
  * Lista cartas para seleccionar y elegir una sospecha
  * @param  {object} props Id de jugador y de partida
@@ -120,19 +120,15 @@ export default function ListadeCartas(props) {
             </div>
             <div>
                 {victima !== "" && monstruo !== "" ? (
-                    <button
-                        className={"btn btn-dark"}
-                        onClick={(e) =>
-                            hacerSospecha({
-                                victima: victima,
-                                monstruo: monstruo,
-                                id_jugador: props.id_jugador,
-                                id_partida: props.id_partida,
-                            })
-                        }
-                    >
-                        Enviar Sospecha
-                    </button>
+                    <BotonEnviarsospecha
+                        data={{
+                            id_jugador: props.id_jugador,
+                            id_partida: props.id_partida,
+                            victima: victima,
+                            monstruo: monstruo,
+                        }}
+                        sospechando={props.sospechando}
+                    />
                 ) : null}
             </div>
         </>

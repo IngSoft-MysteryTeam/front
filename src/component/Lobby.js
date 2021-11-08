@@ -15,7 +15,7 @@ import MostrarSospecha from "./MostrarSospecha";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
- * las de una una entrada.
+ * las de una entrada.
  * @param {int} x
  * @param {int} y
  * @returns {boolean}
@@ -82,31 +82,31 @@ function estaEnUnaEntrada(x, y) {
 }
 
 /**
- * Esta funcion visualiza la partida a los jugadores que se han unido.
+ * Esta función visualiza la partida a los jugadores que se han unido.
  * @returns Renderizado de una partida particular del juego.
  */
 export default function Lobby() {
     /**
-     * Nos indica los parametros para armar la url de la partida.
+     * Nos indica los parámetros para armar la url de la partida.
      */
     const params = useParams();
     /**
-     * Nos indica el id del jugador para armar la url de la partida
+     * Nos indica el id del jugador para armar la url de la partida.
      */
     const location = useLocation();
     /**
-     * Estado que guarda el nombre de los jugadores de la partida
+     * Estado que guarda el nombre de los jugadores de la partida.
      * @param  {List} location.state.jugadores Jugadores en la partida
      */
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     /**
      * Estado que nos indica el turno del jugador
-     * @param  {int} null Numero que indica el orden del jugador
+     * @param  {int} null Número que indica el orden del jugador
      */
     const [turno, setTurno] = useState(null);
     /**
-     * Estado que indica si lanzo el dado y guarda el valor obtenido.
-     * @param  {int} -1 Numero del dado
+     * Estado que indica si lanzó el dado un jugador y guarda el valor obtenido.
+     * @param  {int} -1 Número del dado
      */
     const [dado, setDado] = useState(-1);
     /**
@@ -115,7 +115,7 @@ export default function Lobby() {
      */
     const [cartas, setCartas] = useState([]);
     /**
-     * Estado que indica si el jugador esta sospechando.
+     * Estado que indica si el jugador está sospechando.
      * @param  {bool} false
      */
     const [sospechando, setSospechando] = useState(false);
@@ -261,9 +261,10 @@ export default function Lobby() {
                                     ) : null}
                                     {jugadores.find(
                                         (e) => e.nombre === obtNombrejugador()
-                                    ).recinto ? (
+                                    ).recinto && !sospecha ? (
                                         <Sospechar
                                             sospechando={setSospechando}
+                                            eligosospechar={sospechando}
                                         />
                                     ) : null}
                                 </>
@@ -273,20 +274,27 @@ export default function Lobby() {
                             <ListadeCartas
                                 id_jugador={location.state.id_jugador}
                                 id_partida={params.id}
+                                sospechando={setSospechando}
                             />
                         ) : null}
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    {sospecha ? <MostrarSospecha sospecha={sospecha}/> : null}
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    {sospecha ? <MostrarSospecha sospecha={sospecha} /> : null}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}
                         setPosPosibles={setPosPosibles}
                         id_partida={params.id}
                         id_jugador={location.state.id_jugador}
-                        />
+                    />
                 </div>
             </div>
             <DistribuirCartas cartas={cartas} />
