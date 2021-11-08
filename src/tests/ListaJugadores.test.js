@@ -5,15 +5,12 @@ test("la lista muestra los nombres de los jugadores correctamente", () => {
     const jugadores = [
         {
             nombre: "David",
-            color: "red",
         },
         {
             nombre: "Santi",
-            color: "blue",
         },
         {
             nombre: "fran",
-            color: "yellow",
         },
     ];
 
@@ -24,19 +21,31 @@ test("la lista muestra los nombres de los jugadores correctamente", () => {
     );
 });
 
-test("la lista muestra los lugares vacios correctamente", () => {
+test("la lista muestra los colores de los jugadores correctamente", () => {
     const jugadores = [
         {
             nombre: "David",
             color: "red",
         },
+    ];
+
+    render(<ListaJugadores jugadores={jugadores} />);
+
+    const viñeta = screen.getByText("●");
+
+    expect(viñeta).toHaveStyle("color: red");
+});
+
+test("la lista muestra los lugares vacios correctamente", () => {
+    const jugadores = [
+        {
+            nombre: "David",
+        },
         {
             nombre: "Santi",
-            color: "blue",
         },
         {
             nombre: "fran",
-            color: "yellow",
         },
     ];
 
