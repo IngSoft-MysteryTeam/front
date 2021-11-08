@@ -48,7 +48,9 @@ function miColor(jugadores) {
  */
 function getTamañoFicha(jugadores, x, y) {
     let arreglo = buscarJugadores(jugadores, x, y);
-    if (arreglo.length > 1) {
+    if (arreglo.length > 4) {
+        return "12px";
+    } else if (arreglo.length > 1) {
         return "18px";
     } else {
         return "30px";
