@@ -28,6 +28,8 @@ test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te
     fireEvent.change(input, { target: { value: "David " } });
     fireEvent.click(submit);
 
+    expect(await screen.findByText("Unirse a una partida")).toBeInTheDocument();
+
     unirJugador.mockResolvedValue(
         Promise.resolve({
             status: 200,
