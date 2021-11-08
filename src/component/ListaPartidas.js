@@ -8,16 +8,16 @@ import BotonUnirse from "./BotonUnirse";
 import BotonAct from "./BotonAct";
 
 /**
- * Muestra una lista con las partidas aun no iniciadas.
+ * Muestra una lista con las partidas aún no iniciadas.
  * @returns Renderizado JSX
  */
 export default function ListaPartidas() {
     /**
-     * Ayuda a redireccionar al jugador a la partida
+     * Ayuda a redireccionar al jugador a la partida.
      */
     const history = useHistory();
     /**
-     * Estado que nos guarda las partidas no iniciadas obtenidas del back
+     * Estado que nos guarda las partidas no iniciadas obtenidas del back.
      * @param  {list} [] Lista de partidas obtenidas del back
      */
     const [partidas, setPartidas] = useState([]);
@@ -38,7 +38,7 @@ export default function ListaPartidas() {
     }
 
     /**
-     * Redirecciona al jugador a la partida y envia al jugador al back
+     * Redirecciona al jugador a la partida y envía al jugador al back.
      * @param {Evento} e
      */
     function Unirsepartida(e) {
@@ -70,7 +70,7 @@ export default function ListaPartidas() {
             });
     }
     /**
-     * Renderiza la lista de partidas actualizada
+     * Renderiza la lista de partidas actualizada.
      */
     useEffect(() => {
         obtPartidas();

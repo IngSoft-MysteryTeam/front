@@ -1,7 +1,7 @@
 import { pasarTurno } from "../services";
 
 /**
- * Boton para finalizar turno
+ * Botón para finalizar turno.
  * @param {id_partida} props
  * @returns evento click
  */

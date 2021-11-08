@@ -3,16 +3,16 @@ import { useHistory } from "react-router";
 import { nuevaPartida, obtNombrejugador } from "../services";
 
 /**
- * Permite al jugador crear nueva partida
+ * Permite al jugador crear nueva partida.
  * @returns Renderizado JSX
  */
 export default function CreaPartida() {
     /**
-     * Ayuda a redireccionar al jugador a la partida creada
+     * Ayuda a redireccionar al jugador a la partida creada.
      */
     const history = useHistory();
     /**
-     * Guarda el nombre del jugador creador de la partida
+     * Guarda el nombre del jugador creador de la partida.
      */
     const jugador = obtNombrejugador();
     /**
@@ -37,7 +37,7 @@ export default function CreaPartida() {
     };
 
     /**
-     * Envia la partida al back
+     * Envía la partida al back
      * @param {Evento} evento Evento del click
      */
     const enviarPartida = (evento) => {

@@ -1,5 +1,5 @@
 /**
- * Obtiene el resultadop del dado desde el back.
+ * Obtiene el resultado del dado desde el back.
  * @param {numero} props
  * @returns renderizado HTML.
  */

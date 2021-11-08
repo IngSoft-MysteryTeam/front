@@ -1,7 +1,7 @@
 import Ficha from "./Ficha";
 
 /**
- * Busca jugadores que esten en el recinto y devuelve un arreglo
+ * Busca jugadores que estén en el recinto y devuelve un arreglo
  * con los mismos.
  * @param {Array} jugadores
  * @param {string} recinto

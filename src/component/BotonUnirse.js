@@ -1,8 +1,8 @@
 import React from "react-router-dom";
 
 /**
- * Boton para unirse a una partida no iniciada. Llamada en ListaPartidas.
- * @param {partida | unirse} props Boton por partida.
+ * Botón para unirse a una partida no iniciada.
+ * @param {partida | unirse} props Botón por partida.
  * @returns evento click
  */
 export default function BotonUnirse(props) {

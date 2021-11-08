@@ -1,7 +1,7 @@
 import React from "react-router-dom";
 
 /**
- * Boton para actualizar lista de partidas en el inicio -> ListaPartidas.
+ * Botón para actualizar lista de partidas en el inicio -> ListaPartidas.
  * @param {actPartidas} props Obtiene las partidas desde el back.
  * @returns Renderizado JSX
  */

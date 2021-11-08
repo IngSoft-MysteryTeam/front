@@ -1,7 +1,7 @@
 import { hacerSospecha } from "../services";
 /**
- * Renderiza el boton que envia la sospecha al back
- * @param  {object} props ID jugador y partida, monstruo y victima
+ * Renderiza el botón que envía la sospecha al back
+ * @param  {object} props ID jugador y partida, monstruo y víctima
  */
 export default function BotonEnviarsospecha(props) {
     return (

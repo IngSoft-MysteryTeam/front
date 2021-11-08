@@ -3,7 +3,7 @@ import Ficha from "./Ficha";
 import { obtNombrejugador, moverFicha } from "../services";
 
 /**
- * Busca las posiciones donde estan los jugadores que no están en recintos
+ * Busca las posiciones donde están los jugadores que no están en recintos
  * @param  {Array} jugadores
  * @param  {int} x
  * @param  {int} y
@@ -20,9 +20,9 @@ function buscarJugadores(jugadores, x, y) {
 }
 /**
  * Calcula si la posiciones son posibles acceder con la ficha del jugador
- * @param  {Array} posPosibles Posiciones que envia el back
- * @param  {int} x Posicion del tablero
- * @param  {int} y Posicion del tablero
+ * @param  {Array} posPosibles Posiciones que envía el back
+ * @param  {int} x Posición del tablero
+ * @param  {int} y Posición del tablero
  */
 function esPosicionPosible(posPosibles, x, y) {
     if (posPosibles.findIndex((e) => e.x === x && e.y === y) !== -1) {

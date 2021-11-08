@@ -1,7 +1,7 @@
 import { entrarRecinto } from "../services";
 
 /**
- * Boton para ingresar a un recinto
+ * Botón para ingresar a un recinto.
  * @param {object} props
  * @returns evento click
  */

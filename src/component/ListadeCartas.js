@@ -6,8 +6,8 @@ import BotonEnviarsospecha from "./BotonEnviarsospecha";
  */
 export default function ListadeCartas(props) {
     /**
-     * Estado que guarda el nombre de la victima seleccionada
-     * @param  {string} "" Nombre de la victima
+     * Estado que guarda el nombre de la víctima seleccionada
+     * @param  {string} "" Nombre de la víctima
      */
     const [victima, setVictima] = useState("");
     /**

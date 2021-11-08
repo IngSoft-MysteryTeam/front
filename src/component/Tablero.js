@@ -9,8 +9,8 @@ import Casillero from "./Casillero";
 import Recinto from "./Recinto";
 /**
  * Calcula los casillero del tablero
- * @param  {int} x Posicion del tablero
- * @param  {int} y Posicion del tablero
+ * @param  {int} x Posición del tablero
+ * @param  {int} y Posición del tablero
  */
 function esCasillero(x, y) {
     return x === 6 || x === 13 || y === 6 || y === 13;

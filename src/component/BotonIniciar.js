@@ -1,7 +1,7 @@
 import { iniciarPartida } from "../services";
 
 /**
- * Boton para iniciar partida creada.
+ * Botón para iniciar partida creada.
  * @param {id_partida | cantidadJugadores} props
  * @returns evento click
  */

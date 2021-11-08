@@ -3,25 +3,25 @@ import { useHistory } from "react-router-dom";
 import { asigNombrejugador, nuevoJugador } from "../services";
 
 /**
- * Esta funcion renderiza el inicio del juego
+ * Esta función renderiza el inicio del juego.
  * @returns Renderizado JSX
  */
 export default function Inicio() {
     /**
-     * Ayuda a redireccionar al jugador hacia la lsita de partidas
+     * Ayuda a redireccionar al jugador hacia la lista de partidas.
      */
     const history = useHistory();
     /**
-     * Estado que nos ayuda a guardar el nombre del jugador
-     * @param  {""} nombre Parametros ingresados por teclado
-     * @param  {object} Guarda la cadana de caracteres ingresados
+     * Estado que nos ayuda a guardar el nombre del jugador.
+     * @param  {""} nombre Parámetros ingresados por teclado
+     * @param  {object} Guarda la cadena de caracteres ingresados
      */
     const [newjugador, setNombre] = useState({
         nombre: "",
     });
     /**
      * Nos permite visualizar los input por teclado del usuario en consola
-     * y guardarlos en la constante "newpartida"
+     * y guardarlos en la constante "newpartida".
      * @param  {Evento} evento Evento generado por input del usuario.
      */
     const controlEvents = (evento) => {
@@ -33,7 +33,7 @@ export default function Inicio() {
     };
 
     /**
-     * Esta funcion registra un jugador nuevo en la base de datos.
+     * Esta función registra un jugador nuevo en la base de datos.
      * @param {Evento} e Evento del click
      */
     const enviarJugador = (e) => {
