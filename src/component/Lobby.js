@@ -277,14 +277,16 @@ export default function Lobby() {
                     </div>
                     {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
-                {sospecha ? <MostrarSospecha sospecha={sospecha}/> : null}
-                <Tablero
-                    jugadores={jugadores}
-                    posPosibles={posPosibles}
-                    setPosPosibles={setPosPosibles}
-                    id_partida={params.id}
-                    id_jugador={location.state.id_jugador}
-                    />
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    {sospecha ? <MostrarSospecha sospecha={sospecha}/> : null}
+                    <Tablero
+                        jugadores={jugadores}
+                        posPosibles={posPosibles}
+                        setPosPosibles={setPosPosibles}
+                        id_partida={params.id}
+                        id_jugador={location.state.id_jugador}
+                        />
+                </div>
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>

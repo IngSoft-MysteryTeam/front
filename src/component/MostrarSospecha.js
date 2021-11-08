@@ -1,8 +1,10 @@
 export default function MostrarSospecha(props) {
     return(
-        <div style={{position: "absolute", backgroundColor:"gray", padding:"20px", zIndex:'3', top: '305px', right:'610px' }}>
-            <h1>{props.sospecha.nombre} Sospechó</h1>
-            {props.sospecha.cartas.map(( e, index )=>(<img src={`/cartas/${e}.png`} height='200px'/>))}
+        <div className='sospecha'>
+            <h1>{props.sospecha.nombre} sospechó</h1>
+            <div style={{display: 'flex', columnGap: '15px', marginTop: '10px'}}>
+                {props.sospecha.cartas.map(( e, index )=>(<img src={`/cartas/${e}.png`} height='200px'/>))}
+            </div>
         </div>
     )    
 }
