@@ -241,13 +241,11 @@ export default function Lobby() {
                                     setPosPosibles={setPosPosibles}
                                 />
                             ) : (
-                                <>  
-                                    <BotonAcusar
-                                        acusando={setAcusando}
-                                    />
+                                <>
+                                    <BotonAcusar acusando={setAcusando} />
                                     {acusando ? (
                                         <ListadeCartasAcusacion />
-                                    ) : null} 
+                                    ) : null}
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechando={setSospechando}

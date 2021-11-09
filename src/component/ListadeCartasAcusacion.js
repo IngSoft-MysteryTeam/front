@@ -74,13 +74,12 @@ export default function ListadeCartas(props) {
             nombre: "Dr. Jekyll & Mr. Hyde",
             valor: "JEKYLLHYDE",
         },
-        
     ];
 
     const recintos = [
         {
             nombre: "Cochera",
-            valor: "COCHERA"
+            valor: "COCHERA",
         },
         {
             nombre: "Alcoba",
@@ -116,7 +115,9 @@ export default function ListadeCartas(props) {
                         >
                             <option value="">Víctimas</option>
                             {victimas.map((e, key) => (
-                                <option value={e.valor} key={key}>{e.nombre}</option>
+                                <option value={e.valor} key={key}>
+                                    {e.nombre}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -139,7 +140,9 @@ export default function ListadeCartas(props) {
                         >
                             <option value="">Monstruos</option>
                             {monstruos.map((e, key) => (
-                                <option value={e.valor} key={key}>{e.nombre}</option>
+                                <option value={e.valor} key={key}>
+                                    {e.nombre}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -162,7 +165,9 @@ export default function ListadeCartas(props) {
                         >
                             <option value="">Recintos</option>
                             {recintos.map((e, key) => (
-                                <option value={e.valor} key={key}>{e.nombre}</option>
+                                <option value={e.valor} key={key}>
+                                    {e.nombre}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -178,7 +183,7 @@ export default function ListadeCartas(props) {
             </div>
             <div>
                 {victima !== "" && monstruo !== "" ? (
-                    <BotonEnviarAcusacion/>
+                    <BotonEnviarAcusacion />
                 ) : null}
             </div>
         </>

@@ -82,7 +82,9 @@ export default function ListadeCartas(props) {
                         >
                             <option value="">Víctimas</option>
                             {victimas.map((e, key) => (
-                                <option value={e.valor} key={key}>{e.nombre}</option>
+                                <option value={e.valor} key={key}>
+                                    {e.nombre}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -104,7 +106,9 @@ export default function ListadeCartas(props) {
                         >
                             <option value="">Monstruos</option>
                             {monstruos.map((e, key) => (
-                                <option value={e.valor} key={key}>{e.nombre}</option>
+                                <option value={e.valor} key={key}>
+                                    {e.nombre}
+                                </option>
                             ))}
                         </select>
                     </div>
