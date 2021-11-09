@@ -256,7 +256,12 @@ export default function Lobby() {
                                     acusando={setAcusando} 
                                     eligoacusar={acusando}/>
                                     {acusando ? (
-                                        <ListadeCartasAcusacion id_jugador={location.state.id_jugador} id_partida={params.id} />
+                                        <ListadeCartasAcusacion
+                                            id_jugador={
+                                                location.state.id_jugador
+                                            }
+                                            id_partida={params.id}
+                                        />
                                     ) : null}
                                     <PasarTurno
                                         id_partida={params.id}
