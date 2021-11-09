@@ -109,6 +109,14 @@ export function hacerSospecha(datos) {
     });
 }
 
+export function hacerAcusacion(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/acusar`,
+        method: "GET",
+        params: { victima: datos.victima, monstruo: datos.monstruo },
+    });
+}
+
 /**
  * Envia al back la accion de entrar a un recinto
  * @param {object} datos Id de partida y jugador

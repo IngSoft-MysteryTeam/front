@@ -12,6 +12,8 @@ import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
 import EntrarRecinto from "./BotonEntrarRecinto";
 import MostrarSospecha from "./MostrarSospecha";
+import BotonAcusar from "./BotonAcusar";
+import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -121,6 +123,7 @@ export default function Lobby() {
     const [sospechando, setSospechando] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
+    const [acusando, setAcusando] = useState(false);
     /**
      * Estado que indica las posiciones a las que se puede mover
      * el jugador que tiró el dado.
@@ -234,7 +237,13 @@ export default function Lobby() {
                                     setPosPosibles={setPosPosibles}
                                 />
                             ) : (
-                                <>
+                                <>  
+                                    <BotonAcusar
+                                        acusando={setAcusando}
+                                    />
+                                    {acusando ? (
+                                        <ListadeCartasAcusacion />
+                                    ) : null} 
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechando={setSospechando}
