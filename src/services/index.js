@@ -112,8 +112,8 @@ export function hacerSospecha(datos) {
 export function hacerAcusacion(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/acusar`,
-        method: "GET",
-        params: {
+        method: "PUT",
+        data: {
             victima: datos.victima,
             monstruo: datos.monstruo,
             recinto: datos.recinto,

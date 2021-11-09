@@ -244,7 +244,7 @@ export default function Lobby() {
                                 <>
                                     <BotonAcusar acusando={setAcusando} />
                                     {acusando ? (
-                                        <ListadeCartasAcusacion />
+                                        <ListadeCartasAcusacion id_jugador={location.state.id_jugador} id_partida={params.id}/>
                                     ) : null}
                                     <PasarTurno
                                         id_partida={params.id}
