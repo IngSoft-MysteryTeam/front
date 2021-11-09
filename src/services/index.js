@@ -113,7 +113,7 @@ export function hacerAcusacion(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/acusar`,
         method: "GET",
-        params: { victima: datos.victima, monstruo: datos.monstruo },
+        params: { victima: datos.victima, monstruo: datos.monstruo, recinto: datos.recinto },
     });
 }
 
