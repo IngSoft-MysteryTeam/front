@@ -14,6 +14,7 @@ import EntrarRecinto from "./BotonEntrarRecinto";
 import MostrarSospecha from "./MostrarSospecha";
 import BotonAcusar from "./BotonAcusar";
 import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
+import MostrarAcusacion from "./MostrarAcusacion";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -128,6 +129,12 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [acusando, setAcusando] = useState(false);
+
+    /**
+     * Estado que guarda la acusacion de un jugador
+     * @param {object} null nombre jugador, cartas y si es correcta la acusacion.
+     */
+    const [acusar, setAcusar] = useState(null);
     /**
      * Estado que indica las posiciones a las que se puede mover
      * el jugador que tiró el dado.
@@ -168,6 +175,7 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
+                setAcusar(null);
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
@@ -192,6 +200,8 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Nueva sospecha") {
                 setSospecha({ nombre: json.nombre, cartas: json.cartas });
+            } else if (json.evento === "Nueva acusación") {
+                setAcusar({ nombre: json.nombre, cartas: json.cartas, correcta: json.correcta });
             }
         });
         socket.addEventListener("close", (e) =>
@@ -222,7 +232,7 @@ export default function Lobby() {
                         }}
                     >
                         {jugadores[0].nombre === obtNombrejugador() &&
-                        turno === null ? (
+                            turno === null ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -232,7 +242,7 @@ export default function Lobby() {
                             Abandonar partida
                         </button>
                         {turno != null &&
-                        jugadores.find((e) => e.orden === turno).nombre ===
+                            jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
                                 <BotonDado
@@ -242,13 +252,16 @@ export default function Lobby() {
                                 />
                             ) : (
                                 <>
-                                    <BotonAcusar acusando={setAcusando} />
+                                    <BotonAcusar 
+                                    acusando={setAcusando} 
+                                    eligoacusar={acusando}/>
                                     {acusando ? (
-                                        <ListadeCartasAcusacion id_jugador={location.state.id_jugador} id_partida={params.id}/>
+                                        <ListadeCartasAcusacion id_jugador={location.state.id_jugador} id_partida={params.id} />
                                     ) : null}
                                     <PasarTurno
                                         id_partida={params.id}
                                         sospechando={setSospechando}
+                                        acusando={setAcusando}
                                     />
                                     {estaEnUnaEntrada(
                                         jugadores.find(
@@ -260,9 +273,9 @@ export default function Lobby() {
                                                 e.nombre === obtNombrejugador()
                                         ).posY
                                     ) &&
-                                    jugadores.find(
-                                        (e) => e.nombre === obtNombrejugador()
-                                    ).recinto === "" ? (
+                                        jugadores.find(
+                                            (e) => e.nombre === obtNombrejugador()
+                                        ).recinto === "" ? (
                                         <EntrarRecinto
                                             id_partida={params.id}
                                             id_jugador={
@@ -299,6 +312,7 @@ export default function Lobby() {
                     }}
                 >
                     {sospecha ? <MostrarSospecha sospecha={sospecha} /> : null}
+                    {acusar ? <MostrarAcusacion acusar={acusar} /> : null}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}

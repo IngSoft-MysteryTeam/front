@@ -4,9 +4,9 @@ export default function Acusar(props) {
     return (
         <button
             className={"btn btn-dark"}
-            onClick={(e) => props.acusando(true)}
+            onClick={(e) => props.acusando(!props.eligoacusar)}
         >
-            Acusar
+            {props.eligoacusar ? "Cancelar acusacion" : "Acusar"}
         </button>
     );
 }

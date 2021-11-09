@@ -12,6 +12,7 @@ export default function PasarTurno(props) {
             onClick={(e) => {
                 pasarTurno({ id_partida: props.id_partida });
                 props.sospechando(false);
+                props.acusando(false);
             }}
         >
             Pasar turno
