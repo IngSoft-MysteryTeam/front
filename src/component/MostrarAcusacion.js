@@ -5,7 +5,7 @@
  export default function MostrarAcusacion(props) {
     return (
         <div className="acusacion">
-            <h1>{props.acusar.nombre} Acuso</h1>
+            <h1>{props.acusar.nombre} acusó</h1>
             <div
                 style={{
                     display: "flex",

@@ -252,9 +252,11 @@ export default function Lobby() {
                                 />
                             ) : (
                                 <>
+                                {!sospechando ? 
                                     <BotonAcusar 
                                     acusando={setAcusando} 
                                     eligoacusar={acusando}/>
+                                    : null }
                                     {acusando ? (
                                         <ListadeCartasAcusacion
                                             id_jugador={
@@ -290,7 +292,7 @@ export default function Lobby() {
                                     ) : null}
                                     {jugadores.find(
                                         (e) => e.nombre === obtNombrejugador()
-                                    ).recinto && !sospecha ? (
+                                    ).recinto && !sospecha && !acusando? (
                                         <Sospechar
                                             sospechando={setSospechando}
                                             eligosospechar={sospechando}
