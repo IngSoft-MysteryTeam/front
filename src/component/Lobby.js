@@ -200,7 +200,7 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Nueva sospecha") {
                 setSospecha({ nombre: json.nombre, cartas: json.cartas });
-            } else if (json.evento === "Nueva acusación") {
+            } else if (json.evento === "Nueva acusacion") {
                 setAcusar({ nombre: json.nombre, cartas: json.cartas, correcta: json.correcta });
             }
         });
