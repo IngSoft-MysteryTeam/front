@@ -122,19 +122,17 @@ export default function ListadeCartas(props) {
                     ) : null}
                 </div>
             </div>
-            <div>
-                {victima !== "" && monstruo !== "" ? (
-                    <BotonEnviarsospecha
-                        data={{
-                            id_jugador: props.id_jugador,
-                            id_partida: props.id_partida,
-                            victima: victima,
-                            monstruo: monstruo,
-                        }}
-                        sospechando={props.sospechando}
-                    />
-                ) : null}
-            </div>
+            {victima !== "" && monstruo !== "" ? (
+                <BotonEnviarsospecha
+                    data={{
+                        id_jugador: props.id_jugador,
+                        id_partida: props.id_partida,
+                        victima: victima,
+                        monstruo: monstruo,
+                    }}
+                    sospechando={props.sospechando}
+                />
+            ) : null}
         </>
     );
 }
