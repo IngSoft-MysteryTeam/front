@@ -12,3 +12,13 @@ test("al hacer click en Sospechar, se llama a la funcion setSospechar con el arg
 
     expect(setSospechar).toHaveBeenCalledWith(true);
 });
+
+test("cuando se está sospechando, el botón Sospechar dice Cancelar sospecha", () => {
+    const setSospechar = jest.fn();
+
+    render(<Sospechar sospechando={setSospechar} eligosospechar={true} />);
+
+    const boton = screen.getByRole("button");
+
+    expect(boton).toHaveTextContent("Cancelar sospecha");
+});
