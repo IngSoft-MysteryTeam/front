@@ -3,7 +3,8 @@ import { Router, Route, Switch } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import Lobby from "../component/Lobby";
 import WS from "jest-websocket-mock";
-import { obtNombrejugador, obtDado } from "../services/index";
+import { obtNombrejugador, obtDado, hacerSospecha } from "../services/index";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("../services/index");
 
@@ -306,6 +307,83 @@ test("al hacer click en Sospechar, se muestra el selector de Monstruo y Victima"
     fireEvent.click(button);
 
     expect(await screen.findAllByRole("combobox")).toHaveLength(2);
+
+    server.close();
+});
+
+test("al hacer click en Enviar sospecha, desaparecen los selectores de monstruo y víctima", async () => {
+    const server = new WS("ws://localhost:8000/partida/1/1");
+
+    const history = createMemoryHistory();
+    const state = {
+        nombre: "Test",
+        jugadores: [
+            {
+                nombre: "David",
+                color: "red",
+                orden: 1,
+            },
+        ],
+        id_jugador: 1,
+    };
+
+    history.push("/partidas/1", state);
+
+    obtNombrejugador.mockImplementation(() => "David");
+
+    render(
+        <Router history={history}>
+            <Switch>
+                <Route path="/partidas/:id">
+                    <Lobby />
+                </Route>
+            </Switch>
+        </Router>
+    );
+
+    await server.connected;
+
+    server.send(
+        JSON.stringify({
+            evento: "Nuevo turno",
+            turno: 1,
+        })
+    );
+
+    server.send(
+        JSON.stringify({
+            evento: "Tiraron el dado",
+            valor: 5,
+        })
+    );
+
+    server.send(
+        JSON.stringify({
+            evento: "Nueva posicion",
+            nombre: "David",
+            x: 4,
+            y: 6,
+            recinto: "COCHERA",
+        })
+    );
+
+    const button = await screen.findByText("Sospechar");
+
+    fireEvent.click(button);
+
+    hacerSospecha.mockResolvedValue(Promise.resolve(true));
+
+    const inputVictimas = screen.getAllByRole("combobox")[0];
+    const inputMonstruos = screen.getAllByRole("combobox")[1];
+
+    userEvent.selectOptions(inputVictimas, "CONDESA");
+    userEvent.selectOptions(inputMonstruos, "DRACULA");
+
+    const button2 = await screen.findByText("Enviar Sospecha");
+
+    fireEvent.click(button2);
+
+    expect(screen.queryAllByRole("combobox")).toHaveLength(0);
 
     server.close();
 });

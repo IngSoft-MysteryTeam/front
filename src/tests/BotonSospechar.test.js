@@ -4,7 +4,7 @@ import Sospechar from "../component/BotonSospechar";
 test("al hacer click en Sospechar, se llama a la funcion setSospechar con el argumento adecuado", () => {
     const setSospechar = jest.fn();
 
-    render(<Sospechar sospechar={setSospechar} />);
+    render(<Sospechar sospechando={setSospechar} eligosospechar={false} />);
 
     const boton = screen.getByRole("button");
 
