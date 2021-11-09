@@ -108,7 +108,10 @@ export function hacerSospecha(datos) {
         params: { victima: datos.victima, monstruo: datos.monstruo },
     });
 }
-
+/**
+ * Envia al back la acusacion del jugador.
+ * @param  {object} datos Id partida y jugador, monstruo victima y recinto.
+ */
 export function hacerAcusacion(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/acusar`,
