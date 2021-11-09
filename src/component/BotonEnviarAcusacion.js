@@ -1,6 +1,11 @@
 import React from "react";
 import { hacerAcusacion } from "../services";
 
+/**
+ * Renderiza el botón que envía la acusacion al back
+ * @param {object} props ID jugador y partida, monstruo, recinto y víctima
+ * @returns 
+ */
 export default function BotonEnviarAcusacion(props) {
     return (
         <button

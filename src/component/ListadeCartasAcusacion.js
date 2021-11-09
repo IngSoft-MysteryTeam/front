@@ -129,6 +129,7 @@ export default function ListadeCartas(props) {
                         />
                     ) : null}
                 </div>
+                {/* //Monstruos */}
                 <div style={{ width: "50%" }}>
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select

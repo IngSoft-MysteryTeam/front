@@ -123,6 +123,10 @@ export default function Lobby() {
     const [sospechando, setSospechando] = useState(false);
     /* params.id viene de la url de donde estas parado */
 
+    /**
+     * Estado que indica si el jugador está acusando.
+     * @param  {bool} false
+     */
     const [acusando, setAcusando] = useState(false);
     /**
      * Estado que indica las posiciones a las que se puede mover
