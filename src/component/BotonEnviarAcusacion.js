@@ -10,15 +10,16 @@ export default function BotonEnviarAcusacion(props) {
     return (
         <button
             className={"btn btn-dark"}
-            onClick={(e) =>
+            onClick={(e) => {
+                props.setSospecha(null);
                 hacerAcusacion({
                     victima: props.data.victima,
                     monstruo: props.data.monstruo,
                     recinto: props.data.recinto,
                     id_jugador: props.data.id_jugador,
                     id_partida: props.data.id_partida,
-                })
-            }
+                });
+            }}
         >
             Enviar Acusacion
         </button>

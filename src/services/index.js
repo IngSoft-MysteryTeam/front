@@ -135,3 +135,14 @@ export function entrarRecinto(datos) {
         method: "PUT",
     });
 }
+
+export function responderSospecha(datos) {
+    console.log(datos.carta)
+    return axios({
+        url: `${baseUrl}partida/${datos.id_jugador}/${datos.id_responde}/responder-sospecha`,
+        method: "GET",
+        params: {
+            carta: datos.carta
+        }
+    })
+}

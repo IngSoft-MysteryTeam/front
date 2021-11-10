@@ -148,6 +148,10 @@ export default function Lobby() {
      */
     const [sospecha, setSospecha] = useState(null);
 
+    const [respuestaSospecha, setRespuestaSospecha] = useState(null);
+
+    const [respondiendoSospecha, setRespondiendoSospecha] = useState(null);
+
     useEffect(() => {
         const socket = new WebSocket(
             `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
@@ -179,6 +183,7 @@ export default function Lobby() {
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
+                setRespuestaSospecha(null);
             } else if (json.evento === "Tiraron el dado") {
                 setDado(json.valor);
             } else if (json.evento === "Reparto de cartas") {
@@ -199,9 +204,25 @@ export default function Lobby() {
                     return newJugadores;
                 });
             } else if (json.evento === "Nueva sospecha") {
-                setSospecha({ nombre: json.nombre, cartas: json.cartas });
+                setSospecha({ nombre: json.nombre, cartas: json.cartas, id_jugador: json.id_jugador });
             } else if (json.evento === "Nueva acusacion") {
-                setAcusar({ nombre: json.nombre, cartas: json.cartas, correcta: json.correcta });
+                setAcusar({
+                    nombre: json.nombre,
+                    cartas: json.cartas,
+                    correcta: json.correcta,
+                });
+            } else if (json.evento === "Carta de sospecha") {
+                setRespuestaSospecha({
+                    nombre: json.nombreResponde,
+                    carta: json.carta,
+                });
+            } else if (json.evento === "Responder sospecha") {
+                setRespondiendoSospecha({
+                    cartas: json.cartas,
+                    id_responde: jugadores.find(
+                        (e) => e.nombre === obtNombrejugador()
+                    ).id_jugador
+                });
             }
         });
         socket.addEventListener("close", (e) =>
@@ -232,7 +253,7 @@ export default function Lobby() {
                         }}
                     >
                         {jugadores[0].nombre === obtNombrejugador() &&
-                            turno === null ? (
+                        turno === null ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -242,7 +263,7 @@ export default function Lobby() {
                             Abandonar partida
                         </button>
                         {turno != null &&
-                            jugadores.find((e) => e.orden === turno).nombre ===
+                        jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() ? (
                             dado === -1 ? (
                                 <BotonDado
@@ -252,17 +273,19 @@ export default function Lobby() {
                                 />
                             ) : (
                                 <>
-                                {!sospechando ? 
-                                    <BotonAcusar 
-                                    acusando={setAcusando} 
-                                    eligoacusar={acusando}/>
-                                    : null }
+                                    {!sospechando ? (
+                                        <BotonAcusar
+                                            acusando={setAcusando}
+                                            eligoacusar={acusando}
+                                        />
+                                    ) : null}
                                     {acusando ? (
                                         <ListadeCartasAcusacion
                                             id_jugador={
                                                 location.state.id_jugador
                                             }
                                             id_partida={params.id}
+                                            setSospecha={setSospecha}
                                         />
                                     ) : null}
                                     <PasarTurno
@@ -280,9 +303,9 @@ export default function Lobby() {
                                                 e.nombre === obtNombrejugador()
                                         ).posY
                                     ) &&
-                                        jugadores.find(
-                                            (e) => e.nombre === obtNombrejugador()
-                                        ).recinto === "" ? (
+                                    jugadores.find(
+                                        (e) => e.nombre === obtNombrejugador()
+                                    ).recinto === "" ? (
                                         <EntrarRecinto
                                             id_partida={params.id}
                                             id_jugador={
@@ -292,7 +315,9 @@ export default function Lobby() {
                                     ) : null}
                                     {jugadores.find(
                                         (e) => e.nombre === obtNombrejugador()
-                                    ).recinto && !sospecha && !acusando? (
+                                    ).recinto &&
+                                    !sospecha &&
+                                    !acusando ? (
                                         <Sospechar
                                             sospechando={setSospechando}
                                             eligosospechar={sospechando}
@@ -318,7 +343,14 @@ export default function Lobby() {
                         alignItems: "center",
                     }}
                 >
-                    {sospecha ? <MostrarSospecha sospecha={sospecha} /> : null}
+                    {sospecha ? (
+                        <MostrarSospecha
+                            sospecha={sospecha}
+                            respuestaSospecha={respuestaSospecha}
+                            respondiendoSospecha={respondiendoSospecha}
+                            setRespondiendoSospecha={setRespondiendoSospecha}
+                        />
+                    ) : null}
                     {acusar ? <MostrarAcusacion acusar={acusar} /> : null}
                     <Tablero
                         jugadores={jugadores}
