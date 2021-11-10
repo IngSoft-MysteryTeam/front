@@ -124,7 +124,7 @@ export default function Lobby() {
      */
     const [sospechando, setSospechando] = useState(false);
     /* params.id viene de la url de donde estas parado */
-    
+
     /**
      * Estado que guarda la sospecha realizada por un jugador
      * @param  {object} null Cartas y nombre del jugador
@@ -164,10 +164,16 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [perdio, setPerdio] = useState(false);
+    /**
+     * Estado que indica si la partida termino.
+     * @param  {bool} false
+     */
+    const [findepartida, setFindepartida] = useState(false);
 
     useEffect(() => {
+        const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
-            `ws://localhost:8000/partida/${params.id}/${location.state.id_jugador}`
+            `${urlbase}${params.id}/${location.state.id_jugador}`
         );
         socket.addEventListener("open", (e) =>
             console.log("Conexion establecida")
@@ -192,7 +198,6 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
-                setAcusar(null);
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
@@ -217,19 +222,24 @@ export default function Lobby() {
                     return newJugadores;
                 });
             } else if (json.evento === "Nueva sospecha") {
-                setSospecha({ nombre: json.nombre, cartas: json.cartas, id_jugador: json.id_jugador });
+                setSospecha({
+                    nombre: json.nombre,
+                    cartas: json.cartas,
+                    id_jugador: json.id_jugador,
+                });
             } else if (json.evento === "Nueva acusacion") {
                 setAcusar({
                     nombre: json.nombre,
                     cartas: json.cartas,
                 });
-            
-            } else if (json.evento === "Resultado de acusacion"){
-                
-                if (!json.correcta){
-                    setPerdio(true)
+                if (!json.correcta) {
+                    if (obtNombrejugador() === json.nombre) {
+                        setPerdio(true);
+                    }
+                } else {
+                    setFindepartida(true);
                 }
-            }else if (json.evento === "Carta de sospecha") {
+            } else if (json.evento === "Carta de sospecha") {
                 setRespuestaSospecha({
                     nombre: json.nombreResponde,
                     carta: json.carta,
@@ -239,7 +249,7 @@ export default function Lobby() {
                     cartas: json.cartas,
                     id_responde: jugadores.find(
                         (e) => e.nombre === obtNombrejugador()
-                    ).id_jugador
+                    ).id_jugador,
                 });
             }
         });
@@ -271,7 +281,8 @@ export default function Lobby() {
                         }}
                     >
                         {jugadores[0].nombre === obtNombrejugador() &&
-                        turno === null ? (
+                        turno === null &&
+                        !findepartida ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -279,7 +290,8 @@ export default function Lobby() {
                         ) : null}
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
-                            obtNombrejugador() && !perdio ? (
+                            obtNombrejugador() &&
+                        !perdio ? (
                             dado === -1 ? (
                                 <BotonDado
                                     id_partida={params.id}
@@ -366,7 +378,12 @@ export default function Lobby() {
                             setRespondiendoSospecha={setRespondiendoSospecha}
                         />
                     ) : null}
-                    {acusar ? <MostrarAcusacion acusar={acusar} /> : null}
+                    {acusar ? (
+                        <MostrarAcusacion
+                            acusar={acusar}
+                            setacusar={setAcusar}
+                        />
+                    ) : null}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}
@@ -375,7 +392,7 @@ export default function Lobby() {
                         id_jugador={location.state.id_jugador}
                     />
                 </div>
-            <Informe></Informe>
+                <Informe></Informe>
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>

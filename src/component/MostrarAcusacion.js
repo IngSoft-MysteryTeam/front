@@ -17,6 +17,9 @@
                     <img src={`/cartas/${e}.png`} height="200px" key={key} />
                 ))}
             </div>
+            <button className="btn btn-dark" style={{marginTop: "15px"}} onClick={()=> props.setacusar(null)}>
+                Aceptar
+            </button>
         </div>
     );
 }
