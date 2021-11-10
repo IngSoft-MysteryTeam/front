@@ -15,6 +15,7 @@ import MostrarSospecha from "./MostrarSospecha";
 import BotonAcusar from "./BotonAcusar";
 import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 import MostrarAcusacion from "./MostrarAcusacion";
+import Informe from "./Informe";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -123,6 +124,12 @@ export default function Lobby() {
      */
     const [sospechando, setSospechando] = useState(false);
     /* params.id viene de la url de donde estas parado */
+    
+    /**
+     * Estado que guarda la sospecha realizada por un jugador
+     * @param  {object} null Cartas y nombre del jugador
+     */
+    const [sospecha, setSospecha] = useState(null);
 
     /**
      * Estado que indica si el jugador está acusando.
@@ -143,14 +150,20 @@ export default function Lobby() {
     const [posPosibles, setPosPosibles] = useState([]);
 
     /**
-     * Estado que guarda la sospecha realizada por un jugador
-     * @param  {object} null Cartas y nombre del jugador
+     * Estado que guarda la carta que responde el jugador que tiene una coincidencia con la sospecha.
+     * @param  {object} null
      */
-    const [sospecha, setSospecha] = useState(null);
-
     const [respuestaSospecha, setRespuestaSospecha] = useState(null);
-
+    /**
+     * Estado que gurda las cartas que se elegieron para realizar una sospecha.
+     * @param  {object} null
+     */
     const [respondiendoSospecha, setRespondiendoSospecha] = useState(null);
+    /**
+     * Estado que indica si un jugador perdio.
+     * @param  {bool} false
+     */
+    const [perdio, setPerdio] = useState(false);
 
     useEffect(() => {
         const socket = new WebSocket(
@@ -209,9 +222,14 @@ export default function Lobby() {
                 setAcusar({
                     nombre: json.nombre,
                     cartas: json.cartas,
-                    correcta: json.correcta,
                 });
-            } else if (json.evento === "Carta de sospecha") {
+            
+            } else if (json.evento === "Resultado de acusacion"){
+                
+                if (!json.correcta){
+                    setPerdio(true)
+                }
+            }else if (json.evento === "Carta de sospecha") {
                 setRespuestaSospecha({
                     nombre: json.nombreResponde,
                     carta: json.carta,
@@ -231,7 +249,7 @@ export default function Lobby() {
     }, [location.state.id_jugador, params.id]);
 
     return (
-        <div style={{ maxWidth: "1100px", margin: "auto" }}>
+        <div style={{ maxWidth: "1600px", margin: "auto" }}>
             <div
                 style={{
                     display: "flex",
@@ -259,12 +277,9 @@ export default function Lobby() {
                                 cantjugadores={jugadores.length}
                             />
                         ) : null}
-                        <button className="btn btn-dark">
-                            Abandonar partida
-                        </button>
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
-                            obtNombrejugador() ? (
+                            obtNombrejugador() && !perdio ? (
                             dado === -1 ? (
                                 <BotonDado
                                     id_partida={params.id}
@@ -273,7 +288,7 @@ export default function Lobby() {
                                 />
                             ) : (
                                 <>
-                                    {!sospechando ? (
+                                    {!sospechando && !sospecha ? (
                                         <BotonAcusar
                                             acusando={setAcusando}
                                             eligoacusar={acusando}
@@ -360,6 +375,7 @@ export default function Lobby() {
                         id_jugador={location.state.id_jugador}
                     />
                 </div>
+            <Informe></Informe>
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>

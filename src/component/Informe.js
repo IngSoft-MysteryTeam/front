@@ -33,245 +33,145 @@ import React, {useState} from 'react';
            <table>
                <th>MONSTRUO</th>
                <tr>DRACULA
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf1('X')}
-                        >
-                            {inf1}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>FRANKENSTEIN
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf2('X')}
-                        >
-                            {inf2}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>HOMBRE LOBO
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf3('X')}
-                        >
-                            {inf3}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>FANTASMA
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf4('X')}
-                        >
-                            {inf4}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>MOMIA
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf5('X')}
-                        >
-                            {inf5}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>DR. JEKYLL MR.HYDE
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf6('X')}
-                        >
-                            {inf6}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
 
                <th>VÍCTIMA</th>
                <tr>CONDE
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf7('X')}
-                        >
-                            {inf7}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>CONDESA
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf8('X')}
-                        >
-                            {inf8}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>AMA DE LLAVES
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf9('X')}
-                        >
-                            {inf9}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>MAYORDOMO
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf10('X')}
-                        >
-                            {inf10}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>DONCELLA
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf11('X')}
-                        >
-                            {inf11}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>JARDINERO
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf12('X')}
-                        >
-                            {inf12}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <th>RECINTO</th>
                <tr>VESTÍBULO
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf13('X')}
-                        >
-                            {inf13}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>ALCOBA
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf14('X')}
-                        >
-                            {inf14}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>BIBLIOTECA
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf15('X')}
-                        >
-                            {inf15}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>SALÓN
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf16('X')}
-                        >
-                            {inf16}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>LABORATORIO
-                   <td><button 
-                            className="square"
-                            onClick={() => setInf17('X')}
-                        >
-                            {inf17}
-                        </button>
+                   <td>
+                       <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>BODEGA
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf18('X')}
-                        >
-                            {inf18}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>PANTEON
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf19('X')}
-                        >
-                            {inf19}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
                <tr>COCHERA
-                    <td><button 
-                            className="square"
-                            onClick={() => setInf20('X')}
-                        >
-                            {inf20}
-                        </button>
+                    <td>
+                        <input type="checkbox" style={{marginRight:"10px", transform: "scale(1.5)"}}/>
                         <input>
-                        
                         </input>
                    </td>
                </tr>
