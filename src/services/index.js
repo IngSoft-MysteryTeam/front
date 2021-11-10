@@ -136,6 +136,12 @@ export function entrarRecinto(datos) {
     });
 }
 
+/**
+ * Envia al back la accion de responder una sospecha
+ * @param {object} datos id del jugador que sospecho y el id del
+ * jugador que responde la sospecha
+ * @returns 
+ */
 export function responderSospecha(datos) {
     console.log(datos.carta)
     return axios({
