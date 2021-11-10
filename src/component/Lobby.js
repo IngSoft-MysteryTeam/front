@@ -7,7 +7,7 @@ import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
 import { obtNombrejugador } from "../services";
-import ListadeCartas from "./ListadeCartas";
+import ListadeCartasSospecha from "./ListadeCartasSospecha";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
 import EntrarRecinto from "./BotonEntrarRecinto";
@@ -354,7 +354,7 @@ export default function Lobby() {
                             )
                         ) : null}
                         {sospechando ? (
-                            <ListadeCartas
+                            <ListadeCartasSospecha
                                 id_jugador={location.state.id_jugador}
                                 id_partida={params.id}
                                 sospechando={setSospechando}

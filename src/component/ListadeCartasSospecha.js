@@ -4,7 +4,7 @@ import BotonEnviarsospecha from "./BotonEnviarsospecha";
  * Lista cartas para seleccionar y elegir una sospecha
  * @param  {object} props Id de jugador y de partida
  */
-export default function ListadeCartas(props) {
+export default function ListadeCartasSospecha(props) {
     /**
      * Estado que guarda el nombre de la víctima seleccionada
      * @param  {string} "" Nombre de la víctima
