@@ -28,7 +28,9 @@ export default function MostrarSospecha(props) {
                 ))}
             </div>
             {props.respuestaSospecha ? (
-                <>
+                props.respuestaSospecha.carta === "NINGUNA" ? (
+                    <h1>Nadie respondio</h1>
+                ) : <>
                     <h1>{props.respuestaSospecha.nombre} responde</h1>
                     <img
                         src={`/cartas/${props.respuestaSospecha.carta}.png`}
@@ -36,7 +38,8 @@ export default function MostrarSospecha(props) {
                         a
                         alt={props.respuestaSospecha.carta}
                     />
-                </>
+            </>
+
             ) : null}
             {props.respondiendoSospecha ? (
                 <>
