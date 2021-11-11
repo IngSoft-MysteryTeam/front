@@ -29,9 +29,7 @@ export default function MostrarSospecha(props) {
                     ))}{" "}
                 </div>
             </div>
-            <div>
-                <h1>{props.sospecha.nombreResponde} responde</h1>
-            </div>
+            <h1>{props.sospecha.nombreResponde} responde</h1>
             {props.respuestaSospecha ? (
                 props.respuestaSospecha.carta === "NINGUNA" ? (
                     <h1>Nadie respondio</h1>
