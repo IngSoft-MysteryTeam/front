@@ -170,6 +170,12 @@ export default function Lobby() {
      */
     const [findepartida, setFindepartida] = useState(false);
 
+    /**
+     * Estado que indica si el jugador es el único que no perdió
+     * @param  {bool} false
+     */
+    const [ultimoJugador, setUltimoJugador] = useState(false);
+
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
@@ -231,8 +237,25 @@ export default function Lobby() {
                 setAcusar({
                     nombre: json.nombre,
                     cartas: json.cartas,
+                    correcta: json.correcta,
                 });
                 if (!json.correcta) {
+                    setJugadores((oldJugadores) => {
+                        let newJugadores = oldJugadores.map((e) => {
+                            if (e.nombre === json.nombre) {
+                                return {
+                                    ...e,
+                                    perdio: true,
+                                };
+                            } else return e;
+                        });
+                        if (
+                            newJugadores.filter((e) => !e.perdio).length === 1
+                        ) {
+                            setUltimoJugador(true);
+                        }
+                        return newJugadores;
+                    });
                     if (obtNombrejugador() === json.nombre) {
                         setPerdio(true);
                     }
@@ -297,66 +320,80 @@ export default function Lobby() {
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
                         !perdio ? (
-                            dado === -1 ? (
-                                <BotonDado
-                                    id_partida={params.id}
-                                    id_jugador={location.state.id_jugador}
-                                    setPosPosibles={setPosPosibles}
-                                />
-                            ) : (
-                                <>
-                                    <PasarTurno
-                                        id_partida={params.id}
-                                        sospechando={setSospechando}
+                            <>
+                                {!sospechando && !sospecha ? (
+                                    <BotonAcusar
                                         acusando={setAcusando}
+                                        eligoacusar={acusando}
                                     />
-                                    {!sospechando && !sospecha ? (
-                                        <BotonAcusar
-                                            acusando={setAcusando}
-                                            eligoacusar={acusando}
-                                        />
-                                    ) : null}
-                                    {acusando ? (
-                                        <ListadeCartasAcusacion
-                                            id_jugador={
-                                                location.state.id_jugador
-                                            }
-                                            id_partida={params.id}
-                                            setSospecha={setSospecha}
-                                        />
-                                    ) : null}
-                                    {estaEnUnaEntrada(
+                                ) : null}
+                                {acusando ? (
+                                    <ListadeCartasAcusacion
+                                        id_jugador={location.state.id_jugador}
+                                        id_partida={params.id}
+                                        setSospecha={setSospecha}
+                                    />
+                                ) : null}
+                                {dado === -1 ? (
+                                    <>
+                                        {!ultimoJugador ? (
+                                            <BotonDado
+                                                id_partida={params.id}
+                                                id_jugador={
+                                                    location.state.id_jugador
+                                                }
+                                                setPosPosibles={setPosPosibles}
+                                            />
+                                        ) : null}
+                                    </>
+                                ) : (
+                                    <>
+                                        {!ultimoJugador ? (
+                                            <PasarTurno
+                                                id_partida={params.id}
+                                                sospechando={setSospechando}
+                                                acusando={setAcusando}
+                                            />
+                                        ) : null}
+                                        {estaEnUnaEntrada(
+                                            jugadores.find(
+                                                (e) =>
+                                                    e.nombre ===
+                                                    obtNombrejugador()
+                                            ).posX,
+                                            jugadores.find(
+                                                (e) =>
+                                                    e.nombre ===
+                                                    obtNombrejugador()
+                                            ).posY
+                                        ) &&
                                         jugadores.find(
                                             (e) =>
                                                 e.nombre === obtNombrejugador()
-                                        ).posX,
-                                        jugadores.find(
+                                        ).recinto === "" &&
+                                        !ultimoJugador ? (
+                                            <EntrarRecinto
+                                                id_partida={params.id}
+                                                id_jugador={
+                                                    location.state.id_jugador
+                                                }
+                                            />
+                                        ) : null}
+                                        {jugadores.find(
                                             (e) =>
                                                 e.nombre === obtNombrejugador()
-                                        ).posY
-                                    ) &&
-                                    jugadores.find(
-                                        (e) => e.nombre === obtNombrejugador()
-                                    ).recinto === "" ? (
-                                        <EntrarRecinto
-                                            id_partida={params.id}
-                                            id_jugador={
-                                                location.state.id_jugador
-                                            }
-                                        />
-                                    ) : null}
-                                    {jugadores.find(
-                                        (e) => e.nombre === obtNombrejugador()
-                                    ).recinto &&
-                                    !sospecha &&
-                                    !acusando ? (
-                                        <Sospechar
-                                            sospechando={setSospechando}
-                                            eligosospechar={sospechando}
-                                        />
-                                    ) : null}
-                                </>
-                            )
+                                        ).recinto &&
+                                        !sospecha &&
+                                        !acusando &&
+                                        !ultimoJugador ? (
+                                            <Sospechar
+                                                sospechando={setSospechando}
+                                                eligosospechar={sospechando}
+                                            />
+                                        ) : null}
+                                    </>
+                                )}
+                            </>
                         ) : null}
                         {sospechando ? (
                             <ListadeCartasSospecha
