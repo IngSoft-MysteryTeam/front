@@ -155,7 +155,7 @@ export default function Lobby() {
      */
     const [respuestaSospecha, setRespuestaSospecha] = useState(null);
     /**
-     * Estado que gurda las cartas que se elegieron para realizar una sospecha.
+     * Estado que guarda las cartas que se elegieron para realizar una sospecha.
      * @param  {object} null
      */
     const [respondiendoSospecha, setRespondiendoSospecha] = useState(null);
@@ -232,6 +232,7 @@ export default function Lobby() {
                     nombre: json.nombre,
                     cartas: json.cartas,
                     id_jugador: json.id_jugador,
+                    nombreResponde: json.nombreResponde,
                 });
             } else if (json.evento === "Nueva acusacion") {
                 setAcusar({
