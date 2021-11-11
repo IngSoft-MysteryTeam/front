@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { faCrown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
 /**
@@ -24,6 +24,12 @@ export default function ListaJugadores(props) {
                             <span style={{ color: e.color }}>●</span> {e.nombre}{" "}
                             {index === 0 ? (
                                 <FontAwesomeIcon icon={faCrown} />
+                            ) : null}
+                            {e.perdio ? (
+                                <>
+                                    {" "}
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </>
                             ) : null}
                         </td>
                     </tr>
