@@ -253,6 +253,10 @@ export default function Lobby() {
                             newJugadores.filter((e) => !e.perdio).length === 1
                         ) {
                             setUltimoJugador(true);
+                        } else if (
+                            newJugadores.filter((e) => !e.perdio).length === 0
+                        ) {
+                            setFindepartida(true);
                         }
                         return newJugadores;
                     });
