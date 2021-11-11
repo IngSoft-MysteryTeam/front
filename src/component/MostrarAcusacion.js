@@ -19,9 +19,21 @@ export default function MostrarAcusacion(props) {
                         height="200px"
                         key={key}
                         alt={e}
+                        style={{ marginBottom: "10px" }}
                     />
                 ))}
             </div>
+            {props.acusar.correcta ? (
+                <>
+                    <h2>La acusación fue acertada.</h2>
+                    <h2>{props.acusar.nombre} ha ganado la partida!</h2>
+                </>
+            ) : (
+                <>
+                    <h2>La acusación fue erronea.</h2>
+                    <h2>{props.acusar.nombre} ha perdido la partida.</h2>
+                </>
+            )}
             <button
                 className="btn btn-dark"
                 style={{ marginTop: "15px" }}
