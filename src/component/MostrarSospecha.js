@@ -19,7 +19,12 @@ export default function MostrarSospecha(props) {
                 }}
             >
                 {props.sospecha.cartas.map((e, key) => (
-                    <img src={`/cartas/${e}.png`} height="200px" key={key} />
+                    <img
+                        src={`/cartas/${e}.png`}
+                        height="200px"
+                        key={key}
+                        alt={e}
+                    />
                 ))}
             </div>
             {props.respuestaSospecha ? (
@@ -28,6 +33,8 @@ export default function MostrarSospecha(props) {
                     <img
                         src={`/cartas/${props.respuestaSospecha.carta}.png`}
                         height="200px"
+                        a
+                        alt={props.respuestaSospecha.carta}
                     />
                 </>
             ) : null}
@@ -50,17 +57,19 @@ export default function MostrarSospecha(props) {
                                     cursor: "pointer",
                                     opacity: e === respuesta ? "100%" : "50%",
                                 }}
+                                alt={e}
+                                key={key}
                             />
                         ))}
                     </div>
                     {respuesta ? (
                         <BotonResponderSospecha
-                            id_sospechante={
-                                props.sospecha.id_jugador
-                            }
+                            id_sospechante={props.sospecha.id_jugador}
                             id_responde={props.respondiendoSospecha.id_responde}
                             carta={respuesta}
-                            setRespondiendoSospecha={props.setRespondiendoSospecha}
+                            setRespondiendoSospecha={
+                                props.setRespondiendoSospecha
+                            }
                         />
                     ) : null}
                 </>

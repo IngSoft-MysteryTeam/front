@@ -2,7 +2,7 @@
  * Renderiza las cartas de una acusacion
  * @param  {object} props Nombre de jugador y cartas de acusacion
  */
- export default function MostrarAcusacion(props) {
+export default function MostrarAcusacion(props) {
     return (
         <div className="acusacion">
             <h1>{props.acusar.nombre} acusó</h1>
@@ -14,10 +14,19 @@
                 }}
             >
                 {props.acusar.cartas.map((e, key) => (
-                    <img src={`/cartas/${e}.png`} height="200px" key={key} />
+                    <img
+                        src={`/cartas/${e}.png`}
+                        height="200px"
+                        key={key}
+                        alt={e}
+                    />
                 ))}
             </div>
-            <button className="btn btn-dark" style={{marginTop: "15px"}} onClick={()=> props.setacusar(null)}>
+            <button
+                className="btn btn-dark"
+                style={{ marginTop: "15px" }}
+                onClick={() => props.setacusar(null)}
+            >
                 Aceptar
             </button>
         </div>

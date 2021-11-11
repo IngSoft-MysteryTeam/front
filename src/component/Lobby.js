@@ -259,24 +259,29 @@ export default function Lobby() {
     }, [location.state.id_jugador, params.id]);
 
     return (
-        <div style={{ maxWidth: "1600px", margin: "auto" }}>
+        <div style={{ maxWidth: "1500px", margin: "auto" }}>
             <div
                 style={{
                     display: "flex",
                     gap: "10px",
-                    flexWrap: "wrap-reverse",
-                    alignItems: "flex-end",
+                    alignItems: "flex-start",
                 }}
             >
-                <div style={{ flexGrow: 1, flexBasis: "100px" }}>
+                <div
+                    style={{
+                        flexGrow: 1,
+                        flexBasis: "100px",
+                        display: "flex",
+                        flexDirection: "column",
+                        rowGap: "10px",
+                    }}
+                >
                     <h1>{location.state.nombre}</h1>
                     <ListaJugadores jugadores={jugadores} turno={turno} />
                     <div
                         style={{
                             display: "flex",
-                            marginTop: "10px",
-                            columnGap: "10px",
-                            rowGap: "10px",
+                            gap: "10px",
                             flexWrap: "wrap",
                         }}
                     >
@@ -300,6 +305,11 @@ export default function Lobby() {
                                 />
                             ) : (
                                 <>
+                                    <PasarTurno
+                                        id_partida={params.id}
+                                        sospechando={setSospechando}
+                                        acusando={setAcusando}
+                                    />
                                     {!sospechando && !sospecha ? (
                                         <BotonAcusar
                                             acusando={setAcusando}
@@ -315,11 +325,6 @@ export default function Lobby() {
                                             setSospecha={setSospecha}
                                         />
                                     ) : null}
-                                    <PasarTurno
-                                        id_partida={params.id}
-                                        sospechando={setSospechando}
-                                        acusando={setAcusando}
-                                    />
                                     {estaEnUnaEntrada(
                                         jugadores.find(
                                             (e) =>
@@ -392,7 +397,7 @@ export default function Lobby() {
                         id_jugador={location.state.id_jugador}
                     />
                 </div>
-                <Informe></Informe>
+                <Informe iniciada={!(turno === null)}></Informe>
             </div>
             <DistribuirCartas cartas={cartas} />
         </div>

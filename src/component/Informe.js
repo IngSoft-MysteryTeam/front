@@ -2,276 +2,85 @@
  * Componente que renderiza un informe
  *
  */
-export default function Informe() {
-    return (
-        <div className="informe">
-            <h1> INFORME </h1>
-            <table>
-                <th>MONSTRUO</th>
-                <tr>
-                    DRACULA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    FRANKENSTEIN
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    HOMBRE LOBO
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    FANTASMA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    MOMIA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    DR. JEKYLL MR.HYDE
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
+export default function Informe(props) {
+    const victimas = [
+        "Conde",
+        "Condesa",
+        "Ama de llaves",
+        "Mayordomo",
+        "Doncella",
+        "Jardinero",
+    ];
 
-                <th>VÍCTIMA</th>
-                <tr>
-                    CONDE
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    CONDESA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    AMA DE LLAVES
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    MAYORDOMO
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    DONCELLA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    JARDINERO
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <th>RECINTO</th>
-                <tr>
-                    VESTÍBULO
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    ALCOBA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    BIBLIOTECA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    SALÓN
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    LABORATORIO
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    BODEGA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    PANTEON
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-                <tr>
-                    COCHERA
-                    <td>
-                        <input
-                            type="checkbox"
-                            style={{
-                                marginRight: "10px",
-                                transform: "scale(1.5)",
-                            }}
-                        />
-                        <input></input>
-                    </td>
-                </tr>
-            </table>
+    const monstruos = [
+        "Drácula",
+        "Frankenstein",
+        "Hombre Lobo",
+        "Fantasma",
+        "Momia",
+        "Dr. Jekyll & Mr. Hyde",
+    ];
+
+    const recintos = [
+        "Cochera",
+        "Alcoba",
+        "Biblioteca",
+        "Laboratorio",
+        "Panteón",
+        "Salón",
+    ];
+
+    return (
+        <div
+            className="informe"
+            style={{ opacity: props.iniciada ? "100%" : "0%" }}
+        >
+            <h1 style={{ marginBottom: 0 }}>INFORME</h1>
+            <div>
+                <div className="encabezadoInforme">MONSTRUO</div>
+                <div className="cuerpoInforme">
+                    {monstruos.map((e, i) => (
+                        <div className="itemInforme" key={i}>
+                            <div className="nombreItemInforme">{e}</div>
+                            <input
+                                type="checkbox"
+                                className="checkboxInforme"
+                            />
+                            <input className="textboxInforme" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div>
+                <div className="encabezadoInforme">VÍCTIMA</div>
+                <div className="cuerpoInforme">
+                    {victimas.map((e, i) => (
+                        <div className="itemInforme" key={i}>
+                            <div className="nombreItemInforme">{e}</div>
+                            <input
+                                type="checkbox"
+                                className="checkboxInforme"
+                            />
+                            <input className="textboxInforme" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div>
+                <div className="encabezadoInforme">RECINTO</div>
+                <div className="cuerpoInforme">
+                    {recintos.map((e, i) => (
+                        <div className="itemInforme" key={i}>
+                            <div className="nombreItemInforme">{e}</div>
+                            <input
+                                type="checkbox"
+                                className="checkboxInforme"
+                            />
+                            <input className="textboxInforme" />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }

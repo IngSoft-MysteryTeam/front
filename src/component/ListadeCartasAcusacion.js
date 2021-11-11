@@ -94,11 +94,11 @@ export default function ListadeCartas(props) {
             valor: "LABORATORIO",
         },
         {
-            nombre: "Panteon",
+            nombre: "Panteón",
             valor: "PANTEON",
         },
         {
-            nombre: "Salon",
+            nombre: "Salón",
             valor: "SALON",
         },
     ];
@@ -106,7 +106,14 @@ export default function ListadeCartas(props) {
     return (
         <>
             <div style={{ display: "flex" }}>
-                <div style={{ width: "50%" }}>
+                <div
+                    style={{
+                        width: "33%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select
                             className="form-select form-select-sm"
@@ -131,7 +138,14 @@ export default function ListadeCartas(props) {
                     ) : null}
                 </div>
                 {/* //Monstruos */}
-                <div style={{ width: "50%" }}>
+                <div
+                    style={{
+                        width: "33%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select
                             className="form-select form-select-sm"
@@ -156,7 +170,14 @@ export default function ListadeCartas(props) {
                     ) : null}
                 </div>
                 {/* //Recintos */}
-                <div style={{ width: "50%" }}>
+                <div
+                    style={{
+                        width: "33%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select
                             className="form-select form-select-sm"
