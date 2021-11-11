@@ -3,6 +3,7 @@ import {
     faArrowLeft,
     faArrowRight,
     faArrowUp,
+    faSpider,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Casillero from "./Casillero";
@@ -226,6 +227,100 @@ const casillerosEspeciales = [
         color: "#3F3C29",
         extra: () => (
             <FontAwesomeIcon className="extraCasillero" icon={faArrowUp} />
+        ),
+    },
+    {
+        x: 6,
+        y: 4,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/murcielago.svg"
+                style={{ width: "30px" }}
+                alt="Murciélago"
+            />
+        ),
+    },
+    {
+        x: 6,
+        y: 14,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/murcielago.svg"
+                style={{ width: "30px" }}
+                alt="Murciélago"
+            />
+        ),
+    },
+    {
+        x: 13,
+        y: 3,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/escorpion.svg"
+                style={{ width: "30px" }}
+                alt="Escorpión"
+            />
+        ),
+    },
+    {
+        x: 13,
+        y: 14,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/escorpion.svg"
+                style={{ width: "30px" }}
+                alt="Escorpión"
+            />
+        ),
+    },
+    {
+        x: 3,
+        y: 6,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/cobra.svg"
+                style={{ width: "30px" }}
+                alt="Cobra"
+            />
+        ),
+    },
+    {
+        x: 14,
+        y: 6,
+        color: "black",
+        extra: () => (
+            <img
+                className="extraCasillero"
+                src="/tablero/cobra.svg"
+                style={{ width: "30px" }}
+                alt="Cobra"
+            />
+        ),
+    },
+    {
+        x: 4,
+        y: 13,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faSpider} />
+        ),
+    },
+    {
+        x: 15,
+        y: 13,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faSpider} />
         ),
     },
 ];
