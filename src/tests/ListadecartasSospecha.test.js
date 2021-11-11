@@ -1,6 +1,6 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ListadeCartas from "../component/ListadeCartas";
+import ListadeCartas from "../component/ListadecartasSospecha";
 
 test("el boton Enviar Sospecha solo aparece si seleccionamos monstruo y victima", async () => {
     render(<ListadeCartas />);
