@@ -40,7 +40,7 @@ export function unirJugador(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/unirse`,
         method: "POST",
-        data: { nombre: datos.nombre },
+        data: { nombre: datos.nombre, color: datos.color },
     });
 }
 /**
@@ -155,7 +155,7 @@ export function responderSospecha(datos) {
 /**
  * Envia al back la accion de usar la bruja de salem
  * @param {object} datos id partida y id jugador
- * @returns 
+ * @returns
  */
 export function usarBrujaSalem(datos) {
     return axios({

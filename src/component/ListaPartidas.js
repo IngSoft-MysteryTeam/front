@@ -6,6 +6,7 @@ import { unirJugador, traerPartidas, obtNombrejugador } from "../services";
 import BotonCrear from "./BotonCrear";
 import BotonUnirse from "./BotonUnirse";
 import BotonAct from "./BotonAct";
+import PreUnirse from "./PreUnirse";
 
 /**
  * Muestra una lista con las partidas aún no iniciadas.
@@ -21,6 +22,10 @@ export default function ListaPartidas() {
      * @param  {list} [] Lista de partidas obtenidas del back
      */
     const [partidas, setPartidas] = useState([]);
+
+    const [prePartida, setPrePartida] = useState(null);
+
+    const [color, setColor] = useState(null);
 
     /**
      * Obtiene las partidas desde el back.
@@ -45,6 +50,7 @@ export default function ListaPartidas() {
         unirJugador({
             id_partida: e.id_partida,
             nombre: obtNombrejugador(),
+            color: color,
         })
             .then((res) => {
                 console.log(res);
@@ -54,7 +60,6 @@ export default function ListaPartidas() {
                         state: { ...res.data, nombre: e.nombre },
                     });
                 } else if (res.status === 202) {
-                    //console.log(res)
                     if (res.data.detail === "La partida ya fue iniciada") {
                         alert("La partida ya fue iniciada");
                         obtPartidas();
@@ -79,41 +84,62 @@ export default function ListaPartidas() {
     return (
         <div style={{ maxWidth: "750px", margin: "auto" }}>
             <h1 style={{ color: "white" }}>Unirse a una partida</h1>
-            <table className="tablaPartidas" style={{ marginBottom: "10px" }}>
-                <thead>
-                    <tr>
-                        <th width="50%">Partida</th>
-                        <th>Anfitrión</th>
-                        <th width="140px">Cant. Jugadores</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {partidas.map((e, key) => (
-                        <tr key={key}>
-                            <td>{e.nombre}</td>
-                            <td>{e.anfitrion}</td>
-                            <td>
-                                <FontAwesomeIcon icon={faUserFriends} />{" "}
-                                {e.cantidad_jugadores}
-                                /6
-                            </td>
-                            <td>
-                                <BotonUnirse
-                                    partida={e}
-                                    unirse={Unirsepartida}
-                                />
-                            </td>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+            >
+                {prePartida ? (
+                    <PreUnirse
+                        partida={prePartida}
+                        Unirsepartida={Unirsepartida}
+                        setColor={setColor}
+                        setPrePartida={setPrePartida}
+                        color={color}
+                    />
+                ) : null}
+                <table
+                    className="tablaPartidas"
+                    style={{ marginBottom: "10px" }}
+                >
+                    <thead>
+                        <tr>
+                            <th width="50%">Partida</th>
+                            <th>Anfitrión</th>
+                            <th width="140px">Cant. Jugadores</th>
                         </tr>
-                    ))}
-                    {partidas.length === 0 ? (
-                        <tr style={{ pointerEvents: "none" }}>
-                            <td colSpan={3}>
-                                <i style={{ color: "gray" }}>No hay partidas</i>
-                            </td>
-                        </tr>
-                    ) : null}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {partidas.map((e, key) => (
+                            <tr key={key}>
+                                <td>{e.nombre}</td>
+                                <td>{e.anfitrion}</td>
+                                <td>
+                                    <FontAwesomeIcon icon={faUserFriends} />{" "}
+                                    {e.cantidad_jugadores}
+                                    /6
+                                </td>
+                                <td>
+                                    <BotonUnirse
+                                        partida={e}
+                                        unirse={setPrePartida}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                        {partidas.length === 0 ? (
+                            <tr style={{ pointerEvents: "none" }}>
+                                <td colSpan={3}>
+                                    <i style={{ color: "gray" }}>
+                                        No hay partidas
+                                    </i>
+                                </td>
+                            </tr>
+                        ) : null}
+                    </tbody>
+                </table>
+            </div>
             <BotonAct actpartidas={obtPartidas} />
             <br />
             <BotonCrear />

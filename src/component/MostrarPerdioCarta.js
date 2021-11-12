@@ -1,6 +1,6 @@
 export default function MostrarPerdioCarta(props) {
     return (
-        <div className="acusacion">
+        <div className="popup">
             <h1>{props.nombre} no usó la Bruja de Salem</h1>
             <div
                 style={{
@@ -8,8 +8,7 @@ export default function MostrarPerdioCarta(props) {
                     columnGap: "15px",
                     marginTop: "10px",
                 }}
-            >
-            </div>
+            ></div>
             <button
                 className="btn btn-dark"
                 style={{ marginTop: "15px" }}

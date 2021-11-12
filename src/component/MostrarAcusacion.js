@@ -4,7 +4,7 @@
  */
 export default function MostrarAcusacion(props) {
     return (
-        <div className="acusacion">
+        <div className="popup">
             <h1>{props.acusar.nombre} acusó</h1>
             <div
                 style={{

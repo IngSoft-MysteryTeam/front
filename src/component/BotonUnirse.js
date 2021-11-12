@@ -11,6 +11,7 @@ export default function BotonUnirse(props) {
             <button
                 className="btn btn-dark"
                 onClick={(e) => props.unirse(props.partida)}
+                disabled={props.disabled}
             >
                 Unirse
             </button>

@@ -9,7 +9,7 @@ export default function MostrarSospecha(props) {
     const [respuesta, setRespuesta] = useState(null);
 
     return (
-        <div className="sospecha">
+        <div className="popup">
             <h1>{props.sospecha.nombre} sospechó</h1>
             <div
                 style={{

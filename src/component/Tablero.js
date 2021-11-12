@@ -328,7 +328,12 @@ const casillerosEspeciales = [
         y: 6,
         color: "black",
         extra: () => (
-            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
+            <img
+                src="/tablero/trampa.svg"
+                alt="Trampa"
+                height="37px"
+                style={{ position: "absolute" }}
+            />
         ),
     },
     {
@@ -336,7 +341,12 @@ const casillerosEspeciales = [
         y: 6,
         color: "black",
         extra: () => (
-            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
+            <img
+                src="/tablero/trampa.svg"
+                alt="Trampa"
+                height="37px"
+                style={{ position: "absolute" }}
+            />
         ),
     },
     {
@@ -344,7 +354,12 @@ const casillerosEspeciales = [
         y: 13,
         color: "black",
         extra: () => (
-            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
+            <img
+                src="/tablero/trampa.svg"
+                alt="Trampa"
+                height="37px"
+                style={{ position: "absolute" }}
+            />
         ),
     },
     {
@@ -352,7 +367,12 @@ const casillerosEspeciales = [
         y: 13,
         color: "black",
         extra: () => (
-            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
+            <img
+                src="/tablero/trampa.svg"
+                alt="Trampa"
+                height="37px"
+                style={{ position: "absolute" }}
+            />
         ),
     },
 ];
