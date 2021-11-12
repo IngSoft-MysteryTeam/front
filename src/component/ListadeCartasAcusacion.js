@@ -101,6 +101,14 @@ export default function ListadeCartas(props) {
             nombre: "Salón",
             valor: "SALON",
         },
+        {
+            nombre: "Bodega",
+            valor: "BODEGA",
+        },
+        {
+            nombre: "Vestíbulo",
+            valor: "VESTIBULO",
+        },
     ];
 
     return (

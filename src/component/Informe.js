@@ -30,6 +30,8 @@ export default function Informe(props) {
         "Laboratorio",
         "Panteón",
         "Salón",
+        "Bodega",
+        "Vestíbulo"
     ];
 
     return (
