@@ -140,15 +140,26 @@ export function entrarRecinto(datos) {
  * Envia al back la accion de responder una sospecha
  * @param {object} datos id del jugador que sospecho y el id del
  * jugador que responde la sospecha
- * @returns 
+ * @returns
  */
 export function responderSospecha(datos) {
-    console.log(datos.carta)
     return axios({
         url: `${baseUrl}partida/${datos.id_jugador}/${datos.id_responde}/responder-sospecha`,
         method: "GET",
         params: {
-            carta: datos.carta
-        }
-    })
+            carta: datos.carta,
+        },
+    });
+}
+
+/**
+ * Envia al back la accion de usar la bruja de salem
+ * @param {object} datos id partida y id jugador
+ * @returns 
+ */
+export function usarBrujaSalem(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/usar-bruja-salem`,
+        method: "PUT",
+    });
 }

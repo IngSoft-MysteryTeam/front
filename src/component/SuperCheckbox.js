@@ -60,5 +60,7 @@ export default function SuperCheckbox() {
                     />
                 </div>
             );
+        default:
+            return null;
     }
 }

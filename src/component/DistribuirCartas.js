@@ -1,4 +1,5 @@
 import Carta from "./Carta";
+import CartaSalem from "./CartaSalem";
 /**
  * Reparte las cartas a los jugadores
  * @param  {object} props Cartas obtenidas del back
@@ -12,9 +13,17 @@ export default function DistribuirCartas(props) {
                 marginTop: "15px",
             }}
         >
-            {props.cartas.map((e, index) => (
-                <Carta carta={e} key={index} />
-            ))}
+            {props.cartas.map((e, index) =>
+                e === "BRUJASALEM" ? (
+                    <CartaSalem
+                        key={index}
+                        id_partida={props.id_partida}
+                        id_jugador={props.id_jugador}
+                    />
+                ) : (
+                    <Carta carta={e} key={index} />
+                )
+            )}
         </div>
     );
 }
