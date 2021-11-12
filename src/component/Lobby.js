@@ -17,6 +17,7 @@ import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 import MostrarAcusacion from "./MostrarAcusacion";
 import Informe from "./Informe";
 import MostrarCartaMisterio from "./MostrarCartaMisterio";
+import MostrarPerdioCarta from "./MostrarPerdioCarta";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -176,8 +177,10 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [ultimoJugador, setUltimoJugador] = useState(false);
-    
+
     const [salem, setSalem] = useState(null);
+
+    const [perdioBruja, setPerdioBruja] = useState(null);
 
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
@@ -283,12 +286,24 @@ export default function Lobby() {
                     ).id_jugador,
                 });
             } else if (json.evento === "Bruja Salem") {
-                setSalem(oldSalem => ({...oldSalem, nombre: json.nombre, carta: json.carta_misterio}))
-                setCartas(oldCartas => oldCartas.filter(e => e !== "BRUJASALEM"))
-            } else if (json.evento === "Jugo la Bruja"){
-                setSalem(oldSalem => ({...oldSalem, nombre: json.nombre}))
+                setSalem((oldSalem) => ({
+                    ...oldSalem,
+                    nombre: json.nombre,
+                    carta: json.carta_misterio,
+                }));
+                setCartas((oldCartas) =>
+                    oldCartas.filter((e) => e !== "BRUJASALEM")
+                );
+            } else if (json.evento === "Jugo la Bruja") {
+                setSalem((oldSalem) => ({ ...oldSalem, nombre: json.nombre }));
+            } else if (json.evento === "Perdio bruja") {
+                setPerdioBruja(json.nombre);
+                if (json.nombre === obtNombrejugador()) {
+                    setCartas((oldCartas) =>
+                        oldCartas.filter((e) => e !== "BRUJASALEM")
+                    );
+                }
             }
-
         });
         socket.addEventListener("close", (e) =>
             console.log("Se cayo la conexion")
@@ -448,6 +463,12 @@ export default function Lobby() {
                             cartamisterio={salem.carta}
                             jugosalem={salem.nombre}
                             setSalem={setSalem}
+                        />
+                    ) : null}
+                    {perdioBruja ? (
+                        <MostrarPerdioCarta
+                            nombre={perdioBruja}
+                            setPerdioBruja={setPerdioBruja}
                         />
                     ) : null}
                     <Tablero
