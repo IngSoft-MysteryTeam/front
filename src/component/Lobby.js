@@ -345,23 +345,6 @@ export default function Lobby() {
                             obtNombrejugador() &&
                         !perdio ? (
                             <>
-                                {ronda === 1 &&
-                                cartas.find((e) => e === "BRUJASALEM") ? (
-                                    <BotonSalem />
-                                ) : null}
-                                {!sospechando && !sospecha ? (
-                                    <BotonAcusar
-                                        acusando={setAcusando}
-                                        eligoacusar={acusando}
-                                    />
-                                ) : null}
-                                {acusando ? (
-                                    <ListadeCartasAcusacion
-                                        id_jugador={location.state.id_jugador}
-                                        id_partida={params.id}
-                                        setSospecha={setSospecha}
-                                    />
-                                ) : null}
                                 {dado === -1 ? (
                                     <>
                                         {!ultimoJugador ? (
@@ -424,6 +407,23 @@ export default function Lobby() {
                                         ) : null}
                                     </>
                                 )}
+                                {ronda === 1 &&
+                                cartas.find((e) => e === "BRUJASALEM") ? (
+                                    <BotonSalem />
+                                ) : null}
+                                {!sospechando && !sospecha ? (
+                                    <BotonAcusar
+                                        acusando={setAcusando}
+                                        eligoacusar={acusando}
+                                    />
+                                ) : null}
+                                {acusando ? (
+                                    <ListadeCartasAcusacion
+                                        id_jugador={location.state.id_jugador}
+                                        id_partida={params.id}
+                                        setSospecha={setSospecha}
+                                    />
+                                ) : null}
                             </>
                         ) : null}
                         {sospechando ? (
