@@ -16,6 +16,7 @@ import BotonAcusar from "./BotonAcusar";
 import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 import MostrarAcusacion from "./MostrarAcusacion";
 import Informe from "./Informe";
+import BotonSalem from "./BotonCartadeSalem";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -99,7 +100,8 @@ export default function Lobby() {
      */
     const location = useLocation();
     /**
-     * Estado que guarda el nombre de los jugadores de la partida.
+     * Estado que guarda toda la entidad los jugadores de la partida
+     * con todos sus atributos.
      * @param  {List} location.state.jugadores Jugadores en la partida
      */
     const [jugadores, setJugadores] = useState(location.state.jugadores);
@@ -175,6 +177,11 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [ultimoJugador, setUltimoJugador] = useState(false);
+    /**
+     * Estado que nos indica el numero de ronda que lleva un jugador en la partida.
+     * @param  {int} 0
+     */
+    const [ronda, setRonda] = useState(0)
 
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
@@ -204,6 +211,18 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
+                setJugadores((oldJugadores) => {
+                    let newJugadores = oldJugadores.map((e, i) => {
+                        if (e.nombre === json.nombre) {
+                            setRonda(oldronda => oldronda+1);
+                            return {
+                                ...e,
+                                turno: e.turno+1
+                            };
+                        } else return e;
+                    });
+                    return newJugadores;
+                });
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
@@ -324,8 +343,12 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
-                        !perdio ? (
+                        !perdio ? ( 
                             <>
+                            {
+                                ronda === 1 && cartas.find(e=> e === "BRUJASALEM") ?
+                                 <BotonSalem /> :null
+                            }
                                 {!sospechando && !sospecha ? (
                                     <BotonAcusar
                                         acusando={setAcusando}
@@ -356,6 +379,7 @@ export default function Lobby() {
                                         {!ultimoJugador ? (
                                             <PasarTurno
                                                 id_partida={params.id}
+                                                id_jugador={location.state.id_jugador}
                                                 sospechando={setSospechando}
                                                 acusando={setAcusando}
                                             />
