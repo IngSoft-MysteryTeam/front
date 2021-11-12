@@ -3,7 +3,6 @@ import {
     faArrowLeft,
     faArrowRight,
     faArrowUp,
-    faDoorOpen,
     faSpider,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -329,7 +328,7 @@ const casillerosEspeciales = [
         y: 6,
         color: "black",
         extra: () => (
-            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
         ),
     },
     {
@@ -337,7 +336,7 @@ const casillerosEspeciales = [
         y: 6,
         color: "black",
         extra: () => (
-            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
         ),
     },
     {
@@ -345,7 +344,7 @@ const casillerosEspeciales = [
         y: 13,
         color: "black",
         extra: () => (
-            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
         ),
     },
     {
@@ -353,7 +352,7 @@ const casillerosEspeciales = [
         y: 13,
         color: "black",
         extra: () => (
-            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+            <img src='/tablero/trampa.svg' alt='Trampa' height='37px' style={{position: 'absolute'}} />
         ),
     },
 ];
