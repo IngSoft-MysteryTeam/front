@@ -17,6 +17,7 @@ import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 import MostrarAcusacion from "./MostrarAcusacion";
 import Informe from "./Informe";
 import BotonSalem from "./BotonCartadeSalem";
+import MostrarCartaMisterio from "./MostrarCartaMisterio";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -181,7 +182,17 @@ export default function Lobby() {
      * Estado que nos indica el numero de ronda que lleva un jugador en la partida.
      * @param  {int} 0
      */
-    const [ronda, setRonda] = useState(0)
+    const [ronda, setRonda] = useState(0);
+    /**
+     * Estado que guarda la carta del misterio obtenida al usar la bruja de Salem.
+     * @param  {objet} null
+     */
+    const [cartamisterio, setCartamisterio] = useState(null);
+    /**
+     * Estado que guarda el nombre del jugador que uso la bruja de Salem.
+     * @param  {object} null
+     */
+    const [jugosalem, setJugosalem] = useState(null)
 
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
@@ -214,10 +225,10 @@ export default function Lobby() {
                 setJugadores((oldJugadores) => {
                     let newJugadores = oldJugadores.map((e, i) => {
                         if (e.nombre === json.nombre) {
-                            setRonda(oldronda => oldronda+1);
+                            setRonda((oldronda) => oldronda + 1);
                             return {
                                 ...e,
-                                turno: e.turno+1
+                                turno: e.turno + 1,
                             };
                         } else return e;
                     });
@@ -298,7 +309,16 @@ export default function Lobby() {
                         (e) => e.nombre === obtNombrejugador()
                     ).id_jugador,
                 });
+            } else if (json.evento === "Bruja Salem") {
+                setCartamisterio({
+                    carta: json.cartas_misterio,
+                });
+            } else if (json.evento === "Jugó la Bruja"){
+                setJugosalem({
+                    nombre: json.nombre
+                })
             }
+
         });
         socket.addEventListener("close", (e) =>
             console.log("Se cayo la conexion")
@@ -343,12 +363,16 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
-                        !perdio ? ( 
+                        !perdio ? (
                             <>
-                            {
-                                ronda === 1 && cartas.find(e=> e === "BRUJASALEM") ?
-                                 <BotonSalem /> :null
-                            }
+                                {jugadores.find((e) => e.orden === turno).turno === ronda &&
+                                cartas.find((e) => e === "BRUJASALEM") ? (
+                                    <BotonSalem
+                                        id_jugador={location.state.id_jugador}
+                                        id_partida={params.id}
+                                    />
+                                ) : null}
+                                
                                 {!sospechando && !sospecha ? (
                                     <BotonAcusar
                                         acusando={setAcusando}
@@ -379,7 +403,9 @@ export default function Lobby() {
                                         {!ultimoJugador ? (
                                             <PasarTurno
                                                 id_partida={params.id}
-                                                id_jugador={location.state.id_jugador}
+                                                id_jugador={
+                                                    location.state.id_jugador
+                                                }
                                                 sospechando={setSospechando}
                                                 acusando={setAcusando}
                                             />
@@ -453,6 +479,13 @@ export default function Lobby() {
                         <MostrarAcusacion
                             acusar={acusar}
                             setacusar={setAcusar}
+                        />
+                    ) : null}
+                    {cartamisterio ? (
+                        <MostrarCartaMisterio
+                            cartamisterio={cartamisterio}
+                            jugosalem={jugosalem}
+                            setcartamisterio={setCartamisterio}
                         />
                     ) : null}
                     <Tablero
