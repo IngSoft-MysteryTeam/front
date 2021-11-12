@@ -181,7 +181,7 @@ export default function Lobby() {
      * Estado que nos indica el numero de ronda que lleva un jugador en la partida.
      * @param  {int} 0
      */
-    const [ronda, setRonda] = useState(0)
+    const [ronda, setRonda] = useState(0);
 
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
@@ -214,10 +214,10 @@ export default function Lobby() {
                 setJugadores((oldJugadores) => {
                     let newJugadores = oldJugadores.map((e, i) => {
                         if (e.nombre === json.nombre) {
-                            setRonda(oldronda => oldronda+1);
+                            setRonda((oldronda) => oldronda + 1);
                             return {
                                 ...e,
-                                turno: e.turno+1
+                                turno: e.turno + 1,
                             };
                         } else return e;
                     });
@@ -343,12 +343,12 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
-                        !perdio ? ( 
+                        !perdio ? (
                             <>
-                            {
-                                ronda === 1 && cartas.find(e=> e === "BRUJASALEM") ?
-                                 <BotonSalem /> :null
-                            }
+                                {ronda === 1 &&
+                                cartas.find((e) => e === "BRUJASALEM") ? (
+                                    <BotonSalem />
+                                ) : null}
                                 {!sospechando && !sospecha ? (
                                     <BotonAcusar
                                         acusando={setAcusando}
@@ -379,7 +379,9 @@ export default function Lobby() {
                                         {!ultimoJugador ? (
                                             <PasarTurno
                                                 id_partida={params.id}
-                                                id_jugador={location.state.id_jugador}
+                                                id_jugador={
+                                                    location.state.id_jugador
+                                                }
                                                 sospechando={setSospechando}
                                                 acusando={setAcusando}
                                             />
