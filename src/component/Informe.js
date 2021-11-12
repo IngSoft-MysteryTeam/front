@@ -1,3 +1,5 @@
+import SuperCheckbox from "./SuperCheckbox";
+
 /**
  * Componente que renderiza un informe
  *
@@ -42,10 +44,7 @@ export default function Informe(props) {
                     {monstruos.map((e, i) => (
                         <div className="itemInforme" key={i}>
                             <div className="nombreItemInforme">{e}</div>
-                            <input
-                                type="checkbox"
-                                className="checkboxInforme"
-                            />
+                            <SuperCheckbox />
                             <input className="textboxInforme" />
                         </div>
                     ))}
@@ -57,10 +56,7 @@ export default function Informe(props) {
                     {victimas.map((e, i) => (
                         <div className="itemInforme" key={i}>
                             <div className="nombreItemInforme">{e}</div>
-                            <input
-                                type="checkbox"
-                                className="checkboxInforme"
-                            />
+                            <SuperCheckbox />
                             <input className="textboxInforme" />
                         </div>
                     ))}
@@ -72,10 +68,7 @@ export default function Informe(props) {
                     {recintos.map((e, i) => (
                         <div className="itemInforme" key={i}>
                             <div className="nombreItemInforme">{e}</div>
-                            <input
-                                type="checkbox"
-                                className="checkboxInforme"
-                            />
+                            <SuperCheckbox />
                             <input className="textboxInforme" />
                         </div>
                     ))}
