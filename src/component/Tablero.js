@@ -3,6 +3,7 @@ import {
     faArrowLeft,
     faArrowRight,
     faArrowUp,
+    faDoorOpen,
     faSpider,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -321,6 +322,38 @@ const casillerosEspeciales = [
         color: "black",
         extra: () => (
             <FontAwesomeIcon className="extraCasillero" icon={faSpider} />
+        ),
+    },
+    {
+        x: 6,
+        y: 6,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+        ),
+    },
+    {
+        x: 13,
+        y: 6,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+        ),
+    },
+    {
+        x: 6,
+        y: 13,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
+        ),
+    },
+    {
+        x: 13,
+        y: 13,
+        color: "black",
+        extra: () => (
+            <FontAwesomeIcon className="extraCasillero" icon={faDoorOpen} />
         ),
     },
 ];
