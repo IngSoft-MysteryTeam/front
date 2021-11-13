@@ -25,6 +25,8 @@ export default function CreaPartida() {
 
     const [color, setColor] = useState(null);
 
+    const [contraseña, setContraseña] = useState(null);
+
     const colores = [
         "#4285F4",
         "#DB4437",
@@ -43,12 +45,13 @@ export default function CreaPartida() {
             nombre: nombre,
             anfitrion: jugador,
             color: color,
+            contraseña: contraseña,
         })
             .then((res) => {
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
-                        state: { ...res.data, nombre: nombre },
+                        state: { ...res.data, nombre: nombre, contraseña: contraseña },
                     });
                 }
             })
@@ -83,13 +86,15 @@ export default function CreaPartida() {
                 required
                 placeholder="Contraseña"
                 type="password"
+                onChange={(e) => setContraseña(e.target.value)}
                 style={{ width: "500px" }}
             />
             <SelectorColores colores={colores} setColor={setColor} />
             <button
                 className="btn btn-dark"
-                onClick={(e) => enviarPartida()}
-                disabled={!(nombre && color)}
+                onClick={(e, key) => enviarPartida()}
+                disabled={!(nombre && color)
+                }
             >
                 Crear partida
             </button>

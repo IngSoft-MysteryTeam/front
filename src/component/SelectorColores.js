@@ -33,6 +33,7 @@ export default function SelectorColores(props) {
                                 hover === i || selected === e ? "100%" : "50%",
                             cursor: "pointer",
                         }}
+                        key={i}
                     />
                 ))}
             </div>
