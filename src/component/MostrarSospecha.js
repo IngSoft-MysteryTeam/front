@@ -26,23 +26,16 @@ export default function MostrarSospecha(props) {
                     />
                 ))}
             </div>
+            <h1>{props.sospecha.nombreResponde} responde</h1>
             {props.respuestaSospecha ? (
-                props.respuestaSospecha.carta === "NINGUNA" ? (
-                    <h1>Nadie respondio</h1>
-                    ) : (
-                        <>
-                        <h1>{props.sospecha.nombreResponde} responde</h1>
-                        <img
-                            src={`/cartas/${props.respuestaSospecha.carta}.png`}
-                            height="200px"
-                            a
-                            alt={props.respuestaSospecha.carta}
-                        />
-                    </>
-                )
-            ) : null}
-            {props.sospecha && !props.respuestaSospecha ? (
-                <h1>{props.sospecha.nombreResponde} responde</h1>
+                props.respuestaSospecha.carta !== "NINGUNA" ? (
+                    <img
+                        src={`/cartas/${props.respuestaSospecha.carta}.png`}
+                        height="200px"
+                        a
+                        alt={props.respuestaSospecha.carta}
+                    />
+                ) : null
             ) : null}
             {props.respondiendoSospecha ? (
                 <>
