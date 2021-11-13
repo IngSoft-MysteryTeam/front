@@ -29,7 +29,7 @@ export default function CreaPartida() {
     /**
      * Se guarda la contraseña.
      */
-    const [contraseña, setContraseña] = useState(null);
+    const [password, setPassword] = useState("");
 
     const colores = [
         "#4285F4",
@@ -49,13 +49,13 @@ export default function CreaPartida() {
             nombre: nombre,
             anfitrion: jugador,
             color: color,
-            contraseña: contraseña,
+            password: password,
         })
             .then((res) => {
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
-                        state: { ...res.data, nombre: nombre, contraseña: contraseña },
+                        state: { ...res.data, nombre: nombre, password: password },
                     });
                 }
             })
@@ -89,7 +89,7 @@ export default function CreaPartida() {
             <input
                 placeholder="Contraseña"
                 type="password"
-                onChange={(e) => setContraseña(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 style={{ width: "500px" }}
             />
             <SelectorColores colores={colores} setColor={setColor} />
