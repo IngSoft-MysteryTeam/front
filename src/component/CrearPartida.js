@@ -22,9 +22,13 @@ export default function CreaPartida() {
      * @param  {object} Nombre de la partida
      */
     const [nombre, setNombre] = useState(null);
-
+    /**
+     * Se guarda el color elegido
+     */
     const [color, setColor] = useState(null);
-
+    /**
+     * Se guarda la contraseña.
+     */
     const [contraseña, setContraseña] = useState(null);
 
     const colores = [
@@ -83,7 +87,6 @@ export default function CreaPartida() {
                 style={{ width: "500px" }}
             />
             <input
-                required
                 placeholder="Contraseña"
                 type="password"
                 onChange={(e) => setContraseña(e.target.value)}
