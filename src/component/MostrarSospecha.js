@@ -15,26 +15,23 @@ export default function MostrarSospecha(props) {
                 style={{
                     display: "flex",
                     columnGap: "15px",
-                    marginTop: "10px",
                 }}
             >
-                <div>
-                    {props.sospecha.cartas.map((e, key) => (
-                        <img
-                            src={`/cartas/${e}.png`}
-                            height="200px"
-                            key={key}
-                            alt={e}
-                        />
-                    ))}{" "}
-                </div>
+                {props.sospecha.cartas.map((e, key) => (
+                    <img
+                        src={`/cartas/${e}.png`}
+                        height="200px"
+                        key={key}
+                        alt={e}
+                    />
+                ))}
             </div>
-            <h1>{props.sospecha.nombreResponde} responde</h1>
             {props.respuestaSospecha ? (
                 props.respuestaSospecha.carta === "NINGUNA" ? (
                     <h1>Nadie respondio</h1>
-                ) : (
-                    <>
+                    ) : (
+                        <>
+                        <h1>{props.sospecha.nombreResponde} responde</h1>
                         <img
                             src={`/cartas/${props.respuestaSospecha.carta}.png`}
                             height="200px"
@@ -43,6 +40,9 @@ export default function MostrarSospecha(props) {
                         />
                     </>
                 )
+            ) : null}
+            {props.sospecha && !props.respuestaSospecha ? (
+                <h1>{props.sospecha.nombreResponde} responde</h1>
             ) : null}
             {props.respondiendoSospecha ? (
                 <>
