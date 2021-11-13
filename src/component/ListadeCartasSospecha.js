@@ -71,9 +71,16 @@ export default function ListadeCartasSospecha(props) {
     ];
 
     return (
-        <>
+        <div className="popup">
+            <h1>Sospechar</h1>
             <div style={{ display: "flex" }}>
-                <div style={{ width: "50%" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select
                             className="form-select form-select-sm"
@@ -97,7 +104,13 @@ export default function ListadeCartasSospecha(props) {
                         />
                     ) : null}
                 </div>
-                <div style={{ width: "50%" }}>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
                     <div style={{ paddingLeft: "5px", paddingRight: "5px" }}>
                         <select
                             className="form-select form-select-sm"
@@ -122,7 +135,7 @@ export default function ListadeCartasSospecha(props) {
                     ) : null}
                 </div>
             </div>
-            {victima !== "" && monstruo !== "" ? (
+            <div style={{ display: "flex", columnGap: "10px" }}>
                 <BotonEnviarsospecha
                     data={{
                         id_jugador: props.id_jugador,
@@ -130,9 +143,20 @@ export default function ListadeCartasSospecha(props) {
                         victima: victima,
                         monstruo: monstruo,
                     }}
-                    sospechando={props.sospechando}
+                    setSospechando={props.setSospechando}
+                    disabled={victima === "" || monstruo === ""}
                 />
-            ) : null}
-        </>
+                <button
+                    className="btn btn-dark"
+                    onClick={(e) => {
+                        setMonstruo("");
+                        setVictima("");
+                        props.setSospechando(false);
+                    }}
+                >
+                    Cancelar sospecha
+                </button>
+            </div>
+        </div>
     );
 }

@@ -112,11 +112,10 @@ export default function ListadeCartas(props) {
     ];
 
     return (
-        <>
+        <div className='popup'>
             <div style={{ display: "flex" }}>
                 <div
                     style={{
-                        width: "33%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -140,7 +139,7 @@ export default function ListadeCartas(props) {
                         <img
                             style={{ marginTop: "10px" }}
                             src={`/cartas/${victima}.png`}
-                            height="130px"
+                            height="200px"
                             alt={victima}
                         />
                     ) : null}
@@ -148,7 +147,6 @@ export default function ListadeCartas(props) {
                 {/* //Monstruos */}
                 <div
                     style={{
-                        width: "33%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -172,7 +170,7 @@ export default function ListadeCartas(props) {
                         <img
                             style={{ marginTop: "10px" }}
                             src={`/cartas/${monstruo}.png`}
-                            height="130px"
+                            height="200px"
                             alt={monstruo}
                         />
                     ) : null}
@@ -180,7 +178,6 @@ export default function ListadeCartas(props) {
                 {/* //Recintos */}
                 <div
                     style={{
-                        width: "33%",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -204,13 +201,13 @@ export default function ListadeCartas(props) {
                         <img
                             style={{ marginTop: "10px" }}
                             src={`/cartas/${recinto}.png`}
-                            height="130px"
+                            height="200px"
                             alt={recinto}
                         />
                     ) : null}
                 </div>
             </div>
-            {victima !== "" && monstruo !== "" && recinto !== "" ? (
+            <div style={{ display: "flex", columnGap: "10px" }}>
                 <BotonEnviarAcusacion
                     data={{
                         id_jugador: props.id_jugador,
@@ -219,9 +216,21 @@ export default function ListadeCartas(props) {
                         monstruo: monstruo,
                         recinto: recinto,
                     }}
-                    setSospecha={props.setSospecha}
+                    setAcusando={props.setAcusando}
+                    disabled={victima === "" || monstruo === "" || recinto === ""}
                 />
-            ) : null}
-        </>
+                <button
+                    className="btn btn-dark"
+                    onClick={(e) => {
+                        setMonstruo("");
+                        setVictima("");
+                        setRecinto("")
+                        props.setAcusando(false);
+                    }}
+                >
+                    Cancelar acusación
+                </button>
+            </div>
+        </div>
     );
 }

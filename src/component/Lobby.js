@@ -404,38 +404,20 @@ export default function Lobby() {
                                         ).recinto &&
                                         !sospecha &&
                                         !acusando &&
-                                        !ultimoJugador ? (
+                                        !ultimoJugador &&
+                                        !sospechando ? (
                                             <Sospechar
-                                                sospechando={setSospechando}
-                                                eligosospechar={sospechando}
+                                                setSospechando={setSospechando}
                                             />
                                         ) : null}
                                     </>
                                 )}
-                                {!sospechando && !sospecha ? (
-                                    <BotonAcusar
-                                        acusando={setAcusando}
-                                        eligoacusar={acusando}
-                                    />
-                                ) : null}
-                                {acusando ? (
-                                    <ListadeCartasAcusacion
-                                        id_jugador={location.state.id_jugador}
-                                        id_partida={params.id}
-                                        setSospecha={setSospecha}
-                                    />
+                                {!sospechando && !sospecha && !acusando ? (
+                                    <BotonAcusar setAcusando={setAcusando} />
                                 ) : null}
                             </>
                         ) : null}
-                        {sospechando ? (
-                            <ListadeCartasSospecha
-                                id_jugador={location.state.id_jugador}
-                                id_partida={params.id}
-                                sospechando={setSospechando}
-                            />
-                        ) : null}
                     </div>
-                    {dado !== -1 ? <Dado numero={dado} /> : null}
                 </div>
                 <div
                     style={{
@@ -471,6 +453,23 @@ export default function Lobby() {
                             setPerdioBruja={setPerdioBruja}
                         />
                     ) : null}
+                    {acusando ? (
+                        <ListadeCartasAcusacion
+                            id_jugador={location.state.id_jugador}
+                            id_partida={params.id}
+                            setAcusando={setAcusando}
+                            setSospecha={setSospecha}
+                        />
+                    ) : null}
+                    {sospechando ? (
+                        <ListadeCartasSospecha
+                            id_jugador={location.state.id_jugador}
+                            id_partida={params.id}
+                            setSospechando={setSospechando}
+                            sospechando={sospechando}
+                        />
+                    ) : null}
+                    {dado !== -1 ? <Dado numero={dado} /> : null}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}

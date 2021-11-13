@@ -11,7 +11,7 @@ export default function BotonEnviarAcusacion(props) {
         <button
             className={"btn btn-dark"}
             onClick={(e) => {
-                props.setSospecha(null);
+                props.setAcusando(false);
                 hacerAcusacion({
                     victima: props.data.victima,
                     monstruo: props.data.monstruo,
@@ -20,6 +20,7 @@ export default function BotonEnviarAcusacion(props) {
                     id_partida: props.data.id_partida,
                 });
             }}
+            disabled={props.disabled}
         >
             Enviar Acusacion
         </button>
