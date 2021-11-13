@@ -19,7 +19,6 @@ export default function MostrarAcusacion(props) {
                         height="200px"
                         key={key}
                         alt={e}
-                        style={{ marginBottom: "10px" }}
                     />
                 ))}
             </div>
@@ -36,7 +35,6 @@ export default function MostrarAcusacion(props) {
             )}
             <button
                 className="btn btn-dark"
-                style={{ marginTop: "15px" }}
                 onClick={() => props.setacusar(null)}
             >
                 Aceptar
