@@ -6,6 +6,10 @@ import BotonResponderSospecha from "./BotonResponderSospecha";
  * @param  {object} props Nombre de jugador y cartas de sospecha
  */
 export default function MostrarSospecha(props) {
+    /**
+     * Estado que guarda la carta de la respues de una sospecha.
+     * @param  {object} null
+     */
     const [respuesta, setRespuesta] = useState(null);
 
     return (
