@@ -48,11 +48,12 @@ export default function Chat(props) {
                     }
                     value={mensaje}
                     onChange={(e) => setMensaje(e.target.value)}
+                    disabled={props.disabled}
                 />
                 <button
                     className="btn btn-dark"
                     onClick={(e) => mandarMensaje(mensaje)}
-                    disabled={!mensaje}
+                    disabled={!mensaje || props.disabled}
                 >
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </button>

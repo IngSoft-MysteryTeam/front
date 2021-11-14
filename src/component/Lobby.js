@@ -434,7 +434,7 @@ export default function Lobby() {
                             </>
                         ) : null}
                     </div>
-                    <Chat id_partida={params.id} mensajesChat={mensajesChat} />
+                    <Chat id_partida={params.id} mensajesChat={mensajesChat} disabled={perdio} />
                 </div>
                 <div
                     style={{
