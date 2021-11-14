@@ -16,7 +16,6 @@ export default function Chat(props) {
             nombre: obtNombrejugador(),
             texto: mensaje,
         });
-        console.log(mensaje);
     }
 
     useEffect(() => {
@@ -45,7 +44,7 @@ export default function Chat(props) {
                     style={{ flexGrow: 1 }}
                     placeholder="Escribe un mensaje..."
                     onKeyUp={(e) =>
-                        e.key === "Enter" ? mandarMensaje(mensaje) : null
+                        e.key === "Enter" && mensaje ? mandarMensaje(mensaje) : null
                     }
                     value={mensaje}
                     onChange={(e) => setMensaje(e.target.value)}
@@ -53,6 +52,7 @@ export default function Chat(props) {
                 <button
                     className="btn btn-dark"
                     onClick={(e) => mandarMensaje(mensaje)}
+                    disabled={!mensaje}
                 >
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
