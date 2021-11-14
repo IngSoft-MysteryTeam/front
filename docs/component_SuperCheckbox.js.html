@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/SuperCheckbox.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/SuperCheckbox.js</h1>
 
     
 
@@ -26,37 +26,71 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
+            <pre class="prettyprint source linenums"><code>import {
+    faCheck,
+    faQuestion,
+    faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
 /**
- * Establece los path donde se renderizan las componentes.
+ * Componente que renderiza un checkbox de 4 estados
  */
-export default function Approuter() {
-    return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
-    );
+export default function SuperCheckbox() {
+    const [estado, setEstado] = useState(0);
+
+    const aumentarEstado = () => {
+        setEstado((e) => (e + 1) % 4);
+    };
+
+    switch (estado) {
+        case 0:
+            return (
+                &lt;div
+                    className="superCheckbox"
+                    onClick={(e) => aumentarEstado()}
+                />
+            );
+        case 1:
+            return (
+                &lt;div
+                    className="superCheckbox"
+                    onClick={(e) => aumentarEstado()}
+                >
+                    &lt;FontAwesomeIcon
+                        icon={faCheck}
+                        style={{ color: "#0F9D58" }}
+                    />
+                &lt;/div>
+            );
+        case 2:
+            return (
+                &lt;div
+                    className="superCheckbox"
+                    onClick={(e) => aumentarEstado()}
+                >
+                    &lt;FontAwesomeIcon
+                        icon={faTimes}
+                        style={{ color: "#DB4437" }}
+                    />
+                &lt;/div>
+            );
+        case 3:
+            return (
+                &lt;div
+                    className="superCheckbox"
+                    onClick={(e) => aumentarEstado()}
+                >
+                    &lt;FontAwesomeIcon
+                        icon={faQuestion}
+                        style={{ color: "#F4B400" }}
+                    />
+                &lt;/div>
+            );
+        default:
+            return null;
+    }
 }
 </code></pre>
         </article>

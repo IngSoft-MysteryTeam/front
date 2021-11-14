@@ -1,11 +1,12 @@
 {
     "source": {
-        "include": ["./src/componentes", "./src/routers","./src/services"],
+        "include": ["./src/component", "./src/routers","./src/services"],
         "includePattern": ".+\\.js(doc|x)?$",
         "exclude": "node_modules/|docs"
     },
     "plugins": [],
     "opts": {
         "destination": "docs/"
-    }
+    }, 
+    "recurseDepth": 10
 }

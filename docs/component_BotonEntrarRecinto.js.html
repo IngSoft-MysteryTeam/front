@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/BotonEntrarRecinto.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/BotonEntrarRecinto.js</h1>
 
     
 
@@ -26,36 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
+            <pre class="prettyprint source linenums"><code>import { entrarRecinto } from "../services";
+
 /**
- * Establece los path donde se renderizan las componentes.
+ * Botón para ingresar a un recinto.
+ * @param {object} props
+ * @returns evento click
  */
-export default function Approuter() {
+export default function EntrarRecinto(props) {
     return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
+        &lt;button
+            className="btn btn-dark"
+            onClick={(e) =>
+                entrarRecinto({
+                    id_partida: props.id_partida,
+                    id_jugador: props.id_jugador,
+                })
+            }
+        >
+            Entrar al recinto
+        &lt;/button>
     );
 }
 </code></pre>

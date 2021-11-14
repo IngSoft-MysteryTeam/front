@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/SelectorColores.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/SelectorColores.js</h1>
 
     
 
@@ -26,36 +26,49 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
+            <pre class="prettyprint source linenums"><code>import { useState } from "react";
 /**
- * Establece los path donde se renderizan las componentes.
+ * Componente que muestra los colores para elegir.
+ * @param  {props} props
  */
-export default function Approuter() {
+export default function SelectorColores(props) {
+    const [hover, setHover] = useState(-1);
+    const [selected, setSelected] = useState(null);
+
     return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
+        &lt;>
+            &lt;h3>Elige un color:&lt;/h3>
+            &lt;div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    columnGap: "15px",
+                }}
+            >
+                {props.colores.map((e, i) => (
+                    &lt;div
+                        onMouseOver={(e) => setHover(i)}
+                        onMouseOut={(e) => setHover(-1)}
+                        onClick={() => {
+                            setSelected(e);
+                            props.setColor(e);
+                        }}
+                        style={{
+                            height: "40px",
+                            width: "40px",
+                            borderRadius: "20px",
+                            border: "2px solid white",
+                            backgroundColor: e,
+                            opacity:
+                                hover === i || selected === e ? "100%" : "50%",
+                            cursor: "pointer",
+                        }}
+                        key={i}
+                    />
+                ))}
+            &lt;/div>
+        &lt;/>
     );
 }
 </code></pre>

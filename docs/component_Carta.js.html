@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/Carta.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/Carta.js</h1>
 
     
 
@@ -26,36 +26,20 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
-/**
- * Establece los path donde se renderizan las componentes.
+            <pre class="prettyprint source linenums"><code>/**
+ * Componente que renderiza una carta
+ * @param  {object} props Cartas
  */
-export default function Approuter() {
+export default function Carta(props) {
     return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
+        &lt;div className="divCarta">
+            &lt;img
+                className="carta"
+                src={`/cartas/${props.carta}.png`}
+                height="200px"
+                alt={props.carta}
+            />
+        &lt;/div>
     );
 }
 </code></pre>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/PreUnirse.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/PreUnirse.js</h1>
 
     
 
@@ -26,36 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
+            <pre class="prettyprint source linenums"><code>import BotonUnirse from "./BotonUnirse";
+import SelectorColores from "./SelectorColores";
 /**
- * Establece los path donde se renderizan las componentes.
+ * Renderiza la opcion de elegir color antes de unirse.
+ * @param  {props} props
  */
-export default function Approuter() {
+export default function PreUnirse(props) {
     return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
+        &lt;div className="popup">
+            &lt;h1>Unirse a {props.partida.nombre}&lt;/h1>
+            &lt;SelectorColores
+                colores={props.partida.colores}
+                setColor={props.setColor}
+            />
+            {props.partida.password ? (
+                &lt;input
+                    type="password"
+                    placeholder="Contraseña"
+                    onChange={(e) => props.setPassword(e.target.value)}
+                />
+            ) : null}
+            &lt;div style={{ display: "flex", columnGap: "10px" }}>
+                &lt;BotonUnirse
+                    partida={props.partida}
+                    unirse={props.Unirsepartida}
+                    disabled={
+                        !props.color ||
+                        (props.partida.password &amp;&amp; !props.password)
+                    }
+                />
+                &lt;button
+                    className="btn btn-dark"
+                    onClick={(e) => {
+                        props.setColor(null);
+                        props.setPassword("");
+                        props.setPrePartida(null);
+                    }}
+                >
+                    Cancelar
+                &lt;/button>
+            &lt;/div>
+        &lt;/div>
     );
 }
 </code></pre>

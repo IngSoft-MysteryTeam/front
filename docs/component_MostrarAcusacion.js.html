@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routers/AppRouter.js</title>
+    <title>JSDoc: Source: component/MostrarAcusacion.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routers/AppRouter.js</h1>
+    <h1 class="page-title">Source: component/MostrarAcusacion.js</h1>
 
     
 
@@ -26,36 +26,48 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CrearPartida from "../component/CrearPartida";
-import Inicio from "../component/Inicio";
-import ListaPartidas from "../component/ListaPartidas";
-import Lobby from "../component/Lobby";
-/**
- * Establece los path donde se renderizan las componentes.
+            <pre class="prettyprint source linenums"><code>/**
+ * Renderiza las cartas de una acusacion
+ * @param  {object} props Nombre de jugador y cartas de acusacion
  */
-export default function Approuter() {
+export default function MostrarAcusacion(props) {
     return (
-        &lt;Router>
-            &lt;Switch>
-                &lt;Route path="/inicio">
-                    &lt;ListaPartidas />
-                &lt;/Route>
-                &lt;Route path="/partidas/:id">
-                    &lt;Lobby />
-                &lt;/Route>
-                &lt;Route path="/crear-partida">
-                    &lt;CrearPartida />
-                &lt;/Route>
-                &lt;Route path="/">
-                    &lt;Inicio />
-                &lt;/Route>
-                &lt;Route path="/*">
-                    &lt;h1>404 Not Found&lt;/h1>
-                &lt;/Route>
-            &lt;/Switch>
-        &lt;/Router>
+        &lt;div className="popup">
+            &lt;h1>{props.acusar.nombre} acusó&lt;/h1>
+            &lt;div
+                style={{
+                    display: "flex",
+                    columnGap: "15px",
+                    marginTop: "10px",
+                }}
+            >
+                {props.acusar.cartas.map((e, key) => (
+                    &lt;img
+                        src={`/cartas/${e}.png`}
+                        height="200px"
+                        key={key}
+                        alt={e}
+                    />
+                ))}
+            &lt;/div>
+            {props.acusar.correcta ? (
+                &lt;>
+                    &lt;h2>La acusación fue acertada.&lt;/h2>
+                    &lt;h2>{props.acusar.nombre} ha ganado la partida!&lt;/h2>
+                &lt;/>
+            ) : (
+                &lt;>
+                    &lt;h2>La acusación fue erronea.&lt;/h2>
+                    &lt;h2>{props.acusar.nombre} ha perdido la partida.&lt;/h2>
+                &lt;/>
+            )}
+            &lt;button
+                className="btn btn-dark"
+                onClick={() => props.setacusar(null)}
+            >
+                Aceptar
+            &lt;/button>
+        &lt;/div>
     );
 }
 </code></pre>

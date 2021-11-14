@@ -131,7 +131,6 @@ export function hacerAcusacion(datos) {
 /**
  * Envia al back la accion de entrar a un recinto
  * @param {object} datos Id de partida y jugador
- * @returns
  */
 export function entrarRecinto(datos) {
     return axios({
@@ -144,7 +143,6 @@ export function entrarRecinto(datos) {
  * Envia al back la accion de responder una sospecha
  * @param {object} datos id del jugador que sospecho y el id del
  * jugador que responde la sospecha
- * @returns
  */
 export function responderSospecha(datos) {
     return axios({
@@ -159,7 +157,6 @@ export function responderSospecha(datos) {
 /**
  * Envia al back la accion de usar la bruja de salem
  * @param {object} datos id partida y id jugador
- * @returns
  */
 export function usarBrujaSalem(datos) {
     return axios({
@@ -172,7 +169,6 @@ export function usarBrujaSalem(datos) {
  * Envia al back un mensaje para el chat de la partida
  * @param {object} datos id partida, nombre del jugador y
  * mensaje
- * @returns
  */
 export function enviarMensaje(datos) {
     return axios({
