@@ -1,5 +1,8 @@
 import { responderSospecha } from "../services";
-
+/**
+ * Renderiza el boton para enviar la carta seleccionada para responder la sospecha.
+ * @param  {props} props
+ */
 export default function BotonResponderSospecha(props) {
     return (
         <button

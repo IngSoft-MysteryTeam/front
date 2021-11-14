@@ -1,6 +1,9 @@
 import BotonUnirse from "./BotonUnirse";
 import SelectorColores from "./SelectorColores";
-
+/**
+ * Renderiza la opcion de elegir color antes de unirse.
+ * @param  {props} props
+ */
 export default function PreUnirse(props) {
     return (
         <div className="popup">

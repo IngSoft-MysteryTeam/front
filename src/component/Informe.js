@@ -1,7 +1,7 @@
 import SuperCheckbox from "./SuperCheckbox";
 
 /**
- * Componente que renderiza un informe
+ * Componente que renderiza un informe.
  *
  */
 export default function Informe(props) {

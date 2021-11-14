@@ -143,7 +143,8 @@ export default function Lobby() {
 
     /**
      * Estado que guarda la acusacion de un jugador
-     * @param {object} null nombre jugador, cartas y si es correcta la acusacion.
+     * @param {object} null nombre jugador, cartas
+     *  y si es correcta la acusacion.
      */
     const [acusar, setAcusar] = useState(null);
     /**
@@ -154,7 +155,8 @@ export default function Lobby() {
     const [posPosibles, setPosPosibles] = useState([]);
 
     /**
-     * Estado que guarda la carta que responde el jugador que tiene una coincidencia con la sospecha.
+     * Estado que guarda la carta que responde el jugador que tiene 
+     * una coincidencia con la sospecha.
      * @param  {object} null
      */
     const [respuestaSospecha, setRespuestaSospecha] = useState(null);
@@ -178,9 +180,15 @@ export default function Lobby() {
      * @param  {bool} false
      */
     const [ultimoJugador, setUltimoJugador] = useState(false);
-
+    /**
+     * Estado que guarda el nombre del jugador que tiene la bruja de Salem.
+     * @param  {objet} null
+     */
     const [salem, setSalem] = useState(null);
-
+    /**
+     * Estado que indica si uso o no la bruja de Salem.
+     * @param  {bool} null
+     */
     const [perdioBruja, setPerdioBruja] = useState(null);
 
     const [mensajesChat, setMensajesChat] = useState([]);

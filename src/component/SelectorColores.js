@@ -1,5 +1,8 @@
 import { useState } from "react";
-
+/**
+ * Componente que muestra los colores para elegir.
+ * @param  {props} props
+ */
 export default function SelectorColores(props) {
     const [hover, setHover] = useState(-1);
     const [selected, setSelected] = useState(null);

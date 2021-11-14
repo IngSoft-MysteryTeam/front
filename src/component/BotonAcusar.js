@@ -1,5 +1,8 @@
 import React from "react";
-
+/**
+ * Renderiza el boton para realizar una acusación.
+ * @param  {props} props
+ */
 export default function Acusar(props) {
     return (
         <button

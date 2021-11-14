@@ -1,3 +1,8 @@
+/**
+ * Renderiza la carta del misterio obtenida por usar la bruja de Salem
+ * y informa a los demas jugadores quien la uso.
+ * @param  {prosp} props
+ */
 export default function MostrarCartaMisterio(props) {
     return (
         <div className="popup">

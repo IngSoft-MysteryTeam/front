@@ -1,3 +1,7 @@
+/**
+ * Componente que renderiza si un jugador no uso la carta de Salem.
+ * @param  {props} props
+ */
 export default function MostrarPerdioCarta(props) {
     return (
         <div className="popup">
