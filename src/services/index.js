@@ -40,7 +40,11 @@ export function unirJugador(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/unirse`,
         method: "POST",
-        data: { nombre: datos.nombre, color: datos.color },
+        data: {
+            nombre: datos.nombre,
+            color: datos.color,
+            password: datos.password,
+        },
     });
 }
 /**
@@ -161,5 +165,22 @@ export function usarBrujaSalem(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/usar-bruja-salem`,
         method: "PUT",
+    });
+}
+
+/**
+ * Envia al back un mensaje para el chat de la partida
+ * @param {object} datos id partida, nombre del jugador y
+ * mensaje
+ * @returns 
+ */
+export function enviarMensaje(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/enviar-mensaje`,
+        method: "POST",
+        data: {
+            nombre: datos.nombre,
+            texto: datos.texto,
+        },
     });
 }

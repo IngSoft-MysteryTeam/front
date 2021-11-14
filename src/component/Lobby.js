@@ -18,6 +18,7 @@ import MostrarAcusacion from "./MostrarAcusacion";
 import Informe from "./Informe";
 import MostrarCartaMisterio from "./MostrarCartaMisterio";
 import MostrarPerdioCarta from "./MostrarPerdioCarta";
+import Chat from "./Chat";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -182,6 +183,8 @@ export default function Lobby() {
 
     const [perdioBruja, setPerdioBruja] = useState(null);
 
+    const [mensajesChat, setMensajesChat] = useState([]);
+
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
@@ -303,6 +306,11 @@ export default function Lobby() {
                         oldCartas.filter((e) => e !== "BRUJASALEM")
                     );
                 }
+            } else if (json.evento === "Nuevo mensaje") {
+                setMensajesChat((oldMensajesChat) => [
+                    ...oldMensajesChat,
+                    { nombre: json.nombre, texto: json.texto, color: json.color },
+                ]);
             }
         });
         socket.addEventListener("close", (e) =>
@@ -418,6 +426,7 @@ export default function Lobby() {
                             </>
                         ) : null}
                     </div>
+                    <Chat id_partida={params.id} mensajesChat={mensajesChat} />
                 </div>
                 <div
                     style={{

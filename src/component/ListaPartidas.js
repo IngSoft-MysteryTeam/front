@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { unirJugador, traerPartidas, obtNombrejugador } from "../services";
 import BotonCrear from "./BotonCrear";
 import BotonUnirse from "./BotonUnirse";
@@ -27,6 +27,8 @@ export default function ListaPartidas() {
 
     const [color, setColor] = useState(null);
 
+    const [password, setPassword] = useState("");
+
     /**
      * Obtiene las partidas desde el back.
      */
@@ -51,6 +53,7 @@ export default function ListaPartidas() {
             id_partida: e.id_partida,
             nombre: obtNombrejugador(),
             color: color,
+            password: password
         })
             .then((res) => {
                 console.log(res);
@@ -70,8 +73,12 @@ export default function ListaPartidas() {
                 }
             })
             .catch((err) => {
-                alert("Ocurrió un error. Revise la consola.");
-                console.error(err);
+                if (err.response.status === 400) {
+                    alert("Contraseña incorrecta!");
+                } else {
+                    alert("Ocurrió un error. Revise la consola.");
+                    console.error(err);
+                }
             });
     }
     /**
@@ -97,6 +104,8 @@ export default function ListaPartidas() {
                         setColor={setColor}
                         setPrePartida={setPrePartida}
                         color={color}
+                        setPassword={setPassword}
+                        password={password}
                     />
                 ) : null}
                 <table
@@ -105,6 +114,7 @@ export default function ListaPartidas() {
                 >
                     <thead>
                         <tr>
+                            <th width="40px"></th>
                             <th width="50%">Partida</th>
                             <th>Anfitrión</th>
                             <th width="140px">Cant. Jugadores</th>
@@ -113,6 +123,7 @@ export default function ListaPartidas() {
                     <tbody>
                         {partidas.map((e, key) => (
                             <tr key={key}>
+                                <td>{e.password ? <FontAwesomeIcon icon={faLock} /> : null}</td>
                                 <td>{e.nombre}</td>
                                 <td>{e.anfitrion}</td>
                                 <td>

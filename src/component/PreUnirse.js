@@ -9,16 +9,24 @@ export default function PreUnirse(props) {
                 colores={props.partida.colores}
                 setColor={props.setColor}
             />
+            {props.partida.password ? (
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    onChange={(e) => props.setPassword(e.target.value)}
+                />
+            ) : null}
             <div style={{ display: "flex", columnGap: "10px" }}>
                 <BotonUnirse
                     partida={props.partida}
                     unirse={props.Unirsepartida}
-                    disabled={!props.color}
+                    disabled={!props.color || (props.partida.password && !props.password)}
                 />
                 <button
                     className="btn btn-dark"
                     onClick={(e) => {
                         props.setColor(null);
+                        props.setPassword("");
                         props.setPrePartida(null);
                     }}
                 >
