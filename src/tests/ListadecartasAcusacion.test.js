@@ -19,7 +19,7 @@ test("el boton Enviar Sospecha solo aparece si seleccionamos monstruo y victima"
 
     expect(screen.queryByRole("button")).not.toBeInTheDocument();
 
-    userEvent.selectOptions(inputRecintos, "BIBLIOTECA")
+    userEvent.selectOptions(inputRecintos, "BIBLIOTECA");
 
     expect(await screen.findByRole("button")).toBeInTheDocument();
 });

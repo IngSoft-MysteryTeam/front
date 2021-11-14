@@ -55,7 +55,11 @@ export default function CreaPartida() {
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
-                        state: { ...res.data, nombre: nombre, password: password },
+                        state: {
+                            ...res.data,
+                            nombre: nombre,
+                            password: password,
+                        },
                     });
                 }
             })
@@ -96,8 +100,7 @@ export default function CreaPartida() {
             <button
                 className="btn btn-dark"
                 onClick={(e, key) => enviarPartida()}
-                disabled={!(nombre && color)
-                }
+                disabled={!(nombre && color)}
             >
                 Crear partida
             </button>

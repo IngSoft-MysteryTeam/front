@@ -155,7 +155,7 @@ export default function Lobby() {
     const [posPosibles, setPosPosibles] = useState([]);
 
     /**
-     * Estado que guarda la carta que responde el jugador que tiene 
+     * Estado que guarda la carta que responde el jugador que tiene
      * una coincidencia con la sospecha.
      * @param  {object} null
      */
@@ -317,7 +317,11 @@ export default function Lobby() {
             } else if (json.evento === "Nuevo mensaje") {
                 setMensajesChat((oldMensajesChat) => [
                     ...oldMensajesChat,
-                    { nombre: json.nombre, texto: json.texto, color: json.color },
+                    {
+                        nombre: json.nombre,
+                        texto: json.texto,
+                        color: json.color,
+                    },
                 ]);
             }
         });
@@ -434,7 +438,11 @@ export default function Lobby() {
                             </>
                         ) : null}
                     </div>
-                    <Chat id_partida={params.id} mensajesChat={mensajesChat} disabled={perdio} />
+                    <Chat
+                        id_partida={params.id}
+                        mensajesChat={mensajesChat}
+                        disabled={perdio}
+                    />
                 </div>
                 <div
                     style={{

@@ -61,14 +61,19 @@ test("al jugador que sospechó, se le muestran las cartas de su sospecha y la re
 
     const respuestaSospecha = {
         nombreResponde: "Dani",
-        carta: "ALCOBA"
-    }
+        carta: "ALCOBA",
+    };
 
-    render(<MostrarSospecha sospecha={sospecha} respuestaSospecha={respuestaSospecha} />);
+    render(
+        <MostrarSospecha
+            sospecha={sospecha}
+            respuestaSospecha={respuestaSospecha}
+        />
+    );
 
     expect(screen.getByText("David sospechó")).toBeInTheDocument();
 
     expect(screen.getByText("Dani responde")).toBeInTheDocument();
 
     expect(screen.queryAllByRole("img")).toHaveLength(4);
-})
+});

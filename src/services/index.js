@@ -172,7 +172,7 @@ export function usarBrujaSalem(datos) {
  * Envia al back un mensaje para el chat de la partida
  * @param {object} datos id partida, nombre del jugador y
  * mensaje
- * @returns 
+ * @returns
  */
 export function enviarMensaje(datos) {
     return axios({

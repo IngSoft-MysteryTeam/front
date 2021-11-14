@@ -23,7 +23,10 @@ export default function PreUnirse(props) {
                 <BotonUnirse
                     partida={props.partida}
                     unirse={props.Unirsepartida}
-                    disabled={!props.color || (props.partida.password && !props.password)}
+                    disabled={
+                        !props.color ||
+                        (props.partida.password && !props.password)
+                    }
                 />
                 <button
                     className="btn btn-dark"

@@ -31,7 +31,7 @@ export default function Informe(props) {
         "Panteón",
         "Salón",
         "Bodega",
-        "Vestíbulo"
+        "Vestíbulo",
     ];
 
     return (

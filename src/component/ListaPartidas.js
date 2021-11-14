@@ -53,7 +53,7 @@ export default function ListaPartidas() {
             id_partida: e.id_partida,
             nombre: obtNombrejugador(),
             color: color,
-            password: password
+            password: password,
         })
             .then((res) => {
                 console.log(res);
@@ -123,7 +123,11 @@ export default function ListaPartidas() {
                     <tbody>
                         {partidas.map((e, key) => (
                             <tr key={key}>
-                                <td>{e.password ? <FontAwesomeIcon icon={faLock} /> : null}</td>
+                                <td>
+                                    {e.password ? (
+                                        <FontAwesomeIcon icon={faLock} />
+                                    ) : null}
+                                </td>
                                 <td>{e.nombre}</td>
                                 <td>{e.anfitrion}</td>
                                 <td>

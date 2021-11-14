@@ -21,26 +21,26 @@ test("si la acusación es correcta, dice que fue acertada", () => {
     let acusar = {
         nombre: "David",
         cartas: ["ALCOBA", "COCHERA", "BIBLIOTECA"],
-        correcta: true
+        correcta: true,
     };
 
     render(<MostrarAcusacion acusar={acusar} />);
 
     expect(screen.getByText("David acusó")).toBeInTheDocument();
 
-    expect(screen.getByText("La acusación fue acertada.")).toBeInTheDocument()
+    expect(screen.getByText("La acusación fue acertada.")).toBeInTheDocument();
 });
 
 test("si la acusación es incorrecta, dice que fue erronea", () => {
     let acusar = {
         nombre: "David",
         cartas: ["ALCOBA", "COCHERA", "BIBLIOTECA"],
-        correcta: false
+        correcta: false,
     };
 
     render(<MostrarAcusacion acusar={acusar} />);
 
     expect(screen.getByText("David acusó")).toBeInTheDocument();
 
-    expect(screen.getByText("La acusación fue erronea.")).toBeInTheDocument()
+    expect(screen.getByText("La acusación fue erronea.")).toBeInTheDocument();
 });

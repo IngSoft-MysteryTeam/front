@@ -112,7 +112,7 @@ export default function ListadeCartas(props) {
     ];
 
     return (
-        <div className='popup'>
+        <div className="popup">
             <div style={{ display: "flex" }}>
                 <div
                     style={{
@@ -217,14 +217,16 @@ export default function ListadeCartas(props) {
                         recinto: recinto,
                     }}
                     setAcusando={props.setAcusando}
-                    disabled={victima === "" || monstruo === "" || recinto === ""}
+                    disabled={
+                        victima === "" || monstruo === "" || recinto === ""
+                    }
                 />
                 <button
                     className="btn btn-dark"
                     onClick={(e) => {
                         setMonstruo("");
                         setVictima("");
-                        setRecinto("")
+                        setRecinto("");
                         props.setAcusando(false);
                     }}
                 >

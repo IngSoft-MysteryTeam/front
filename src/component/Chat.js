@@ -44,7 +44,9 @@ export default function Chat(props) {
                     style={{ flexGrow: 1 }}
                     placeholder="Escribe un mensaje..."
                     onKeyUp={(e) =>
-                        e.key === "Enter" && mensaje ? mandarMensaje(mensaje) : null
+                        e.key === "Enter" && mensaje
+                            ? mandarMensaje(mensaje)
+                            : null
                     }
                     value={mensaje}
                     onChange={(e) => setMensaje(e.target.value)}

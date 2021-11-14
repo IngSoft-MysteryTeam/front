@@ -40,7 +40,7 @@ export default function Recinto(props) {
                 props.jugadores,
                 props.imagen.toUpperCase()
             ).map((e, key) => (
-                <Ficha color={e.color} tamaño="30px" key={key}/>
+                <Ficha color={e.color} tamaño="30px" key={key} />
             ))}
         </div>
     );
