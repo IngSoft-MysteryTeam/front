@@ -145,7 +145,7 @@ export default function ListaPartidas() {
                         ))}
                         {partidas.length === 0 ? (
                             <tr style={{ pointerEvents: "none" }}>
-                                <td colSpan={3}>
+                                <td colSpan={4}>
                                     <i style={{ color: "gray" }}>
                                         No hay partidas
                                     </i>
