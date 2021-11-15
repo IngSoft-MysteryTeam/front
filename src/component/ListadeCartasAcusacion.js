@@ -113,6 +113,7 @@ export default function ListadeCartas(props) {
 
     return (
         <div className="popup">
+            <h1>Acusar</h1>
             <div style={{ display: "flex" }}>
                 <div
                     style={{
