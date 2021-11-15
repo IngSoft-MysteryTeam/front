@@ -16,6 +16,7 @@ export default function DistribuirCartas(props) {
             {props.cartas.map((e, index) =>
                 e === "BRUJASALEM" ? (
                     <CartaSalem
+                        miturno={props.miturno}
                         key={index}
                         id_partida={props.id_partida}
                         id_jugador={props.id_jugador}

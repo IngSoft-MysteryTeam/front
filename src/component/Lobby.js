@@ -102,16 +102,21 @@ export default function Lobby() {
      */
     const location = useLocation();
     /**
-     * Estado que guarda toda la entidad los jugadores de la partida
+     * Estado que guarda toda la entidad los jugadores de la partida.
      * con todos sus atributos.
      * @param  {List} location.state.jugadores Jugadores en la partida
      */
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     /**
-     * Estado que nos indica el turno del jugador
+     * Estado que nos indica el numero de orden en la partida del jugador.
      * @param  {int} null Número que indica el orden del jugador
      */
     const [turno, setTurno] = useState(null);
+    /**
+     * Estado que indica si es el turno de un jugador.
+     * @param  {bool} false
+     */
+    const [miturno, setMiturno] = useState(false);
     /**
      * Estado que indica si lanzó el dado un jugador y guarda el valor obtenido.
      * @param  {int} -1 Número del dado
@@ -221,6 +226,11 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
+                if (json.nombre === obtNombrejugador()) {
+                    setMiturno(true);
+                }else{
+                    setMiturno(false);
+                }
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
@@ -506,6 +516,7 @@ export default function Lobby() {
                 <Informe iniciada={!(turno === null)}></Informe>
             </div>
             <DistribuirCartas
+                miturno={miturno}
                 cartas={cartas}
                 id_partida={params.id}
                 id_jugador={location.state.id_jugador}

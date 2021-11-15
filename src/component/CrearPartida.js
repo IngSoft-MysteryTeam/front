@@ -87,12 +87,16 @@ export default function CreaPartida() {
             <input
                 required
                 placeholder="Escribe un nombre..."
+                maxLength = "20"
+                minLength = "4"
                 onChange={(e) => setNombre(e.target.value)}
                 style={{ width: "500px" }}
             />
             <input
                 placeholder="Contraseña"
                 type="password"
+                maxLength = "30"
+                minLength = "3"
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ width: "500px" }}
             />

@@ -332,7 +332,7 @@ const casillerosEspeciales = [
                 src="/tablero/trampa.svg"
                 alt="Trampa"
                 height="37px"
-                style={{ position: "absolute" }}
+                style={{ position: "absolute", transform: "rotate(0.5turn)" }}
             />
         ),
     },
@@ -345,7 +345,7 @@ const casillerosEspeciales = [
                 src="/tablero/trampa.svg"
                 alt="Trampa"
                 height="37px"
-                style={{ position: "absolute" }}
+                style={{ position: "absolute", transform: "rotate(0.5turn)" }}
             />
         ),
     },
