@@ -31,7 +31,7 @@ test("si la acusación es correcta, dice que fue acertada", () => {
     expect(screen.getByText("La acusación fue acertada.")).toBeInTheDocument();
 });
 
-test("si la acusación es incorrecta, dice que fue erronea", () => {
+test("si la acusación es incorrecta, dice que fue errónea", () => {
     let acusar = {
         nombre: "David",
         cartas: ["ALCOBA", "COCHERA", "BIBLIOTECA"],
@@ -42,5 +42,5 @@ test("si la acusación es incorrecta, dice que fue erronea", () => {
 
     expect(screen.getByText("David acusó")).toBeInTheDocument();
 
-    expect(screen.getByText("La acusación fue erronea.")).toBeInTheDocument();
+    expect(screen.getByText("La acusación fue errónea.")).toBeInTheDocument();
 });

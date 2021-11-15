@@ -29,7 +29,7 @@ export default function MostrarAcusacion(props) {
                 </>
             ) : (
                 <>
-                    <h2>La acusación fue erronea.</h2>
+                    <h2>La acusación fue errónea.</h2>
                     <h2>{props.acusar.nombre} ha perdido la partida.</h2>
                 </>
             )}
