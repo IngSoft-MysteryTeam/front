@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: component/Informe.js</title>
+    <title>JSDoc: Source: component/Sumario.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: component/Informe.js</h1>
+    <h1 class="page-title">Source: component/Sumario.js</h1>
 
     
 
@@ -26,84 +26,58 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import SuperCheckbox from "./SuperCheckbox";
-
+            <pre class="prettyprint source linenums"><code>import { useHistory } from "react-router";
 /**
- * Componente que renderiza un informe.
- *
+ * Renderiza las estadisticas al finalizar una partida
+ * @param {Object} sumario
  */
-export default function Informe(props) {
-    const victimas = [
-        "Conde",
-        "Condesa",
-        "Ama de llaves",
-        "Mayordomo",
-        "Doncella",
-        "Jardinero",
-    ];
-
-    const monstruos = [
-        "Drácula",
-        "Frankenstein",
-        "Hombre Lobo",
-        "Fantasma",
-        "Momia",
-        "Dr. Jekyll &amp; Mr. Hyde",
-    ];
-
-    const recintos = [
-        "Cochera",
-        "Alcoba",
-        "Biblioteca",
-        "Laboratorio",
-        "Panteón",
-        "Salón",
-        "Bodega",
-        "Vestíbulo",
-    ];
+export default function Sumario({ sumario }) {
+    const history = useHistory();
 
     return (
-        &lt;div
-            className="informe"
-            style={{ opacity: props.iniciada ? "100%" : "0%" }}
-        >
-            &lt;h1 style={{ marginBottom: 0 }}>INFORME&lt;/h1>
-            &lt;div>
-                &lt;div className="encabezadoInforme">MONSTRUO&lt;/div>
-                &lt;div className="cuerpoInforme">
-                    {monstruos.map((e, i) => (
-                        &lt;div className="itemInforme" key={i}>
-                            &lt;div className="nombreItemInforme">{e}&lt;/div>
-                            &lt;SuperCheckbox />
-                            &lt;input className="textboxInforme" />
-                        &lt;/div>
-                    ))}
-                &lt;/div>
-            &lt;/div>
-            &lt;div>
-                &lt;div className="encabezadoInforme">VÍCTIMA&lt;/div>
-                &lt;div className="cuerpoInforme">
-                    {victimas.map((e, i) => (
-                        &lt;div className="itemInforme" key={i}>
-                            &lt;div className="nombreItemInforme">{e}&lt;/div>
-                            &lt;SuperCheckbox />
-                            &lt;input className="textboxInforme" />
-                        &lt;/div>
-                    ))}
-                &lt;/div>
-            &lt;/div>
-            &lt;div>
-                &lt;div className="encabezadoInforme">RECINTO&lt;/div>
-                &lt;div className="cuerpoInforme">
-                    {recintos.map((e, i) => (
-                        &lt;div className="itemInforme" key={i}>
-                            &lt;div className="nombreItemInforme">{e}&lt;/div>
-                            &lt;SuperCheckbox />
-                            &lt;input className="textboxInforme" />
-                        &lt;/div>
-                    ))}
-                &lt;/div>
-            &lt;/div>
+        &lt;div className="popup">
+            {Object.keys(sumario.ganador).length > 0 ? (
+                &lt;>
+                    &lt;h1>{sumario.ganador.nombre} ha ganado la partida&lt;/h1>
+                    &lt;div style={{ display: "flex", columnGap: "10px" }}>
+                        {sumario.ganador.cartas.map((e, i) => (
+                            &lt;img
+                                src={`/cartas/${e}.png`}
+                                height="200px"
+                                key={i}
+                                alt={e}
+                            />
+                        ))}
+                    &lt;/div>
+                    &lt;h3>Además, hizo {sumario.ganador.sospechas} sospechas&lt;/h3>
+                &lt;/>
+            ) : (
+                &lt;>
+                    &lt;h1>Nadie ganó la partida&lt;/h1>
+                &lt;/>
+            )}
+            {sumario.perdedores.map((e, i) => (
+                (e.cartas.length === 0) ? (
+                    &lt;h3>
+                        {e.nombre} no acuso.
+                        hizo {e.sospechas} sospechas
+                    &lt;/h3>
+                ) :
+                &lt;>
+                    &lt;h3>
+                        {e.nombre} acusó: {e.cartas.map((e, i) => e + " ")}-
+                        hizo {e.sospechas} sospechas
+                    &lt;/h3>
+                &lt;/>
+            ))}
+            &lt;h3>Se realizaron {sumario.total_sospechas} sospechas en total&lt;/h3>
+            &lt;h3>La partida duró {sumario.tiempo}&lt;/h3>
+            &lt;button
+                className="btn btn-dark"
+                onClick={(e) => history.push("/inicio")}
+            >
+                Volver al inicio
+            &lt;/button>
         &lt;/div>
     );
 }

@@ -34,7 +34,7 @@ import Dado from "./Dado";
 import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
-import { obtNombrejugador } from "../services";
+import { obtenerSumario, obtNombrejugador } from "../services";
 import ListadeCartasSospecha from "./ListadeCartasSospecha";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
@@ -47,6 +47,7 @@ import Informe from "./Informe";
 import MostrarCartaMisterio from "./MostrarCartaMisterio";
 import MostrarPerdioCarta from "./MostrarPerdioCarta";
 import Chat from "./Chat";
+import Sumario from "./Sumario";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -130,16 +131,21 @@ export default function Lobby() {
      */
     const location = useLocation();
     /**
-     * Estado que guarda toda la entidad los jugadores de la partida
+     * Estado que guarda toda la entidad los jugadores de la partida.
      * con todos sus atributos.
      * @param  {List} location.state.jugadores Jugadores en la partida
      */
     const [jugadores, setJugadores] = useState(location.state.jugadores);
     /**
-     * Estado que nos indica el turno del jugador
+     * Estado que nos indica el numero de orden en la partida del jugador.
      * @param  {int} null Número que indica el orden del jugador
      */
     const [turno, setTurno] = useState(null);
+    /**
+     * Estado que indica si es el turno de un jugador.
+     * @param  {bool} false
+     */
+    const [miturno, setMiturno] = useState(false);
     /**
      * Estado que indica si lanzó el dado un jugador y guarda el valor obtenido.
      * @param  {int} -1 Número del dado
@@ -221,6 +227,8 @@ export default function Lobby() {
 
     const [mensajesChat, setMensajesChat] = useState([]);
 
+    const [sumario, setSumario] = useState(null);
+
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
@@ -249,6 +257,11 @@ export default function Lobby() {
                     oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
                 );
             } else if (json.evento === "Nuevo turno") {
+                if (json.nombre === obtNombrejugador()) {
+                    setMiturno(true);
+                } else {
+                    setMiturno(false);
+                }
                 setSospecha(null);
                 setTurno(json.turno);
                 setDado(-1);
@@ -358,6 +371,15 @@ export default function Lobby() {
         );
     }, [location.state.id_jugador, params.id]);
 
+    useEffect(() => {
+        if (findepartida) {
+            obtenerSumario({ id_partida: params.id }).then((res) => {
+                console.log(res.data);
+                setSumario(res.data);
+            });
+        }
+    }, [findepartida]);
+
     return (
         &lt;div style={{ maxWidth: "1500px", margin: "auto" }}>
             &lt;div
@@ -396,7 +418,7 @@ export default function Lobby() {
                         {turno != null &amp;&amp;
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &amp;&amp;
-                        !perdio ? (
+                        !perdio &amp;&amp; !findepartida ? (
                             &lt;>
                                 {dado === -1 ? (
                                     &lt;>
@@ -488,10 +510,14 @@ export default function Lobby() {
                         />
                     ) : null}
                     {acusar ? (
-                        &lt;MostrarAcusacion
-                            acusar={acusar}
-                            setacusar={setAcusar}
-                        />
+                        findepartida &amp;&amp; sumario ? (
+                            &lt;Sumario sumario={sumario} />
+                        ) : (
+                            &lt;MostrarAcusacion
+                                acusar={acusar}
+                                setacusar={setAcusar}
+                            />
+                        )
                     ) : null}
                     {salem ? (
                         &lt;MostrarCartaMisterio
@@ -534,6 +560,7 @@ export default function Lobby() {
                 &lt;Informe iniciada={!(turno === null)}>&lt;/Informe>
             &lt;/div>
             &lt;DistribuirCartas
+                miturno={miturno}
                 cartas={cartas}
                 id_partida={params.id}
                 id_jugador={location.state.id_jugador}
@@ -551,13 +578,13 @@ export default function Lobby() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#asigNombrejugador">asigNombrejugador</a></li><li><a href="global.html#BotonAct">BotonAct</a></li><li><a href="global.html#BotonCrear">BotonCrear</a></li><li><a href="global.html#buscarJugadores">buscarJugadores</a></li><li><a href="global.html#buscarJugadoresRecinto">buscarJugadoresRecinto</a></li><li><a href="global.html#entrarRecinto">entrarRecinto</a></li><li><a href="global.html#enviarMensaje">enviarMensaje</a></li><li><a href="global.html#esCasillero">esCasillero</a></li><li><a href="global.html#esPosicionPosible">esPosicionPosible</a></li><li><a href="global.html#estaEnUnaEntrada">estaEnUnaEntrada</a></li><li><a href="global.html#getTama%25C3%25B1oFicha">getTamañoFicha</a></li><li><a href="global.html#hacerAcusacion">hacerAcusacion</a></li><li><a href="global.html#hacerSospecha">hacerSospecha</a></li><li><a href="global.html#iniciarPartida">iniciarPartida</a></li><li><a href="global.html#miColor">miColor</a></li><li><a href="global.html#moverFicha">moverFicha</a></li><li><a href="global.html#nuevaPartida">nuevaPartida</a></li><li><a href="global.html#nuevoJugador">nuevoJugador</a></li><li><a href="global.html#obtCasilleroEspecial">obtCasilleroEspecial</a></li><li><a href="global.html#obtDado">obtDado</a></li><li><a href="global.html#obtNombrejugador">obtNombrejugador</a></li><li><a href="global.html#pasarTurno">pasarTurno</a></li><li><a href="global.html#responderSospecha">responderSospecha</a></li><li><a href="global.html#traerPartidas">traerPartidas</a></li><li><a href="global.html#unirJugador">unirJugador</a></li><li><a href="global.html#usarBrujaSalem">usarBrujaSalem</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#asigNombrejugador">asigNombrejugador</a></li><li><a href="global.html#BotonAct">BotonAct</a></li><li><a href="global.html#BotonCrear">BotonCrear</a></li><li><a href="global.html#buscarJugadores">buscarJugadores</a></li><li><a href="global.html#buscarJugadoresRecinto">buscarJugadoresRecinto</a></li><li><a href="global.html#entrarRecinto">entrarRecinto</a></li><li><a href="global.html#enviarMensaje">enviarMensaje</a></li><li><a href="global.html#esCasillero">esCasillero</a></li><li><a href="global.html#esPosicionPosible">esPosicionPosible</a></li><li><a href="global.html#estaEnUnaEntrada">estaEnUnaEntrada</a></li><li><a href="global.html#getTama%25C3%25B1oFicha">getTamañoFicha</a></li><li><a href="global.html#hacerAcusacion">hacerAcusacion</a></li><li><a href="global.html#hacerSospecha">hacerSospecha</a></li><li><a href="global.html#iniciarPartida">iniciarPartida</a></li><li><a href="global.html#miColor">miColor</a></li><li><a href="global.html#moverFicha">moverFicha</a></li><li><a href="global.html#nuevaPartida">nuevaPartida</a></li><li><a href="global.html#nuevoJugador">nuevoJugador</a></li><li><a href="global.html#obtCasilleroEspecial">obtCasilleroEspecial</a></li><li><a href="global.html#obtDado">obtDado</a></li><li><a href="global.html#obtenerSumario">obtenerSumario</a></li><li><a href="global.html#obtNombrejugador">obtNombrejugador</a></li><li><a href="global.html#pasarTurno">pasarTurno</a></li><li><a href="global.html#responderSospecha">responderSospecha</a></li><li><a href="global.html#traerPartidas">traerPartidas</a></li><li><a href="global.html#unirJugador">unirJugador</a></li><li><a href="global.html#usarBrujaSalem">usarBrujaSalem</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Nov 14 2021 00:07:52 GMT-0300 (hora estándar de Argentina)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Nov 16 2021 16:08:12 GMT-0300 (hora estándar de Argentina)
 </footer>
 
 <script> prettyPrint(); </script>

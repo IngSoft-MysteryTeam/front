@@ -26,8 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import BotonUnirse from "./BotonUnirse";
-import SelectorColores from "./SelectorColores";
+            <pre class="prettyprint source linenums"><code>import SelectorColores from "./SelectorColores";
 /**
  * Renderiza la opcion de elegir color antes de unirse.
  * @param  {props} props
@@ -36,37 +35,56 @@ export default function PreUnirse(props) {
     return (
         &lt;div className="popup">
             &lt;h1>Unirse a {props.partida.nombre}&lt;/h1>
-            &lt;SelectorColores
-                colores={props.partida.colores}
-                setColor={props.setColor}
-            />
-            {props.partida.password ? (
-                &lt;input
-                    type="password"
-                    placeholder="Contraseña"
-                    onChange={(e) => props.setPassword(e.target.value)}
+            &lt;form
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "20px",
+                    alignItems: "center"
+                }}
+            >
+                &lt;SelectorColores
+                    colores={props.partida.colores}
+                    setColor={props.setColor}
+                    autoFocus={true}
                 />
-            ) : null}
-            &lt;div style={{ display: "flex", columnGap: "10px" }}>
-                &lt;BotonUnirse
-                    partida={props.partida}
-                    unirse={props.Unirsepartida}
-                    disabled={
-                        !props.color ||
-                        (props.partida.password &amp;&amp; !props.password)
-                    }
-                />
-                &lt;button
-                    className="btn btn-dark"
-                    onClick={(e) => {
-                        props.setColor(null);
-                        props.setPassword("");
-                        props.setPrePartida(null);
+                {props.partida.password ? (
+                    &lt;input
+                        type="password"
+                        placeholder="Contraseña"
+                        required
+                        onChange={(e) => props.setPassword(e.target.value)}
+                    />
+                ) : null}
+                &lt;div
+                    style={{
+                        display: "flex",
+                        columnGap: "10px",
+                        justifyContent: "center",
                     }}
                 >
-                    Cancelar
-                &lt;/button>
-            &lt;/div>
+                    &lt;button
+                        className='btn btn-dark'
+                        onClick={props.Unirsepartida}
+                        disabled={
+                            !props.color ||
+                            (props.partida.password &amp;&amp; !props.password)
+                        }
+                    >
+                        Unirse
+                    &lt;/button>
+                    &lt;button
+                        className="btn btn-dark"
+                        onClick={(e) => {
+                            props.setColor(null);
+                            props.setPassword("");
+                            props.setPrePartida(null);
+                        }}
+                    >
+                        Cancelar
+                    &lt;/button>
+                &lt;/div>
+            &lt;/form>
         &lt;/div>
     );
 }
@@ -80,13 +98,13 @@ export default function PreUnirse(props) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#asigNombrejugador">asigNombrejugador</a></li><li><a href="global.html#BotonAct">BotonAct</a></li><li><a href="global.html#BotonCrear">BotonCrear</a></li><li><a href="global.html#buscarJugadores">buscarJugadores</a></li><li><a href="global.html#buscarJugadoresRecinto">buscarJugadoresRecinto</a></li><li><a href="global.html#entrarRecinto">entrarRecinto</a></li><li><a href="global.html#enviarMensaje">enviarMensaje</a></li><li><a href="global.html#esCasillero">esCasillero</a></li><li><a href="global.html#esPosicionPosible">esPosicionPosible</a></li><li><a href="global.html#estaEnUnaEntrada">estaEnUnaEntrada</a></li><li><a href="global.html#getTama%25C3%25B1oFicha">getTamañoFicha</a></li><li><a href="global.html#hacerAcusacion">hacerAcusacion</a></li><li><a href="global.html#hacerSospecha">hacerSospecha</a></li><li><a href="global.html#iniciarPartida">iniciarPartida</a></li><li><a href="global.html#miColor">miColor</a></li><li><a href="global.html#moverFicha">moverFicha</a></li><li><a href="global.html#nuevaPartida">nuevaPartida</a></li><li><a href="global.html#nuevoJugador">nuevoJugador</a></li><li><a href="global.html#obtCasilleroEspecial">obtCasilleroEspecial</a></li><li><a href="global.html#obtDado">obtDado</a></li><li><a href="global.html#obtNombrejugador">obtNombrejugador</a></li><li><a href="global.html#pasarTurno">pasarTurno</a></li><li><a href="global.html#responderSospecha">responderSospecha</a></li><li><a href="global.html#traerPartidas">traerPartidas</a></li><li><a href="global.html#unirJugador">unirJugador</a></li><li><a href="global.html#usarBrujaSalem">usarBrujaSalem</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#asigNombrejugador">asigNombrejugador</a></li><li><a href="global.html#BotonAct">BotonAct</a></li><li><a href="global.html#BotonCrear">BotonCrear</a></li><li><a href="global.html#buscarJugadores">buscarJugadores</a></li><li><a href="global.html#buscarJugadoresRecinto">buscarJugadoresRecinto</a></li><li><a href="global.html#entrarRecinto">entrarRecinto</a></li><li><a href="global.html#enviarMensaje">enviarMensaje</a></li><li><a href="global.html#esCasillero">esCasillero</a></li><li><a href="global.html#esPosicionPosible">esPosicionPosible</a></li><li><a href="global.html#estaEnUnaEntrada">estaEnUnaEntrada</a></li><li><a href="global.html#getTama%25C3%25B1oFicha">getTamañoFicha</a></li><li><a href="global.html#hacerAcusacion">hacerAcusacion</a></li><li><a href="global.html#hacerSospecha">hacerSospecha</a></li><li><a href="global.html#iniciarPartida">iniciarPartida</a></li><li><a href="global.html#miColor">miColor</a></li><li><a href="global.html#moverFicha">moverFicha</a></li><li><a href="global.html#nuevaPartida">nuevaPartida</a></li><li><a href="global.html#nuevoJugador">nuevoJugador</a></li><li><a href="global.html#obtCasilleroEspecial">obtCasilleroEspecial</a></li><li><a href="global.html#obtDado">obtDado</a></li><li><a href="global.html#obtenerSumario">obtenerSumario</a></li><li><a href="global.html#obtNombrejugador">obtNombrejugador</a></li><li><a href="global.html#pasarTurno">pasarTurno</a></li><li><a href="global.html#responderSospecha">responderSospecha</a></li><li><a href="global.html#traerPartidas">traerPartidas</a></li><li><a href="global.html#unirJugador">unirJugador</a></li><li><a href="global.html#usarBrujaSalem">usarBrujaSalem</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Nov 14 2021 00:07:52 GMT-0300 (hora estándar de Argentina)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Nov 16 2021 16:08:12 GMT-0300 (hora estándar de Argentina)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,5 +1,8 @@
 import { useHistory } from "react-router";
-
+/**
+ * Renderiza las estadisticas al finalizar una partida
+ * @param {Object} sumario
+ */
 export default function Sumario({ sumario }) {
     const history = useHistory();
 
