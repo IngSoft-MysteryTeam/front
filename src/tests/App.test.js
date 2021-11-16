@@ -4,7 +4,7 @@ import App from "../App";
 
 jest.mock("../services/index");
 
-test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te redirige al lobby de la partida", async () => {
+test("al entrar con un nombre valido, buscar una partida, elegir color y clickear ingresar, te redirige al lobby de la partida", async () => {
     render(<App />);
 
     let input = screen.getByRole("textbox");
@@ -20,6 +20,7 @@ test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te
                     nombre: "Test",
                     anfitrion: "Santi",
                     cantidad_jugadores: 1,
+                    colores: ["red"],
                 },
             ],
         })
@@ -45,6 +46,14 @@ test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te
     const unirse = await screen.findByRole("button", { name: "Unirse" });
 
     fireEvent.click(unirse);
+
+    const color = screen.getByRole("radio");
+
+    fireEvent.click(color);
+
+    const unirse2 = screen.getAllByRole("button", { name: "Unirse" })[0];
+
+    fireEvent.click(unirse2);
 
     expect(await screen.findByText("David"));
 });
