@@ -196,9 +196,15 @@ export default function Lobby() {
      * @param  {bool} null
      */
     const [perdioBruja, setPerdioBruja] = useState(null);
-
+    /**
+     * Estado que guarda los mensajes enviados por websocket desde el back.
+     * @param  {List} []
+     */
     const [mensajesChat, setMensajesChat] = useState([]);
-
+    /**
+     * 
+     * @param  {objet} null
+     */
     const [sumario, setSumario] = useState(null);
 
     useEffect(() => {
