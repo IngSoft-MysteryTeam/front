@@ -180,3 +180,14 @@ export function enviarMensaje(datos) {
         },
     });
 }
+
+/**
+ * Pide al back el sumario de la partida
+ * @param {object} datos id partida
+ */
+export function obtenerSumario(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/sumario`,
+        method: "GET",
+    });
+}

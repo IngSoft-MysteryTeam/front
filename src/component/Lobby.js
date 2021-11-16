@@ -6,7 +6,7 @@ import Dado from "./Dado";
 import BotonDado from "./BotonDado";
 import ListaJugadores from "./ListaJugadores";
 import DistribuirCartas from "./DistribuirCartas";
-import { obtNombrejugador } from "../services";
+import { obtenerSumario, obtNombrejugador } from "../services";
 import ListadeCartasSospecha from "./ListadeCartasSospecha";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
@@ -19,6 +19,7 @@ import Informe from "./Informe";
 import MostrarCartaMisterio from "./MostrarCartaMisterio";
 import MostrarPerdioCarta from "./MostrarPerdioCarta";
 import Chat from "./Chat";
+import Sumario from "./Sumario";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -198,6 +199,8 @@ export default function Lobby() {
 
     const [mensajesChat, setMensajesChat] = useState([]);
 
+    const [sumario, setSumario] = useState(null);
+
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
@@ -228,7 +231,7 @@ export default function Lobby() {
             } else if (json.evento === "Nuevo turno") {
                 if (json.nombre === obtNombrejugador()) {
                     setMiturno(true);
-                }else{
+                } else {
                     setMiturno(false);
                 }
                 setSospecha(null);
@@ -339,6 +342,13 @@ export default function Lobby() {
             console.log("Se cayo la conexion")
         );
     }, [location.state.id_jugador, params.id]);
+
+    useEffect(() => {
+        obtenerSumario({ id_partida: params.id }).then((res) => {
+            console.log(res.data);
+            setSumario(res.data);
+        });
+    }, [findepartida]);
 
     return (
         <div style={{ maxWidth: "1500px", margin: "auto" }}>
@@ -470,10 +480,14 @@ export default function Lobby() {
                         />
                     ) : null}
                     {acusar ? (
-                        <MostrarAcusacion
-                            acusar={acusar}
-                            setacusar={setAcusar}
-                        />
+                        findepartida && sumario ? (
+                            <Sumario sumario={sumario} />
+                        ) : (
+                            <MostrarAcusacion
+                                acusar={acusar}
+                                setacusar={setAcusar}
+                            />
+                        )
                     ) : null}
                     {salem ? (
                         <MostrarCartaMisterio
