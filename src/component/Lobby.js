@@ -344,10 +344,12 @@ export default function Lobby() {
     }, [location.state.id_jugador, params.id]);
 
     useEffect(() => {
-        obtenerSumario({ id_partida: params.id }).then((res) => {
-            console.log(res.data);
-            setSumario(res.data);
-        });
+        if (findepartida) {
+            obtenerSumario({ id_partida: params.id }).then((res) => {
+                console.log(res.data);
+                setSumario(res.data);
+            });
+        }
     }, [findepartida]);
 
     return (
