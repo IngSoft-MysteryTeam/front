@@ -226,7 +226,7 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
-                    oldJugadores.filter((e) => e.nombre !== json.jugador.nombre)
+                    oldJugadores.filter((e) => e.nombre !== json.jugador)
                 );
             } else if (json.evento === "Nuevo turno") {
                 if (json.nombre === obtNombrejugador()) {
