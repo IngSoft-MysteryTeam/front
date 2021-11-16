@@ -68,15 +68,23 @@ export default function Inicio() {
 
             <div
                 className="card text-white bg-dark mb-3"
-                style={{ maxWidth: "500px", margin: "auto" }}
+                style={{
+                    maxWidth: "500px",
+                    margin: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "10px",
+                    padding: "10px",
+                }}
             >
-                <h2 style={{ textAlign: "center", color: "red" }}>
-                    {" "}
-                    Ingresar{" "}
-                </h2>
-                <form onSubmit={enviarJugador}>
+                <h2 style={{ textAlign: "center", color: "red" }}>Ingresar</h2>
+                <form
+                    onSubmit={enviarJugador}
+                    style={{ display: "flex", columnGap: "10px" }}
+                >
                     <input
                         placeholder="Introduce nombre de jugador"
+                        autoFocus
                         className="form-control"
                         type="text"
                         name="nombre"
@@ -84,11 +92,9 @@ export default function Inicio() {
                         maxLength="20"
                         required
                     />
-                    <div>
-                        <button className="btn btn-dark" type="submit">
-                            Ingresar
-                        </button>
-                    </div>
+                    <button className="btn btn-dark" type="submit">
+                        Ingresar
+                    </button>
                 </form>
             </div>
         </div>

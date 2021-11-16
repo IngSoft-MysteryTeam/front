@@ -44,7 +44,8 @@ export default function CreaPartida() {
      * Envía la partida al back
      * @param {Evento} evento Evento del click
      */
-    const enviarPartida = () => {
+    const enviarPartida = (e) => {
+        e.preventDefault();
         nuevaPartida({
             nombre: nombre,
             anfitrion: jugador,
@@ -84,30 +85,42 @@ export default function CreaPartida() {
             }}
         >
             <h1>CREAR PARTIDA</h1>
-            <input
-                required
-                placeholder="Escribe un nombre..."
-                maxLength = "20"
-                minLength = "4"
-                onChange={(e) => setNombre(e.target.value)}
-                style={{ width: "500px" }}
-            />
-            <input
-                placeholder="Contraseña"
-                type="password"
-                maxLength = "30"
-                minLength = "3"
-                onChange={(e) => setPassword(e.target.value)}
-                style={{ width: "500px" }}
-            />
-            <SelectorColores colores={colores} setColor={setColor} />
-            <button
-                className="btn btn-dark"
-                onClick={(e, key) => enviarPartida()}
-                disabled={!(nombre && color)}
+            <form
+                onSubmit={enviarPartida}
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    rowGap: "15px",
+                }}
             >
-                Crear partida
-            </button>
+                <input
+                    required
+                    autoFocus
+                    placeholder="Escribe un nombre..."
+                    maxLength="20"
+                    minLength="4"
+                    onChange={(e) => setNombre(e.target.value)}
+                    style={{ width: "500px" }}
+                />
+                <input
+                    placeholder="Contraseña"
+                    type="password"
+                    maxLength="30"
+                    minLength="3"
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ width: "500px" }}
+                />
+                <SelectorColores colores={colores} setColor={setColor} />
+                <button
+                    className="btn btn-dark"
+                    type="submit"
+                    disabled={!(nombre && color)}
+                >
+                    Crear partida
+                </button>
+            </form>
         </div>
     );
 }

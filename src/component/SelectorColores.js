@@ -19,7 +19,11 @@ export default function SelectorColores(props) {
                 }}
             >
                 {props.colores.map((e, i) => (
-                    <div
+                    <input
+                        type="radio"
+                        name="color"
+                        autoFocus={props.autoFocus && i === 0}
+                        required
                         onMouseOver={(e) => setHover(i)}
                         onMouseOut={(e) => setHover(-1)}
                         onClick={() => {
@@ -27,6 +31,7 @@ export default function SelectorColores(props) {
                             props.setColor(e);
                         }}
                         style={{
+                            appearance: "none",
                             height: "40px",
                             width: "40px",
                             borderRadius: "20px",

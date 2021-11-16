@@ -49,8 +49,9 @@ export default function ListaPartidas() {
      * @param {Evento} e
      */
     function Unirsepartida(e) {
+        e.preventDefault();
         unirJugador({
-            id_partida: e.id_partida,
+            id_partida: prePartida.id_partida,
             nombre: obtNombrejugador(),
             color: color,
             password: password,
@@ -155,9 +156,10 @@ export default function ListaPartidas() {
                     </tbody>
                 </table>
             </div>
-            <BotonAct actpartidas={obtPartidas} />
-            <br />
-            <BotonCrear />
+            <div style={{ display: "flex", columnGap: "10px" }}>
+                <BotonAct actpartidas={obtPartidas} />
+                <BotonCrear />
+            </div>
         </div>
     );
 }

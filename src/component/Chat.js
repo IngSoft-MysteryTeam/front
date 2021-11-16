@@ -9,7 +9,8 @@ import Mensaje from "./Mensaje";
  * Lógica no implementada.
  */
 export default function Chat(props) {
-    function mandarMensaje(mensaje) {
+    function mandarMensaje(e) {
+        e.preventDefault();
         setMensaje("");
         enviarMensaje({
             id_partida: props.id_partida,
@@ -23,7 +24,7 @@ export default function Chat(props) {
         element.scrollTop = element.scrollHeight;
     }, [props.mensajesChat]);
 
-    const [mensaje, setMensaje] = useState("");
+    const [mensaje, setMensaje] = useState();
 
     return (
         <div
@@ -39,27 +40,25 @@ export default function Chat(props) {
                     />
                 ))}
             </div>
-            <div style={{ display: "flex", columnGap: "10px" }}>
+            <form
+                onSubmit={(e) => mandarMensaje(e)}
+                style={{ display: "flex", columnGap: "10px" }}
+            >
                 <input
                     style={{ flexGrow: 1 }}
                     placeholder="Escribe un mensaje..."
-                    onKeyUp={(e) =>
-                        e.key === "Enter" && mensaje
-                            ? mandarMensaje(mensaje)
-                            : null
-                    }
                     value={mensaje}
                     onChange={(e) => setMensaje(e.target.value)}
                     disabled={props.disabled}
                 />
                 <button
+                    type="submit"
                     className="btn btn-dark"
-                    onClick={(e) => mandarMensaje(mensaje)}
                     disabled={!mensaje || props.disabled}
                 >
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
-            </div>
+            </form>
         </div>
     );
 }
