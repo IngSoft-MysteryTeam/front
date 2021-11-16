@@ -390,7 +390,7 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
-                        !perdio ? (
+                        !perdio && !findepartida ? (
                             <>
                                 {dado === -1 ? (
                                     <>
