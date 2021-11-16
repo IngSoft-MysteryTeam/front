@@ -26,6 +26,12 @@ export default function Sumario({ sumario }) {
                 </>
             )}
             {sumario.perdedores.map((e, i) => (
+                (e.cartas.length === 0) ? (
+                    <h3>
+                        {e.nombre} no acuso.
+                        hizo {e.sospechas} sospechas
+                    </h3>
+                ) :
                 <>
                     <h3>
                         {e.nombre} acusó: {e.cartas.map((e, i) => e + " ")}-
