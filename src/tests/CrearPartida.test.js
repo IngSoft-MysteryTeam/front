@@ -13,7 +13,7 @@ test("el campo nombre es requerido", () => {
     expect(input).toHaveAttribute("required");
 });
 
-test("al ingresar un nombre y hacer click en Crear, se llama la funcion nuevaPartida", () => {
+test("al ingresar un nombre, no ingresar contraseña y hacer click en Crear, se llama la funcion nuevaPartida", () => {
     nuevaPartida.mockResolvedValue(Promise.resolve(true));
 
     render(<CreaPartida />);
@@ -22,14 +22,48 @@ test("al ingresar un nombre y hacer click en Crear, se llama la funcion nuevaPar
 
     const input = screen.getByRole("textbox");
 
+    const color = screen.getAllByRole("radio")[0];
+
     obtNombrejugador.mockImplementation(() => "David");
 
     userEvent.type(input, "test");
-
+    
+    fireEvent.click(color);
     fireEvent.click(button);
 
     expect(nuevaPartida).toHaveBeenCalledWith({
         nombre: "test",
         anfitrion: "David",
+        color: "#4285F4",
+        password: "",
+    });
+});
+
+test("al ingresar un nombre, ingresar una contraseña y hacer click en Crear, se llama la funcion nuevaPartida", () => {
+    nuevaPartida.mockResolvedValue(Promise.resolve(true));
+
+    render(<CreaPartida />);
+
+    const button = screen.getByRole("button");
+
+    const input = screen.getByRole("textbox");
+
+    const color = screen.getAllByRole("radio")[0];
+
+    const password = screen.getByPlaceholderText(/contraseña/i);
+
+    obtNombrejugador.mockImplementation(() => "David");
+
+    userEvent.type(input, "test");
+    userEvent.type(password, "hola");
+    
+    fireEvent.click(color);
+    fireEvent.click(button);
+
+    expect(nuevaPartida).toHaveBeenCalledWith({
+        nombre: "test",
+        anfitrion: "David",
+        color: "#4285F4",
+        password: "hola",
     });
 });

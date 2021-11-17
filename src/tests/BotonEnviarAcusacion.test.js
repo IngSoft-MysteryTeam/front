@@ -4,10 +4,10 @@ import BotonEnviarAcusacion from "../component/BotonEnviarAcusacion";
 
 jest.mock("../services/index");
 
-test("al clickear en enviar sospecha, se llama a la funcion hacerSospecha y setSospecha con los argumentos adecuados", () => {
+test("al clickear en enviar acusacion, se llama a la funcion hacerAcusacion y setAcusacion con los argumentos adecuados", () => {
     hacerAcusacion.mockResolvedValue(Promise.resolve(true));
 
-    const setSospecha = jest.fn();
+    const setAcusando = jest.fn();
 
     const data = {
         victima: "CONDESA",
@@ -17,12 +17,11 @@ test("al clickear en enviar sospecha, se llama a la funcion hacerSospecha y setS
         id_jugador: 2,
     };
 
-    render(<BotonEnviarAcusacion setSospecha={setSospecha} data={data} />);
+    render(<BotonEnviarAcusacion setAcusando={setAcusando} data={data} />);
 
     const button = screen.getByRole("button");
 
     fireEvent.click(button);
 
     expect(hacerAcusacion).toHaveBeenCalledWith(data);
-    expect(setSospecha).toHaveBeenCalledWith(null);
 });

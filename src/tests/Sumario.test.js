@@ -1,4 +1,4 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import Sumario from "../component/Sumario"
 
 test("Al terminar la partida se muestran las estadisticas en un sumario", () => {
