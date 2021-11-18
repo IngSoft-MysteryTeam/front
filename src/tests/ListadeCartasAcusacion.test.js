@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ListadeCartas from "../component/ListadecartasAcusacion";
+import ListadeCartas from "../component/ListadeCartasAcusacion";
 
 test("el boton Enviar Acusacion es utilizable si seleccionamos monstruo, recinto y victima", async () => {
     render(<ListadeCartas />);
