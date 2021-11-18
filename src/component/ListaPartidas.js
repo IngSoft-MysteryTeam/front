@@ -61,7 +61,7 @@ export default function ListaPartidas() {
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
-                        state: { ...res.data, nombre: e.nombre },
+                        state: { ...res.data, nombre: prePartida.nombre },
                     });
                 } else if (res.status === 202) {
                     if (res.data.detail === "La partida ya fue iniciada") {
