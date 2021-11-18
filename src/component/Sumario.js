@@ -26,6 +26,17 @@ export default function Sumario({ sumario }) {
             ) : (
                 <>
                     <h1>Nadie ganó la partida</h1>
+                    <h3>Las cartas del Misterio son:</h3>
+                    <div style={{ display: "flex", columnGap: "10px" }}>
+                        {sumario.cartas_misterio.map((e, i) => (
+                            <img
+                                src={`/cartas/${e}.png`}
+                                height="200px"
+                                key={i}
+                                alt={e}
+                            />
+                        ))}
+                    </div>
                 </>
             )}
             {sumario.perdedores.map((e, i) =>
