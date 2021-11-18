@@ -8,11 +8,13 @@ export default function CartaSalem(props) {
     return (
         <div
             className="divCarta"
-            onClick={() => props.miturno ? 
-                usarBrujaSalem({
-                    id_jugador: props.id_jugador,
-                    id_partida: props.id_partida,
-                }) :null
+            onClick={() =>
+                props.miturno
+                    ? usarBrujaSalem({
+                          id_jugador: props.id_jugador,
+                          id_partida: props.id_partida,
+                      })
+                    : null
             }
             style={{ cursor: "pointer" }}
         >

@@ -26,7 +26,9 @@ export default function ListaJugadores(props) {
                             <span
                                 style={{
                                     fontWeight:
-                                        e.nombre === obtNombrejugador() ? "bold" : "",
+                                        e.nombre === obtNombrejugador()
+                                            ? "bold"
+                                            : "",
                                 }}
                             >
                                 {e.nombre}

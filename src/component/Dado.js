@@ -4,5 +4,9 @@
  * @returns renderizado HTML.
  */
 export default function Dado(props) {
-    return <div className="resultadoDado" data-testid="dado">{props.numero}</div>;
+    return (
+        <div className="resultadoDado" data-testid="dado">
+            {props.numero}
+        </div>
+    );
 }

@@ -28,20 +28,20 @@ export default function Sumario({ sumario }) {
                     <h1>Nadie ganó la partida</h1>
                 </>
             )}
-            {sumario.perdedores.map((e, i) => (
-                (e.cartas.length === 0) ? (
+            {sumario.perdedores.map((e, i) =>
+                e.cartas.length === 0 ? (
                     <h3>
-                        {e.nombre} no acuso.
-                        hizo {e.sospechas} sospechas
+                        {e.nombre} no acuso. hizo {e.sospechas} sospechas
                     </h3>
-                ) :
-                <>
-                    <h3>
-                        {e.nombre} acusó: {e.cartas.map((e, i) => e + " ")}-
-                        hizo {e.sospechas} sospechas
-                    </h3>
-                </>
-            ))}
+                ) : (
+                    <>
+                        <h3>
+                            {e.nombre} acusó: {e.cartas.map((e, i) => e + " ")}-
+                            hizo {e.sospechas} sospechas
+                        </h3>
+                    </>
+                )
+            )}
             <h3>Se realizaron {sumario.total_sospechas} sospechas en total</h3>
             <h3>La partida duró {sumario.tiempo}</h3>
             <button

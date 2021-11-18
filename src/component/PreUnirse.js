@@ -12,7 +12,7 @@ export default function PreUnirse(props) {
                     display: "flex",
                     flexDirection: "column",
                     rowGap: "20px",
-                    alignItems: "center"
+                    alignItems: "center",
                 }}
             >
                 <SelectorColores
@@ -36,7 +36,7 @@ export default function PreUnirse(props) {
                     }}
                 >
                     <button
-                        className='btn btn-dark'
+                        className="btn btn-dark"
                         onClick={props.Unirsepartida}
                         disabled={
                             !props.color ||

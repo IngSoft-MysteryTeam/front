@@ -8,13 +8,19 @@ test("el boton Enviar Sospecha solo aparece si seleccionamos monstruo y victima"
     const inputVictimas = screen.getAllByRole("combobox")[0];
     const inputMonstruos = screen.getAllByRole("combobox")[1];
 
-    expect(screen.queryByRole("button", { name: "Enviar Sospecha" })).toBeDisabled();
+    expect(
+        screen.queryByRole("button", { name: "Enviar Sospecha" })
+    ).toBeDisabled();
 
     userEvent.selectOptions(inputVictimas, "CONDESA");
 
-    expect(screen.queryByRole("button", { name: "Enviar Sospecha" })).toBeDisabled();
+    expect(
+        screen.queryByRole("button", { name: "Enviar Sospecha" })
+    ).toBeDisabled();
 
     userEvent.selectOptions(inputMonstruos, "DRACULA");
 
-    expect(await screen.findByRole("button", { name: "Enviar Sospecha" })).not.toBeDisabled();
+    expect(
+        await screen.findByRole("button", { name: "Enviar Sospecha" })
+    ).not.toBeDisabled();
 });

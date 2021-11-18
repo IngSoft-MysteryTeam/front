@@ -202,7 +202,7 @@ export default function Lobby() {
      */
     const [mensajesChat, setMensajesChat] = useState([]);
     /**
-     * 
+     *
      * @param  {objet} null
      */
     const [sumario, setSumario] = useState(null);
@@ -396,7 +396,8 @@ export default function Lobby() {
                         {turno != null &&
                         jugadores.find((e) => e.orden === turno).nombre ===
                             obtNombrejugador() &&
-                        !perdio && !findepartida ? (
+                        !perdio &&
+                        !findepartida ? (
                             <>
                                 {dado === -1 ? (
                                     <>

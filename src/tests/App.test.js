@@ -5,7 +5,7 @@ import App from "../App";
 
 jest.mock("../services/index");
 
-test ("Unirse a una partida con contraseña, te redirige al lobby de la partida", async () => {
+test("Unirse a una partida con contraseña, te redirige al lobby de la partida", async () => {
     render(<App />);
 
     let input = screen.getByRole("textbox");
@@ -46,7 +46,7 @@ test ("Unirse a una partida con contraseña, te redirige al lobby de la partida"
     );
 
     const unirse = await screen.findByRole("button", { name: "Unirse" });
-    
+
     fireEvent.click(unirse);
 
     const color = screen.getByRole("radio");

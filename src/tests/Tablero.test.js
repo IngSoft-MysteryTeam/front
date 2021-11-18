@@ -12,13 +12,14 @@ test("el tablero muestra todos los casilleros", () => {
 test("el tablero muestra todos los recintos", () => {
     render(<Tablero jugadores={[]} posPosibles={[]} />);
 
-    expect(screen.getByRole("img", {name: "Cochera"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Alcoba"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Biblioteca"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Vestíbulo"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Panteón"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Bodega"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Salón"})).toBeInTheDocument();
-    expect(screen.getByRole("img", {name: "Laboratorio"})).toBeInTheDocument();
-
+    expect(screen.getByRole("img", { name: "Cochera" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Alcoba" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Biblioteca" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Vestíbulo" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Panteón" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Bodega" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Salón" })).toBeInTheDocument();
+    expect(
+        screen.getByRole("img", { name: "Laboratorio" })
+    ).toBeInTheDocument();
 });

@@ -27,7 +27,7 @@ test("al ingresar un nombre, no ingresar contraseña y hacer click en Crear, se 
     obtNombrejugador.mockImplementation(() => "David");
 
     userEvent.type(input, "test");
-    
+
     fireEvent.click(color);
     fireEvent.click(button);
 
@@ -56,7 +56,7 @@ test("al ingresar un nombre, ingresar una contraseña y hacer click en Crear, se
 
     userEvent.type(input, "test");
     userEvent.type(password, "hola");
-    
+
     fireEvent.click(color);
     fireEvent.click(button);
 
