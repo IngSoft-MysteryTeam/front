@@ -22,6 +22,7 @@ export default function SuperCheckbox() {
                 <div
                     className="superCheckbox"
                     onClick={(e) => aumentarEstado()}
+                    data-testid="supercheckbox"
                 />
             );
         case 1:
@@ -29,6 +30,7 @@ export default function SuperCheckbox() {
                 <div
                     className="superCheckbox"
                     onClick={(e) => aumentarEstado()}
+                    data-testid="supercheckbox"
                 >
                     <FontAwesomeIcon
                         icon={faCheck}
@@ -41,6 +43,7 @@ export default function SuperCheckbox() {
                 <div
                     className="superCheckbox"
                     onClick={(e) => aumentarEstado()}
+                    data-testid="supercheckbox"
                 >
                     <FontAwesomeIcon
                         icon={faTimes}
@@ -53,6 +56,7 @@ export default function SuperCheckbox() {
                 <div
                     className="superCheckbox"
                     onClick={(e) => aumentarEstado()}
+                    data-testid="supercheckbox"
                 >
                     <FontAwesomeIcon
                         icon={faQuestion}
