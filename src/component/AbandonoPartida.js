@@ -1,3 +1,7 @@
+/**
+ * Componente que muestra las cartas de un jugador que abandono la partida
+ * @param {object} props nombre y cartas
+ */
 export default function AbandonoPartida(props) {
     return (
         <div className="popup" style={{ width: "821px" }}>

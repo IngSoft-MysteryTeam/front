@@ -1,5 +1,9 @@
 import { useHistory } from "react-router";
 
+/**
+ * Componente que muestra cuando una partida se cancela cuando
+ * el anfitrion abandona 
+ */
 export default function PartidaCancelada() {
     const history = useHistory();
     return(
