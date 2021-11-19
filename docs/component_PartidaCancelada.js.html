@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: component/Recinto.js</title>
+    <title>JSDoc: Source: component/PartidaCancelada.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: component/Recinto.js</h1>
+    <h1 class="page-title">Source: component/PartidaCancelada.js</h1>
 
     
 
@@ -26,54 +26,23 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import Ficha from "./Ficha";
+            <pre class="prettyprint source linenums"><code>import { useHistory } from "react-router";
 
 /**
- * Busca jugadores que estén en el recinto y devuelve un arreglo
- * con los mismos.
- * @param {Array} jugadores
- * @param {string} recinto
- * @returns {Array}
+ * Componente que muestra cuando una partida se cancela cuando
+ * el anfitrion abandona 
  */
-function buscarJugadoresRecinto(jugadores, recinto) {
-    let res = Array.from(jugadores);
-
-    res = res.filter((e) => e.recinto === recinto);
-
-    return res;
-}
-
-/**
- * Renderiza un recinto
- * @param {object} props
- */
-export default function Recinto(props) {
-    return (
-        &lt;div
-            className="recinto"
-            style={{
-                gridColumnStart: props.xInicio + 1,
-                gridColumnEnd: props.xFin + 1,
-                gridRowStart: props.yInicio + 1,
-                gridRowEnd: props.yFin + 1,
-            }}
-        >
-            &lt;img
-                src={`/tablero/${props.imagen}.png`}
-                width="245px"
-                alt={props.nombre}
-                style={{ position: "absolute" }}
-            />
-            {buscarJugadoresRecinto(
-                props.jugadores,
-                props.imagen.toUpperCase()
-            ).map((e, key) => (
-                &lt;Ficha color={e.color} tamaño="30px" key={key} />
-            ))}
+export default function PartidaCancelada() {
+    const history = useHistory();
+    return(
+        &lt;div className="popup">
+            &lt;h1>El anfitrion ha abandonado la partida&lt;/h1>
+            &lt;button className="btn btn-dark" onClick={(e)=>history.push("/inicio")}>
+                Volver al lobby
+            &lt;/button>
         &lt;/div>
-    );
-}
-</code></pre>
+    )
+}</code></pre>
         </article>
     </section>
 

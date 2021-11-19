@@ -204,13 +204,19 @@ export default function Lobby() {
      */
     const [mensajesChat, setMensajesChat] = useState([]);
     /**
-     *
+     * Estado que guarda la informacion del sumario
      * @param  {objet} null
      */
     const [sumario, setSumario] = useState(null);
-
+    /**
+     * Estado que indica si abandono el anfitrion
+     * @param {}
+     */
     const [cancelada, setCancelada] = useState(false);
-
+    /**
+     * Estado que indica que un jugador abandono la partida
+     * @param  {List} []
+     */
     const [abandonoPartida, setAbandonoPartida] = useState([]);
 
     useEffect(() => {

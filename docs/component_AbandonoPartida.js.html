@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: component/Recinto.js</title>
+    <title>JSDoc: Source: component/AbandonoPartida.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: component/Recinto.js</h1>
+    <h1 class="page-title">Source: component/AbandonoPartida.js</h1>
 
     
 
@@ -26,50 +26,43 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import Ficha from "./Ficha";
-
-/**
- * Busca jugadores que estén en el recinto y devuelve un arreglo
- * con los mismos.
- * @param {Array} jugadores
- * @param {string} recinto
- * @returns {Array}
+            <pre class="prettyprint source linenums"><code>/**
+ * Componente que muestra las cartas de un jugador que abandono la partida
+ * @param {object} props nombre y cartas
  */
-function buscarJugadoresRecinto(jugadores, recinto) {
-    let res = Array.from(jugadores);
-
-    res = res.filter((e) => e.recinto === recinto);
-
-    return res;
-}
-
-/**
- * Renderiza un recinto
- * @param {object} props
- */
-export default function Recinto(props) {
+export default function AbandonoPartida(props) {
     return (
-        &lt;div
-            className="recinto"
-            style={{
-                gridColumnStart: props.xInicio + 1,
-                gridColumnEnd: props.xFin + 1,
-                gridRowStart: props.yInicio + 1,
-                gridRowEnd: props.yFin + 1,
-            }}
-        >
-            &lt;img
-                src={`/tablero/${props.imagen}.png`}
-                width="245px"
-                alt={props.nombre}
-                style={{ position: "absolute" }}
-            />
-            {buscarJugadoresRecinto(
-                props.jugadores,
-                props.imagen.toUpperCase()
-            ).map((e, key) => (
-                &lt;Ficha color={e.color} tamaño="30px" key={key} />
-            ))}
+        &lt;div className="popup" style={{ width: "821px" }}>
+            &lt;h1>{props.nombre} abandonó la partida&lt;/h1>
+            &lt;h3>Sus cartas son:&lt;/h3>
+            &lt;div
+                style={{
+                    display: "flex",
+                    columnGap: "10px",
+                    rowGap: "10px",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                }}
+            >
+                {props.cartas.map((e, i) => (
+                    &lt;img
+                        src={`/cartas/${e}.png`}
+                        height="200px"
+                        key={i}
+                        alt={e}
+                    />
+                ))}
+            &lt;/div>
+            &lt;button
+                className="btn btn-dark"
+                onClick={() =>
+                    props.setAbandonoPartida((old) =>
+                        old.filter((e) => e.nombre !== props.nombre)
+                    )
+                }
+            >
+                Aceptar
+            &lt;/button>
         &lt;/div>
     );
 }
