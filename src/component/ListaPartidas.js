@@ -140,6 +140,7 @@ export default function ListaPartidas() {
                                     <BotonUnirse
                                         partida={e}
                                         unirse={setPrePartida}
+                                        disabled={e.cantidad_jugadores === 6}
                                     />
                                 </td>
                             </tr>
