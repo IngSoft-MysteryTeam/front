@@ -3,6 +3,15 @@ import { useHistory } from "react-router";
 import { nuevaPartida, obtNombrejugador } from "../services";
 import SelectorColores from "./SelectorColores";
 
+const colores = [
+    "#4285F4",
+    "#DB4437",
+    "#F4B400",
+    "#0F9D58",
+    "#AB47BC",
+    "#26C6DA",
+];
+
 /**
  * Permite al jugador crear nueva partida.
  * @returns Renderizado JSX
@@ -25,20 +34,11 @@ export default function CreaPartida() {
     /**
      * Se guarda el color elegido
      */
-    const [color, setColor] = useState(null);
+    const [color, setColor] = useState(colores[0]);
     /**
      * Se guarda la contraseña.
      */
     const [password, setPassword] = useState("");
-
-    const colores = [
-        "#4285F4",
-        "#DB4437",
-        "#F4B400",
-        "#0F9D58",
-        "#AB47BC",
-        "#26C6DA",
-    ];
 
     /**
      * Envía la partida al back
@@ -112,7 +112,11 @@ export default function CreaPartida() {
                     onChange={(e) => setPassword(e.target.value)}
                     style={{ width: "500px" }}
                 />
-                <SelectorColores colores={colores} setColor={setColor} />
+                <SelectorColores
+                    colores={colores}
+                    setColor={setColor}
+                    color={color}
+                />
                 <button
                     className="btn btn-dark"
                     type="submit"

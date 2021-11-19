@@ -5,7 +5,7 @@ import { useState } from "react";
  */
 export default function SelectorColores(props) {
     const [hover, setHover] = useState(-1);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState(props.color);
 
     return (
         <>
@@ -22,6 +22,7 @@ export default function SelectorColores(props) {
                     <input
                         type="radio"
                         name="color"
+                        checked={e === props.color}
                         autoFocus={props.autoFocus && i === 0}
                         required
                         onMouseOver={(e) => setHover(i)}

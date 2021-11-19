@@ -19,6 +19,7 @@ export default function PreUnirse(props) {
                     colores={props.partida.colores}
                     setColor={props.setColor}
                     autoFocus={true}
+                    color={props.color}
                 />
                 {props.partida.password ? (
                     <input

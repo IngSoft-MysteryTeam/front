@@ -76,10 +76,9 @@ export default function ListaPartidas() {
             .catch((err) => {
                 if (err.response.status === 400) {
                     alert("Contraseña incorrecta!");
-                } 
-                else if(err.response.status === 405) {
-                    alert("La partida no existe")
-                }else {
+                } else if (err.response.status === 405) {
+                    alert("La partida no existe");
+                } else {
                     alert("Ocurrió un error. Revise la consola.");
                     console.error(err);
                 }
@@ -143,6 +142,7 @@ export default function ListaPartidas() {
                                     <BotonUnirse
                                         partida={e}
                                         unirse={setPrePartida}
+                                        setColor={setColor}
                                         disabled={e.cantidad_jugadores === 6}
                                     />
                                 </td>
