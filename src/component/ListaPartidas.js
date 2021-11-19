@@ -76,7 +76,10 @@ export default function ListaPartidas() {
             .catch((err) => {
                 if (err.response.status === 400) {
                     alert("Contraseña incorrecta!");
-                } else {
+                } 
+                else if(err.response.status === 405) {
+                    alert("La partida no existe")
+                }else {
                     alert("Ocurrió un error. Revise la consola.");
                     console.error(err);
                 }
