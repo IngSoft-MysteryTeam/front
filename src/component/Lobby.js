@@ -20,6 +20,7 @@ import MostrarCartaMisterio from "./MostrarCartaMisterio";
 import MostrarPerdioCarta from "./MostrarPerdioCarta";
 import Chat from "./Chat";
 import Sumario from "./Sumario";
+import PartidaCancelada from "./PartidaCancelada";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -207,6 +208,8 @@ export default function Lobby() {
      */
     const [sumario, setSumario] = useState(null);
 
+    const [cancelada, setCancelada] = useState(false)
+
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
         const socket = new WebSocket(
@@ -232,8 +235,11 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
-                    oldJugadores.filter((e) => e.nombre !== json.jugador)
-                );
+                    oldJugadores.filter((e) => e.nombre !== json.jugador))
+                if (json.jugador === location.state.anfitrion && turno===null && findepartida === false){
+                    setCancelada(true)
+                }
+                    
             } else if (json.evento === "Nuevo turno") {
                 if (json.nombre === obtNombrejugador()) {
                     setMiturno(true);
@@ -528,6 +534,7 @@ export default function Lobby() {
                         />
                     ) : null}
                     {dado !== -1 ? <Dado numero={dado} /> : null}
+                    {cancelada ? <PartidaCancelada/>:null}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}
