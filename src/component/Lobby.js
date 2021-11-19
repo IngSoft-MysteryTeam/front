@@ -383,7 +383,7 @@ export default function Lobby() {
                     }}
                 >
                     <h1>{location.state.nombre}</h1>
-                    <ListaJugadores jugadores={jugadores} turno={turno} />
+                    <ListaJugadores jugadores={jugadores} anfitrion={location.state.anfitrion} turno={turno} />
                     <div
                         style={{
                             display: "flex",
