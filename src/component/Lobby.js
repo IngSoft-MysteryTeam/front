@@ -21,6 +21,7 @@ import MostrarPerdioCarta from "./MostrarPerdioCarta";
 import Chat from "./Chat";
 import Sumario from "./Sumario";
 import PartidaCancelada from "./PartidaCancelada";
+import AbandonoPartida from "./AbandonoPartida";
 
 /**
  * Devuelve true si las coordenadas dadas corresponden a
@@ -208,7 +209,9 @@ export default function Lobby() {
      */
     const [sumario, setSumario] = useState(null);
 
-    const [cancelada, setCancelada] = useState(false)
+    const [cancelada, setCancelada] = useState(false);
+
+    const [abandonoPartida, setAbandonoPartida] = useState([]);
 
     useEffect(() => {
         const urlbase = "ws://localhost:8000/partida/";
@@ -235,11 +238,23 @@ export default function Lobby() {
                 });
             } else if (json.evento === "Jugador desconectado") {
                 setJugadores((oldJugadores) =>
-                    oldJugadores.filter((e) => e.nombre !== json.jugador))
-                if (json.jugador === location.state.anfitrion && turno===null && findepartida === false){
-                    setCancelada(true)
+                    oldJugadores.filter((e) => e.nombre !== json.jugador)
+                );
+                if (
+                    json.jugador === location.state.anfitrion &&
+                    json.turno === null &&
+                    !findepartida
+                ) {
+                    setCancelada(true);
+                } else if (json.turno) {
+                    setAbandonoPartida((old) => [
+                        ...old,
+                        {
+                            nombre: json.jugador,
+                            cartas: json.cartas,
+                        },
+                    ]);
                 }
-                    
             } else if (json.evento === "Nuevo turno") {
                 if (json.nombre === obtNombrejugador()) {
                     setMiturno(true);
@@ -383,7 +398,11 @@ export default function Lobby() {
                     }}
                 >
                     <h1>{location.state.nombre}</h1>
-                    <ListaJugadores jugadores={jugadores} anfitrion={location.state.anfitrion} turno={turno} />
+                    <ListaJugadores
+                        jugadores={jugadores}
+                        anfitrion={location.state.anfitrion}
+                        turno={turno}
+                    />
                     <div
                         style={{
                             display: "flex",
@@ -391,9 +410,9 @@ export default function Lobby() {
                             flexWrap: "wrap",
                         }}
                     >
-                        {jugadores[0].nombre === obtNombrejugador() &&
-                        turno === null &&
-                        !findepartida ? (
+                        {turno === null &&
+                        !findepartida &&
+                        location.state.anfitrion === obtNombrejugador() ? (
                             <Iniciar
                                 id_partida={params.id}
                                 cantjugadores={jugadores.length}
@@ -534,7 +553,15 @@ export default function Lobby() {
                         />
                     ) : null}
                     {dado !== -1 ? <Dado numero={dado} /> : null}
-                    {cancelada ? <PartidaCancelada/>:null}
+                    {cancelada ? <PartidaCancelada /> : null}
+                    {abandonoPartida.map((e, i) => (
+                        <AbandonoPartida
+                            nombre={e.nombre}
+                            cartas={e.cartas}
+                            key={i}
+                            setAbandonoPartida={setAbandonoPartida}
+                        />
+                    ))}
                     <Tablero
                         jugadores={jugadores}
                         posPosibles={posPosibles}
