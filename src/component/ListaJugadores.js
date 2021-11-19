@@ -33,7 +33,7 @@ export default function ListaJugadores(props) {
                             >
                                 {e.nombre}
                             </span>{" "}
-                            {index === 0 ? (
+                            {e.nombre === props.anfitrion ? (
                                 <FontAwesomeIcon icon={faCrown} />
                             ) : null}
                             {e.perdio ? (
