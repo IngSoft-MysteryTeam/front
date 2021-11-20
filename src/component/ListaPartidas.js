@@ -22,11 +22,20 @@ export default function ListaPartidas() {
      * @param  {list} [] Lista de partidas obtenidas del back
      */
     const [partidas, setPartidas] = useState([]);
-
+    /**
+     * Estado para guardar los datos antes de unirse a una partida.
+     * @param  {object} null
+     */
     const [prePartida, setPrePartida] = useState(null);
-
+    /**
+     * Estado para guardar el color elegido.
+     * @param  {string} null
+     */
     const [color, setColor] = useState(null);
-
+    /**
+     * Estado que guarda la contraseña ingresada.
+     * @param  {string} ""
+     */
     const [password, setPassword] = useState("");
 
     /**

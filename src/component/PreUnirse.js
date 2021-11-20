@@ -1,6 +1,7 @@
 import SelectorColores from "./SelectorColores";
 /**
- * Renderiza la opcion de elegir color antes de unirse.
+ * Renderiza la opcion de elegir color antes de unirse
+ * opcionalmente permite tipear una contraseña si la partida lo solcita.
  * @param  {props} props
  */
 export default function PreUnirse(props) {

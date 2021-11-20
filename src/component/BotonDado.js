@@ -1,7 +1,7 @@
 import { obtDado } from "../services";
 
 /**
- * Botón para lanzar dado renderiza el resultado del mismo.
+ * Botón para lanzar dado y renderizar el resultado.
  * @param {id_partida} props
  * @returns evento click
  */

@@ -9,6 +9,15 @@ import Mensaje from "./Mensaje";
  * Lógica no implementada.
  */
 export default function Chat(props) {
+    /**
+     * Estado para guardar los mensajes escritos.
+     */
+    const [mensaje, setMensaje] = useState();
+    
+    /**
+     * Envia el mensaje escrito.
+     * @param  {string} e
+     */
     function mandarMensaje(e) {
         e.preventDefault();
         setMensaje("");
@@ -24,7 +33,6 @@ export default function Chat(props) {
         element.scrollTop = element.scrollHeight;
     }, [props.mensajesChat]);
 
-    const [mensaje, setMensaje] = useState();
 
     return (
         <div
