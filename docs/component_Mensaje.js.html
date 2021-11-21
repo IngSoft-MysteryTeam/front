@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: component/MostrarPerdioCarta.js</title>
+    <title>JSDoc: Source: component/Mensaje.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: component/MostrarPerdioCarta.js</h1>
+    <h1 class="page-title">Source: component/Mensaje.js</h1>
 
     
 
@@ -27,19 +27,16 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Componente que renderiza si un jugador no uso la carta de Salem.
- * @param  {props} props
+ * Funcion para renderizar el nombre, color y texto del mensaje de un jugador.
+ * @param  {object} props
  */
-export default function MostrarPerdioCarta(props) {
+export default function Mensaje(props) {
     return (
-        &lt;div className="popup">
-            &lt;h1>{props.nombre} no usó la Bruja de Salem&lt;/h1>
-            &lt;button
-                className="btn btn-dark"
-                onClick={() => props.setPerdioBruja(null)}
-            >
-                Aceptar
-            &lt;/button>
+        &lt;div className="mensaje">
+            &lt;span style={{ fontWeight: "bold", color: props.color }}>
+                {props.nombre}
+            &lt;/span>
+            : {props.texto}
         &lt;/div>
     );
 }
