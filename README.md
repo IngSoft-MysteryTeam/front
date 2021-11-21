@@ -1,10 +1,11 @@
 # Proyecto: Juego de mesa misterio.
 
-El juego Misterio consta de jugadores o detectives que intentan adivinar quién eliminó a quién y dónde sucedió.
-Es decir, en cada partida el jugador intenta obtener la mayor información posible para revelar el misterio.
-Las reglas y componentes se pueden encontrar en estos documentos:
+El juego Misterio consta de jugadores o detectives que intentan adivinar quién eliminó a quién y dónde sucedió.  
+Es decir, en cada partida el jugador intenta obtener la mayor información posible para revelar el misterio.  
+Las reglas y componentes se pueden encontrar en estos documentos:  
 [Reglas](https://drive.google.com/file/d/1Dc82tRtRMHCxIUQZPUz01Fsz5ZtrTuJ_/view).
-Las reglas fueron adaptadas a un juego virtual (web), al cual se agrega la funcionalidad de un chat entre los jugadores de una partida.
+
+Estas reglas fueron adaptadas a un juego virtual (web), al cual se agrega la funcionalidad de un chat entre los jugadores de una partida.
 
 ## Funcionalidades implementadas.
 * Crear un usuario.
