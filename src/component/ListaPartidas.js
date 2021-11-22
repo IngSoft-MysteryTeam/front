@@ -80,6 +80,9 @@ export default function ListaPartidas() {
                         alert("La partida esta completa");
                         obtPartidas();
                     }
+                    setPrePartida(null);
+                    setColor(null);
+                    setPassword("");
                 }
             })
             .catch((err) => {
