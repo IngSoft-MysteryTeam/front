@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { nuevaPartida, obtNombrejugador } from "../services";
+import SelectorColores from "./SelectorColores";
+
+const colores = [
+    "#4285F4",
+    "#DB4437",
+    "#F4B400",
+    "#0F9D58",
+    "#AB47BC",
+    "#26C6DA",
+];
 
 /**
  * Permite al jugador crear nueva partida.
@@ -20,37 +30,37 @@ export default function CreaPartida() {
      * @param  {""} Cadena de caracteres
      * @param  {object} Nombre de la partida
      */
-    const [newpartida, setNombre] = useState({
-        nombre: "",
-    });
+    const [nombre, setNombre] = useState(null);
     /**
-     * Nos permite visualizar los input por teclado del usuario en consola
-     * y guardarlos en la constante "newpartida"
-     * @param  {Evento} evento Evento generado por input del usuario.
+     * Se guarda el color elegido
      */
-    const controlEvents = (evento) => {
-        console.log(evento.target.value);
-        setNombre({
-            ...newpartida,
-            [evento.target.name]: evento.target.value,
-        });
-    };
+    const [color, setColor] = useState(colores[0]);
+    /**
+     * Se guarda la contraseña.
+     */
+    const [password, setPassword] = useState("");
 
     /**
      * Envía la partida al back
      * @param {Evento} evento Evento del click
      */
-    const enviarPartida = (evento) => {
-        evento.preventDefault();
+    const enviarPartida = (e) => {
+        e.preventDefault();
         nuevaPartida({
-            nombre: newpartida.nombre,
+            nombre: nombre,
             anfitrion: jugador,
+            color: color,
+            password: password,
         })
             .then((res) => {
                 if (res.status === 200) {
                     history.push({
                         pathname: `/partidas/${res.data.id_partida}`,
-                        state: { ...res.data, nombre: newpartida.nombre },
+                        state: {
+                            ...res.data,
+                            nombre: nombre,
+                            password: password,
+                        },
                     });
                 }
             })
@@ -62,24 +72,57 @@ export default function CreaPartida() {
 
     return (
         <div
-            className="card card-body"
-            style={{ maxWidth: "700px", margin: "auto" }}
+            style={{
+                width: "750px",
+                margin: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                rowGap: "15px",
+                border: "1px solid rgb(100, 100, 100)",
+                padding: "15px",
+            }}
         >
-            <h2 style={{ textAlign: "center", color: "black" }}>
-                CREAR PARTIDA
-            </h2>
-            <br />
-            <form className="row" onSubmit={enviarPartida}>
+            <h1>CREAR PARTIDA</h1>
+            <form
+                onSubmit={enviarPartida}
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    rowGap: "15px",
+                }}
+            >
                 <input
-                    placeholder="Escribe un Nombre"
-                    className="form-control"
-                    type="text"
-                    name="nombre"
-                    onChange={controlEvents}
                     required
+                    autoFocus
+                    placeholder="Escribe un nombre..."
+                    maxLength="20"
+                    minLength="4"
+                    onChange={(e) => setNombre(e.target.value)}
+                    style={{ width: "500px" }}
                 />
-                <button className="btn btn-dark" type="submit">
-                    Crear
+                <input
+                    placeholder="Contraseña"
+                    type="password"
+                    maxLength="30"
+                    minLength="3"
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ width: "500px" }}
+                />
+                <SelectorColores
+                    colores={colores}
+                    setColor={setColor}
+                    color={color}
+                />
+                <button
+                    className="btn btn-dark"
+                    type="submit"
+                    disabled={!(nombre && color)}
+                >
+                    Crear partida
                 </button>
             </form>
         </div>

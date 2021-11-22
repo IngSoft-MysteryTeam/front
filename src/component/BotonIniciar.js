@@ -12,7 +12,7 @@ export default function Iniciar(props) {
             disabled={props.cantjugadores < 2}
             onClick={(e) => iniciarPartida({ id_partida: props.id_partida })}
         >
-            Iniciar
+            Iniciar partida
         </button>
     );
 }

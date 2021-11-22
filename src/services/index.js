@@ -40,7 +40,11 @@ export function unirJugador(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/unirse`,
         method: "POST",
-        data: { nombre: datos.nombre },
+        data: {
+            nombre: datos.nombre,
+            color: datos.color,
+            password: datos.password,
+        },
     });
 }
 /**
@@ -108,15 +112,82 @@ export function hacerSospecha(datos) {
         params: { victima: datos.victima, monstruo: datos.monstruo },
     });
 }
+/**
+ * Envia al back la acusacion del jugador.
+ * @param  {object} datos Id partida y jugador, monstruo victima y recinto.
+ */
+export function hacerAcusacion(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/acusar`,
+        method: "PUT",
+        data: {
+            victima: datos.victima,
+            monstruo: datos.monstruo,
+            recinto: datos.recinto,
+        },
+    });
+}
 
 /**
  * Envia al back la accion de entrar a un recinto
  * @param {object} datos Id de partida y jugador
- * @returns
  */
 export function entrarRecinto(datos) {
     return axios({
         url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/entrar-recinto`,
         method: "PUT",
+    });
+}
+
+/**
+ * Envia al back la accion de responder una sospecha
+ * @param {object} datos id del jugador que sospecho y el id del
+ * jugador que responde la sospecha
+ */
+export function responderSospecha(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_jugador}/${datos.id_responde}/responder-sospecha`,
+        method: "GET",
+        params: {
+            carta: datos.carta,
+        },
+    });
+}
+
+/**
+ * Envia al back la accion de usar la bruja de salem
+ * @param {object} datos id partida y id jugador
+ */
+export function usarBrujaSalem(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/${datos.id_jugador}/usar-bruja-salem`,
+        method: "PUT",
+    });
+}
+
+/**
+ * Envia al back un mensaje para el chat de la partida
+ * @param {object} datos id partida, nombre del jugador y
+ * mensaje
+ */
+export function enviarMensaje(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/enviar-mensaje`,
+        method: "POST",
+        data: {
+            nombre: datos.nombre,
+            texto: datos.texto,
+        },
+    });
+}
+
+/**
+ * Pide al back el sumario de la partida
+ * @param {object} datos id partida
+ */
+export function obtenerSumario(datos) {
+    return axios({
+        url: `${baseUrl}partida/${datos.id_partida}/sumario`,
+        method: "GET",
     });
 }

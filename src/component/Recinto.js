@@ -39,8 +39,8 @@ export default function Recinto(props) {
             {buscarJugadoresRecinto(
                 props.jugadores,
                 props.imagen.toUpperCase()
-            ).map((e, i) => (
-                <Ficha color={e.color} tamaño="30px" />
+            ).map((e, key) => (
+                <Ficha color={e.color} tamaño="30px" key={key} />
             ))}
         </div>
     );

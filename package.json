@@ -52,5 +52,12 @@
     "jsdoc": "^3.6.7",
     "mock-socket": "^9.0.7",
     "prettier": "2.4.1"
-  }
+  },
+  "compilerOptions": {
+    "checkJs": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
 }

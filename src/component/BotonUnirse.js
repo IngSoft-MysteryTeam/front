@@ -7,13 +7,15 @@ import React from "react-router-dom";
  */
 export default function BotonUnirse(props) {
     return (
-        <div>
-            <button
-                className="btn btn-dark"
-                onClick={(e) => props.unirse(props.partida)}
-            >
-                Unirse
-            </button>
-        </div>
+        <button
+            className="btn btn-dark"
+            onClick={(e) => {
+                props.setColor(props.partida.colores[0]);
+                props.unirse(props.partida);
+            }}
+            disabled={props.disabled}
+        >
+            Unirse
+        </button>
     );
 }

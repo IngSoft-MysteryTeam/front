@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { nuevoJugador, traerPartidas, unirJugador } from "../services/index";
 import App from "../App";
 
 jest.mock("../services/index");
 
-test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te redirige al lobby de la partida", async () => {
+test("Unirse a una partida con contraseña, te redirige al lobby de la partida", async () => {
     render(<App />);
 
     let input = screen.getByRole("textbox");
@@ -20,6 +21,8 @@ test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te
                     nombre: "Test",
                     anfitrion: "Santi",
                     cantidad_jugadores: 1,
+                    colores: ["red"],
+                    password: true,
                 },
             ],
         })
@@ -46,5 +49,15 @@ test("al entrar con un nombre valido, buscar una partida y clickear ingresar, te
 
     fireEvent.click(unirse);
 
-    expect(await screen.findByText("David"));
+    const color = screen.getByRole("radio");
+    const password = screen.getByPlaceholderText(/contraseña/i);
+
+    userEvent.type(password, "hola");
+    fireEvent.click(color);
+
+    const unirse2 = screen.getAllByRole("button", { name: "Unirse" })[0];
+
+    fireEvent.click(unirse2);
+
+    expect(await screen.findByText("David")).toBeInTheDocument();
 });

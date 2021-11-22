@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { faCrown, faTimes } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import { obtNombrejugador } from "../services";
 
 /**
  * Lista los jugadores que se unieron a una partida. Llamada en Lobby.js .
@@ -21,9 +22,25 @@ export default function ListaJugadores(props) {
                                         : "",
                             }}
                         >
-                            <span style={{ color: e.color }}>●</span> {e.nombre}{" "}
-                            {index === 0 ? (
+                            <span style={{ color: e.color }}>●</span>{" "}
+                            <span
+                                style={{
+                                    fontWeight:
+                                        e.nombre === obtNombrejugador()
+                                            ? "bold"
+                                            : "",
+                                }}
+                            >
+                                {e.nombre}
+                            </span>{" "}
+                            {e.nombre === props.anfitrion ? (
                                 <FontAwesomeIcon icon={faCrown} />
+                            ) : null}
+                            {e.perdio ? (
+                                <>
+                                    {" "}
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </>
                             ) : null}
                         </td>
                     </tr>

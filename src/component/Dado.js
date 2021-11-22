@@ -5,8 +5,8 @@
  */
 export default function Dado(props) {
     return (
-        <h3 className="resultadoDado" style={{ marginTop: "10px" }}>
+        <div className="resultadoDado" data-testid="dado">
             {props.numero}
-        </h3>
+        </div>
     );
 }

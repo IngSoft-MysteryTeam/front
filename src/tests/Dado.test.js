@@ -10,7 +10,7 @@ test("el dado muestra el numero asignado", () => {
 test("el dado tiene los estilos adecuados", () => {
     render(<Dado numero={3} />);
 
-    const numero = screen.getByRole("heading");
+    const numero = screen.getByTestId("dado");
 
     expect(numero).toHaveClass("resultadoDado");
 });

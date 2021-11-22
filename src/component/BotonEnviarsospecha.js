@@ -14,8 +14,9 @@ export default function BotonEnviarsospecha(props) {
                     id_jugador: props.data.id_jugador,
                     id_partida: props.data.id_partida,
                 });
-                props.sospechando(false);
+                props.setSospechando(false);
             }}
+            disabled={props.disabled}
         >
             Enviar Sospecha
         </button>
