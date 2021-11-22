@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router";
+import { obtenerSumario, obtNombrejugador } from "../services";
 import Iniciar from "./BotonIniciar";
 import PasarTurno from "./BotonPasarTurno";
 import Dado from "./Dado";
 import BotonDado from "./BotonDado";
+import BotonAcusar from "./BotonAcusar";
 import ListaJugadores from "./ListaJugadores";
-import DistribuirCartas from "./DistribuirCartas";
-import { obtenerSumario, obtNombrejugador } from "../services";
 import ListadeCartasSospecha from "./ListadeCartasSospecha";
+import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
+import DistribuirCartas from "./DistribuirCartas";
 import Tablero from "./Tablero";
 import Sospechar from "./BotonSospechar";
 import EntrarRecinto from "./BotonEntrarRecinto";
 import MostrarSospecha from "./MostrarSospecha";
-import BotonAcusar from "./BotonAcusar";
-import ListadeCartasAcusacion from "./ListadeCartasAcusacion";
 import MostrarAcusacion from "./MostrarAcusacion";
 import Informe from "./Informe";
 import MostrarCartaMisterio from "./MostrarCartaMisterio";
@@ -243,9 +243,14 @@ export default function Lobby() {
                     }
                 });
             } else if (json.evento === "Jugador desconectado") {
-                setJugadores((oldJugadores) =>
-                    oldJugadores.filter((e) => e.nombre !== json.jugador)
-                );
+                setJugadores((oldJugadores) => {
+                    if (oldJugadores.filter((e) => !e.perdio).length === 2) {
+                        setUltimoJugador(true);
+                    }
+                    return oldJugadores.filter(
+                        (e) => e.nombre !== json.jugador
+                    );
+                });
                 if (
                     json.jugador === location.state.anfitrion &&
                     json.turno === null &&
